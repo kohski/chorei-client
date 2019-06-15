@@ -3,6 +3,7 @@ import pkg from './package'
 
 export default {
   mode: 'universal',
+  srcDir: 'app',
 
   /*
   ** Headers of the page
@@ -55,6 +56,7 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    baseURL: 'http://3.113.114.91'
   },
 
   /*
