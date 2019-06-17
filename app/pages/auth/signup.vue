@@ -42,7 +42,7 @@
           <v-btn round dark @click="handleClickSubmit">
             submit
           </v-btn>
-          <v-btn round dark @click="transferLogIn">
+          <v-btn round dark href="/auth/login">
             LogIn
           </v-btn>
         </div>
@@ -82,9 +82,6 @@ export default {
         this.$data.errors.isError = true
         this.$data.errors.full_messages = e
       }
-    },
-    transferLogIn() {
-      this.$router.push('/auth/login')
     },
     ...mapActions(['signUp'])
   }

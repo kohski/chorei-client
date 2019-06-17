@@ -3,20 +3,16 @@
 export const state = () => ({
   uid: '',
   accessToken: '',
-  client: ''
+  client: '',
+  name: '',
+  image: '',
+  description: ''
 })
 
 export const getters = {
   uid: state => state.uid,
   accessToken: state => state.accessToken,
-  client: state => state.client,
-  all: (state) => {
-    return {
-      uid: state.uid,
-      accessToken: state.accessToken,
-      client: state.client
-    }
-  }
+  client: state => state.client
 }
 
 export const mutations = {
@@ -24,12 +20,14 @@ export const mutations = {
     state.uid = payload.uid
     state.accessToken = payload['access-token']
     state.client = payload.client
+    state.name = payload.name
+    state.image = payload.image
+    state.description = payload.description
   }
 }
 
 export const actions = {
   async signUp({ commit, state }, { email, name, password }) {
-    // const  headers = {}
     await this.$axios.post(
       `/auth`,
       {
@@ -46,6 +44,7 @@ export const actions = {
     )
       .then((res) => {
         const payload = res.headers
+        Object.assign(payload, res.data.data)
         commit('setLoginInfo', { payload })
       })
       .catch((e) => {
@@ -53,7 +52,6 @@ export const actions = {
       })
   },
   async logIn({ commit, state }, { email, password }) {
-    // const  headers = {}
     await this.$axios.post(
       `/auth/sign_in`,
       {
@@ -69,6 +67,7 @@ export const actions = {
     )
       .then((res) => {
         const payload = res.headers
+        Object.assign(payload, res.data.data)
         commit('setLoginInfo', { payload })
       })
       .catch((e) => {

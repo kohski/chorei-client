@@ -36,7 +36,7 @@
           <v-btn round dark @click="handleClickSubmit">
             submit
           </v-btn>
-          <v-btn round dark @click="transferSignUp">
+          <v-btn round dark href="/auth/signup">
             SignUp
           </v-btn>
         </div>
@@ -51,8 +51,8 @@ export default {
     return {
       formData: {
         name: '',
-        email: '',
-        password: ''
+        email: 'nuxt@test.com',
+        password: 'password'
       },
       isSuccess: false,
       errors: {
@@ -71,14 +71,12 @@ export default {
         this.$data.isSuccess = true
         await new Promise(resolve => setTimeout(resolve, 2000))
         this.$data.isSuccess = false
-        this.$router.push('/')
+        console.log(this.$router)
+        this.$router.push('/groups')
       } catch (e) {
         this.$data.errors.isError = true
         this.$data.errors.full_messages = e
       }
-    },
-    transferSignUp() {
-      this.$router.push('/auth/signup')
     },
     ...mapActions('auth', ['logIn'])
   }

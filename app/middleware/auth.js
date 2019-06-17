@@ -6,10 +6,9 @@ export default ({ req, route, redirect }) => {
   }
   const cookies = req ? new Cookies(req.headers.cookie) : new Cookies()
   const credential = cookies.get('chorei-server')
-  if (credential && route.path === '/auth/login') {
-    return redirect('/')
+  console.log(credential)
+  if (credential) {
+    return
   }
-  if (!credential && route.path !== '/auth/login') {
-    return redirect('/auth/login')
-  }
+  return redirect('/auth/login')
 }

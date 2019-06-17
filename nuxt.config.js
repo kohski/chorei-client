@@ -46,7 +46,8 @@ export default {
   */
   plugins: [
     '@/plugins/vuetify',
-    { src: '@/plugins/persistedstate', ssr: false }
+    { src: '@/plugins/persistedstate', ssr: false },
+    '@/plugins/axios'
   ],
 
   /*
@@ -54,7 +55,8 @@ export default {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/toast'
   ],
   /*
   ** Axios module configuration
