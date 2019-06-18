@@ -2690,6 +2690,13 @@ convert-source-map@^1.1.0, convert-source-map@^1.4.0:
   dependencies:
     safe-buffer "~5.1.1"
 
+cookie-machine@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/cookie-machine/-/cookie-machine-0.1.1.tgz#b2daa441f439b2cb631808f24c3d56716eb93f36"
+  integrity sha1-stqkQfQ5sstjGAjyTD1WcW65PzY=
+  dependencies:
+    cookie "^0.2.3"
+
 cookie-signature@1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/cookie-signature/-/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"
@@ -2699,6 +2706,11 @@ cookie@0.4.0, cookie@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.0.tgz#beb437e7022b3b6d49019d088665303ebe9c14ba"
   integrity sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==
+
+cookie@^0.2.3:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.2.4.tgz#a8c155aa7b9b2cf2c4d32ebc7b9a0aa288ccc6bd"
+  integrity sha1-qMFVqnubLPLE0y68e5oKoojMxr0=
 
 cookie@^0.3.1:
   version "0.3.1"
@@ -5517,6 +5529,11 @@ jest@^24.1.0:
   dependencies:
     import-local "^2.0.0"
     jest-cli "^24.8.0"
+
+js-base64@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.5.1.tgz#1efa39ef2c5f7980bb1784ade4a8af2de3291121"
+  integrity sha512-M7kLczedRMYX4L8Mdh4MzyAMM9O5osx+4FcOQuTvr3A9F2D9S5JXheN0ewNbrvK2UatkTRhL5ejGmGSjNMiZuw==
 
 js-beautify@^1.6.14:
   version "1.10.0"

@@ -9,7 +9,7 @@
           transition="scale-transition"
           outline
         >
-          This is a success alert.
+          groups is successfully created!
         </v-alert>
         <v-alert
           v-for="msg in errors.full_messages"
@@ -23,21 +23,23 @@
           {{ msg }}
         </v-alert>
         <v-text-field
-          v-model="formData.email"
+          v-model="formData.name"
+          id="name_field"
           type="text"
-          label="Email"
+          label="Group Name"
         />
         <v-text-field
-          v-model="formData.password"
-          type="password"
-          label="Password"
+          id="imagePicker"
+          type="file"
+          v-on:change="onFileChange"
         />
+        <v-img
+          v-model="formData.image"
+          :src="formData.image"
+        ></v-img>
         <div class="text-sm-center">
-          <v-btn round dark @click="handleClickSubmit">
+          <v-btn round dark @click="postGroupWithPayload">
             submit
-          </v-btn>
-          <v-btn round dark href="/auth/signup">
-            SignUp
           </v-btn>
         </div>
       </v-flex>
@@ -46,13 +48,13 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
+// import { Base64 } from 'js-base64'
 export default {
   asyncData({ redirect, store }) {
     return {
       formData: {
         name: '',
-        email: 'nuxt@test.com',
-        password: 'password'
+        image: ''
       },
       isSuccess: false,
       errors: {
@@ -62,22 +64,23 @@ export default {
     }
   },
   methods: {
-    async handleClickSubmit() {
-      try {
-        await this.logIn({ ...this.formData })
-        this.$data.formData.email = ''
-        this.$data.formData.password = ''
-        this.$data.errors.isError = false
-        this.$data.isSuccess = true
-        // await new Promise(resolve => setTimeout(resolve, 2000))
-        this.$data.isSuccess = false
-        this.$router.push('/groups')
-      } catch (e) {
-        this.$data.errors.isError = true
-        this.$data.errors.full_messages = e
+    async onFileChange(e) {
+      const file = event.target.files[0]
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        this.formData.image = e.target.result
       }
+      await reader.readAsDataURL(file)
     },
-    ...mapActions('auth', ['logIn'])
+    invokeUpload() {
+      const imagePicker = document.getElementById('imagePicker')
+      imagePicker.click()
+    },
+    async postGroupWithPayload() {
+      await this.postGroup(this.formData)
+      this.$router.push('/groups')
+    },
+    ...mapActions('groups', ['postGroup'])
   }
 }
 </script>

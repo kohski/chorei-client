@@ -91,5 +91,9 @@ export default {
         })
       }
     }
+  },
+  toast: {
+    position: 'top-center',
+    duration: 3000
   }
 }

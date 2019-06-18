@@ -1,5 +1,3 @@
-// import moment from '~/plugins/moment'
-
 export const state = () => ({
   uid: '',
   accessToken: '',
@@ -71,7 +69,7 @@ export const actions = {
         commit('setLoginInfo', { payload })
       })
       .catch((e) => {
-        throw e.response.data.errors
+        this.$toast.error(e)
       })
   }
 }

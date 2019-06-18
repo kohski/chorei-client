@@ -87,6 +87,11 @@ export default {
           icon: 'group_work',
           title: 'Groups',
           to: '/groups'
+        },
+        {
+          icon: 'pan_tool',
+          title: 'New Group',
+          to: '/groups/new'
         }
       ],
       miniVariant: false,

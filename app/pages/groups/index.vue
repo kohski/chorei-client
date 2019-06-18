@@ -2,20 +2,23 @@
   <v-container>
     <v-layout>
       <v-flex xs10 offset-xs1 sm6 offset-sm3>
-        <v-card v-for="group in groups" :key="group.id" :href="'/groups/'+group.id" class="each_groups">
-          <v-img
-            :src="group.image"
-          >
-          </v-img>
+        <v-card v-for="group in groups" :key="group.id" class="each_groups">
+          <nuxt-link :to="'/groups/'+group.id">
+            <v-img
+              :src="group.image"
+            >
+            </v-img>
+          </nuxt-link>
           <v-card-title primary-title>
             <div>
               <div> {{ group.name }} </div>
             </div>
           </v-card-title>
+          <v-btn
+            color="indigo lighten-2"
+            @click="deleteGroupWithId(group.id)"
+          >delete</v-btn>
         </v-card>
-        <v-btn color="success" @click="groupIndex">
-          click
-        </v-btn>
       </v-flex>
     </v-layout>
   </v-container>
@@ -26,14 +29,15 @@ export default {
   computed: {
     ...mapGetters('groups', ['groups'])
   },
-  async fetch({ store }) {
-    await store.dispatch('groups/groupIndex')
+  async asyncData({ store }) {
+    await store.dispatch('groups/indexGroups')
   },
   methods: {
-    async indexGroup() {
-      await this.index
+    async deleteGroupWithId(id) {
+      await this.deleteGroup({ id: id })
+      await this.indexGroups()
     },
-    ...mapActions('groups', ['groupIndex'])
+    ...mapActions('groups', ['indexGroups', 'deleteGroup'])
   }
 }
 </script>

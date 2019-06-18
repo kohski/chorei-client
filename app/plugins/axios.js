@@ -1,19 +1,18 @@
-import Cookies from 'js-cookie'
+// import Vue from 'vue'
+import Cookies from 'universal-cookie'
 
-export default function ({ $axios, redirect }) {
+export default function ({ $axios, redirect, req }) {
   $axios.onRequest((config) => {
-    const credential = Cookies.get('chorei-server')
+    const cookies = req ? new Cookies(req.headers.cookie) : new Cookies()
+    const credential = cookies.get('chorei-server')
     if (credential) {
-      const credentials = JSON.parse(credential)
-      config.headers.common.uid = credentials.uid
-      config.headers.common['access-token'] = credentials.accessToken
-      config.headers.common.client = credentials.client
+      config.headers.common.uid = credential.uid
+      config.headers.common['access-token'] = credential.accessToken
+      config.headers.common.client = credential.client
     }
   })
 
-  $axios.onError((error) => {
-    // Vue.toasted.error(error)
-    console.log(`error${error}`)
-    return redirect('/auth/login')
-  })
+  // $axios.onError((error) => {
+  //   Vue.toasted.error(error)
+  // })
 }

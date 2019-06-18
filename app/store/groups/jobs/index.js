@@ -1,28 +1,29 @@
 export const state = () => ({
-  groups: [],
-  group: {}
+  jobs: [],
+  job: {}
 })
 
 export const getters = {
-  groups(state) { return state.groups },
-  group(state) { return state.group }
+  jobs(state) { return state.jobs },
+  job(state) { return state.job }
 }
 
 export const mutations = {
-  setGroups(state, groups) {
-    state.groups = groups
+  setJobs(state, jobs) {
+    state.jobs = jobs
   },
-  addGroup(state, group) {
-    state.groups.push(group)
+  addJob(state, job) {
+    state.jobs.push(job)
   },
-  setGroup(state, group) {
-    state.group = group
+  setJob(state, job) {
+    state.job = job
   }
 }
 export const actions = {
-  async indexGroups({ commit, state }) {
+  async indexJobs({ commit, state }, payload) {
+    debugger
     await this.$axios.get(
-      `/groups`,
+      `groups/${payload.jobId}/jobs`,
       {
         headers: {
           'Accept': 'application/json',
@@ -31,17 +32,18 @@ export const actions = {
       }
     )
       .then((res) => {
-        commit('setGroups', res.data.data)
+        commit('setJobs', res.data.data)
       })
       .catch((e) => {
+        commit('setJobs', [])
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async postGroup({ commit }, formData) {
+  async postJob({ commit }, formData) {
     await this.$axios.post(
-      `/groups`,
+      `/jobs`,
       {
-        group: formData
+        job: formData
       },
       {
         headers: {
@@ -51,16 +53,16 @@ export const actions = {
       }
     )
       .then((res) => {
-        this.$toast.success('group is successfully created')
-        this.$router.push('/groups')
+        this.$toast.success('job is successfully created')
+        this.$router.push('/jobs')
       })
       .catch((e) => {
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async deleteGroup({ commit }, payload) {
+  async deleteJob({ commit }, payload) {
     await this.$axios.delete(
-      `/groups/${payload.id}`,
+      `/jobs/${payload.id}`,
       {
         headers: {
           'Accept': 'application/json',
@@ -75,9 +77,9 @@ export const actions = {
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async showGroup({ commit }, payload) {
+  async showJob({ commit }, payload) {
     await this.$axios.get(
-      `/groups/${payload.id}`,
+      `/jobs/${payload.id}`,
       {
         headers: {
           'Accept': 'application/json',
@@ -86,7 +88,7 @@ export const actions = {
       }
     )
       .then((res) => {
-        commit('setGroup', res.data.data)
+        commit('setJob', res.data.data)
       })
       .catch((e) => {
         this.$toast.error(e.response.data.message || e)
