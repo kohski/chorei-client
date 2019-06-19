@@ -11,8 +11,4 @@ export default function ({ $axios, redirect, req }) {
       config.headers.common.client = credential.client
     }
   })
-
-  // $axios.onError((error) => {
-  //   Vue.toasted.error(error)
-  // })
 }

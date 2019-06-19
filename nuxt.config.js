@@ -46,7 +46,7 @@ export default {
   */
   plugins: [
     '@/plugins/vuetify',
-    { src: '@/plugins/persistedstate', ssr: false },
+    // { src: '@/plugins/persistedstate', ssr: false },
     '@/plugins/axios'
   ],
 
@@ -94,6 +94,7 @@ export default {
   },
   toast: {
     position: 'top-center',
-    duration: 3000
+    duration: 3000,
+    theme: 'bubble'
   }
 }

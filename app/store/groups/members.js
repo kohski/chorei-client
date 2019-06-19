@@ -1,30 +1,26 @@
-// import Vue from 'vue'
-
 export const state = () => ({
-  jobs: [],
-  job: {}
+  members: []
 })
 
 export const getters = {
-  jobs(state) { return state.jobs },
-  job(state) { return state.job }
+  members(state) { return state.members }
 }
 
 export const mutations = {
-  setJobs(state, jobs) {
-    state.jobs = jobs
+  setMembers(state, members) {
+    state.members = members
   },
-  addJob(state, job) {
-    state.jobs.push(job)
+  addMember(state, member) {
+    state.members.push(member)
   },
-  setJob(state, job) {
-    state.job = job
+  setMember(state, member) {
+    state.member = member
   }
 }
 export const actions = {
-  async indexJobs({ commit, state }, { groupId }) {
+  async indexMembers({ commit, state }, { groupId }) {
     await this.$axios.get(
-      `groups/${groupId}/jobs`,
+      `groups/${groupId}/members`,
       {
         headers: {
           'Accept': 'application/json',
@@ -33,21 +29,23 @@ export const actions = {
       }
     )
       .then((res) => {
-        commit('setJobs', res.data.data)
+        commit('setMembers', res.data.data)
       })
       .catch((e) => {
-        commit('setJobs', [])
+        commit('setMembers', [])
         if (process.server) {
           return
         }
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async postJob({ commit }, { groupId, formData }) {
+  async postMember({ commit, store }, { email, groupId }) {
     await this.$axios.post(
-      `groups/${groupId}/jobs`,
+      `groups/${groupId}/members`,
       {
-        job: formData
+        member: {
+          email
+        }
       },
       {
         headers: {
@@ -57,16 +55,15 @@ export const actions = {
       }
     )
       .then((res) => {
-        this.$toast.success('job is successfully created')
-        this.$router.push('/jobs')
+        this.$toast.success('member is successfully created')
       })
       .catch((e) => {
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async deleteJob({ commit }, id) {
+  async deleteMember({ commit }, { groupId, userId }) {
     await this.$axios.delete(
-      `/jobs/${id}`,
+      `/groups/${groupId}/destroy_with_user_id_and_group_id?user_id=${userId}`,
       {
         headers: {
           'Accept': 'application/json',
@@ -76,23 +73,6 @@ export const actions = {
     )
       .then((res) => {
         this.$toast.success('Destroy Completed!!')
-      })
-      .catch((e) => {
-        this.$toast.error(e.response.data.message || e)
-      })
-  },
-  async showJob({ commit }, payload) {
-    await this.$axios.get(
-      `/jobs/${payload.id}`,
-      {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }
-    )
-      .then((res) => {
-        commit('setJob', res.data.data)
       })
       .catch((e) => {
         this.$toast.error(e.response.data.message || e)

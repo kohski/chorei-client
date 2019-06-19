@@ -7,9 +7,7 @@ export default ({ req, route, redirect }) => {
   }
   const cookies = req ? new Cookies(req.headers.cookie) : new Cookies()
   const credential = cookies.get('chorei-server') ? cookies.get('chorei-server') : ''
-  if (credential.uid) {
-    return
+  if (credential.uid === '') {
+    return redirect('/auth/login')
   }
-  // this.$toast.error('please, log in.')
-  return redirect('/auth/login')
 }

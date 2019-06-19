@@ -1,3 +1,5 @@
+import Cookies from 'universal-cookie'
+
 export const state = () => ({
   uid: '',
   accessToken: '',
@@ -21,6 +23,15 @@ export const mutations = {
     state.name = payload.name
     state.image = payload.image
     state.description = payload.description
+    if (process.client) {
+      const cookies = new Cookies()
+      const credentials = {
+        uid: payload.uid,
+        accessToken: payload['access-token'],
+        client: payload.client
+      }
+      cookies.set('chorei-server', credentials, { expire: 365 })
+    }
   }
 }
 

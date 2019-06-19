@@ -34,6 +34,9 @@ export const actions = {
         commit('setGroups', res.data.data)
       })
       .catch((e) => {
+        if (process.server) {
+          return
+        }
         this.$toast.error(e.response.data.message || e)
       })
   },
@@ -75,9 +78,9 @@ export const actions = {
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async showGroup({ commit }, payload) {
+  async showGroup({ commit }, { groupId }) {
     await this.$axios.get(
-      `/groups/${payload.id}`,
+      `/groups/${groupId}`,
       {
         headers: {
           'Accept': 'application/json',
@@ -89,6 +92,9 @@ export const actions = {
         commit('setGroup', res.data.data)
       })
       .catch((e) => {
+        if (process.server) {
+          return
+        }
         this.$toast.error(e.response.data.message || e)
       })
   }
