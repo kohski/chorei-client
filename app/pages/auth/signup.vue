@@ -2,26 +2,6 @@
   <v-container>
     <v-layout>
       <v-flex xs10 offset-xs1 sm6 offset-sm3>
-        <v-alert
-          :value="isSuccess"
-          color="success"
-          icon="check_circle"
-          transition="scale-transition"
-          outline
-        >
-          This is a success alert.
-        </v-alert>
-        <v-alert
-          v-for="msg in errors.full_messages"
-          :key="msg"
-          :value="errors.isError"
-          color="error"
-          icon="warning"
-          transition="scale-transition"
-          outline
-        >
-          {{ msg }}
-        </v-alert>
         <v-text-field
           v-model="formData.name"
           type="text"
@@ -38,6 +18,11 @@
           type="password"
           label="Password"
         />
+        <image-uploader @imageRecieve="imageRecieve"/>
+        <v-textarea
+          v-model="formData.description"
+          placeholder="add your description"
+        ></v-textarea>
         <div class="text-sm-center">
           <v-btn round dark @click="handleClickSubmit">
             submit
@@ -52,38 +37,35 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
+import ImageUploader from '~/components/registers/ImageUploader'
 export default {
+  components: {
+    ImageUploader
+  },
   asyncData({ redirect, store }) {
     return {
       formData: {
         name: '',
         email: '',
+        image: '',
+        description: '',
         password: ''
-      },
-      isSuccess: false,
-      errors: {
-        isError: false,
-        full_messages: []
       }
     }
   },
   methods: {
     async handleClickSubmit() {
-      try {
-        await this.signUp({ ...this.formData })
-        this.$data.formData.name = ''
-        this.$data.formData.email = ''
-        this.$data.formData.password = ''
-        this.$data.errors.isError = false
-        this.$data.isSuccess = true
-        await new Promise(resolve => setTimeout(resolve, 2000))
-        this.$data.isSuccess = false
-      } catch (e) {
-        this.$data.errors.isError = true
-        this.$data.errors.full_messages = e
-      }
+      await this.signUp({ ...this.formData })
+      this.$data.formData.name = ''
+      this.$data.formData.email = ''
+      this.$data.formData.password = ''
+      this.$data.fomrData.image = ''
+      this.$data.fomrData.description = ''
     },
-    ...mapActions(['signUp'])
+    imageRecieve(imageUrl) {
+      this.formData.image = imageUrl
+    },
+    ...mapActions('auth', ['signUp'])
   }
 }
 </script>

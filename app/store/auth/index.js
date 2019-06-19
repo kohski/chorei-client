@@ -36,13 +36,15 @@ export const mutations = {
 }
 
 export const actions = {
-  async signUp({ commit, state }, { email, name, password }) {
+  async signUp({ commit, state }, { email, name, password, image, description }) {
     await this.$axios.post(
       `/auth`,
       {
         name: name,
         email: email,
-        password: password
+        image: image,
+        password: password,
+        description: description
       },
       {
         headers: {
@@ -55,9 +57,12 @@ export const actions = {
         const payload = res.headers
         Object.assign(payload, res.data.data)
         commit('setLoginInfo', { payload })
+        this.$router.push('/groups')
       })
       .catch((e) => {
-        throw e.response.data.errors.full_messages
+        if (process.client) {
+          this.$toast.error(e.response.statusText || e)
+        }
       })
   },
   async logIn({ commit, state }, { email, password }) {

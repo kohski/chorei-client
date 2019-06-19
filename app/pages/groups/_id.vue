@@ -26,9 +26,9 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import JobCard from '~/components/JobCard.vue'
-import MemberCard from '~/components/MemberCard.vue'
-import MemberRegister from '~/components/MemberRegister.vue'
+import JobCard from '~/components/cards/JobCard.vue'
+import MemberCard from '~/components/cards/MemberCard.vue'
+import MemberRegister from '~/components/registers/MemberRegister.vue'
 export default {
   components: {
     JobCard,

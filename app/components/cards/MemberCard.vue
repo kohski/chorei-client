@@ -11,7 +11,6 @@
           </v-card-title>
           <v-btn flat small color="error" @click.stop="destroyMember">delete</v-btn>
         </v-card>
-        {{ val }}
       </v-flex>
     </v-layout>
     <v-layout row justify-center>
@@ -32,7 +31,7 @@
 import dummyUserImage from '~/assets/images/dummy_user_image.png'
 import { mapActions, mapGetters } from 'vuex'
 export default {
-  name: 'JobCard',
+  name: 'MemberCard',
   data() {
     return {
       dialog: false
