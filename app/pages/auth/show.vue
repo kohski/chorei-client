@@ -27,7 +27,7 @@
           :disabled="toggleDisabled"
         ></v-textarea>
         <v-layout row justify-center>
-          <v-btn round dark to='/auth/update'>
+          <v-btn round dark to='/auth/edit'>
             Edit
           </v-btn>
         </v-layout>

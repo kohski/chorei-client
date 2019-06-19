@@ -115,9 +115,39 @@ export const actions = {
       .then((res) => {
         const payload = res.data.data
         commit('setShowInfo', payload)
+        return res.data.data
       })
       .catch((e) => {
         this.$toast.error(e)
+      })
+  },
+  async updateUser({ commit }, { name, image, description }) {
+    await this.$axios.put(
+      `/auth`,
+      {
+        registration: {
+          name: name,
+          image: image,
+          description: description
+        }
+      },
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+      .then((res) => {
+        if (process.client) {
+          this.$toast.success('User Editted!')
+        }
+        this.$router.push('/auth/show')
+      })
+      .catch((e) => {
+        if (process.client) {
+          this.$toast.error(e)
+        }
       })
   }
 }
