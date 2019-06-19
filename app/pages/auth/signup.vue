@@ -23,14 +23,11 @@
           v-model="formData.description"
           placeholder="add your description"
         ></v-textarea>
-        <div class="text-sm-center">
+        <v-layout row justify-center>
           <v-btn round dark @click="handleClickSubmit">
             submit
           </v-btn>
-          <v-btn round dark href="/auth/login">
-            LogIn
-          </v-btn>
-        </div>
+        </v-layout>
       </v-flex>
     </v-layout>
   </v-container>

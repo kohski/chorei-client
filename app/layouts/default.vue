@@ -84,6 +84,11 @@ export default {
           to: '/auth/signup'
         },
         {
+          icon: 'account_box',
+          title: 'Profile',
+          to: '/auth/show'
+        },
+        {
           icon: 'group_work',
           title: 'Groups',
           to: '/groups'

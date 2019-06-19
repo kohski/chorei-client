@@ -32,14 +32,11 @@
           type="password"
           label="Password"
         />
-        <div class="text-sm-center">
+        <v-layout row justify-center>
           <v-btn round dark @click="handleClickSubmit">
             submit
           </v-btn>
-          <v-btn round dark href="/auth/signup">
-            SignUp
-          </v-btn>
-        </div>
+        </v-layout>
       </v-flex>
     </v-layout>
   </v-container>
@@ -63,19 +60,8 @@ export default {
   },
   methods: {
     async handleClickSubmit() {
-      try {
-        await this.logIn({ ...this.formData })
-        this.$data.formData.email = ''
-        this.$data.formData.password = ''
-        this.$data.errors.isError = false
-        this.$data.isSuccess = true
-        // await new Promise(resolve => setTimeout(resolve, 2000))
-        this.$data.isSuccess = false
-        this.$router.push('/groups')
-      } catch (e) {
-        this.$data.errors.isError = true
-        this.$data.errors.full_messages = e
-      }
+      await this.logIn({ ...this.formData })
+      this.$router.push('/groups')
     },
     ...mapActions('auth', ['logIn'])
   }

@@ -12,7 +12,15 @@ export const state = () => ({
 export const getters = {
   uid: state => state.uid,
   accessToken: state => state.accessToken,
-  client: state => state.client
+  client: state => state.client,
+  showInfo: (state) => {
+    return {
+      name: state.name,
+      image: state.image,
+      description: state.description,
+      email: state.uid
+    }
+  }
 }
 
 export const mutations = {
@@ -32,6 +40,12 @@ export const mutations = {
       }
       cookies.set('chorei-server', credentials, { expire: 365 })
     }
+  },
+  setShowInfo(state, { name, uid, image, description }) {
+    state.name = name
+    state.uid = uid
+    state.image = image
+    state.description = description
   }
 }
 
@@ -83,6 +97,24 @@ export const actions = {
         const payload = res.headers
         Object.assign(payload, res.data.data)
         commit('setLoginInfo', { payload })
+      })
+      .catch((e) => {
+        this.$toast.error(e)
+      })
+  },
+  async getUser({ commit }) {
+    await this.$axios.get(
+      `/auth/validate_token`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+      .then((res) => {
+        const payload = res.data.data
+        commit('setShowInfo', payload)
       })
       .catch((e) => {
         this.$toast.error(e)
