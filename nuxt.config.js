@@ -47,7 +47,8 @@ export default {
   plugins: [
     '@/plugins/vuetify',
     // { src: '@/plugins/persistedstate', ssr: false },
-    '@/plugins/axios'
+    '@/plugins/axios',
+    '@/plugins/selectId'
   ],
 
   /*

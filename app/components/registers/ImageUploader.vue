@@ -1,9 +1,11 @@
 <template>
   <v-container fluid>
     <v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
-      <img v-if="imageUrl" :src="imageUrl" height="150">
+      <v-layout row justify-center>
+        <img v-if="imageUrl" :src="imageUrl" height="150">
+      </v-layout>
       <br>
-      <v-btn prepend-icon="attach_file" @click="pickFile">
+      <v-btn small prepend-icon="attach_file" @click="pickFile">
         Image
       </v-btn>
       <input

@@ -33,19 +33,18 @@ export const actions = {
       })
       .catch((e) => {
         commit('setSteps', [])
-        if (process.server) {
-          return
+        if (process.client) {
+          this.$toast.error(e.response.data.message || e)
         }
-        this.$toast.error(e.response.data.message || e)
       })
   },
-  async postStep({ commit }, { jobId, memo, image }) {
+  async postStep({ commit }, { jobId, formData }) {
     await this.$axios.post(
       `jobs/${jobId}/steps`,
       {
-        steps: {
-          memo: memo,
-          image: image
+        step: {
+          memo: formData.memo,
+          image: formData.image
         }
       },
       {

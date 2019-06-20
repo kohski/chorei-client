@@ -52,7 +52,6 @@ export default {
       const groupId = this.$store.$router.currentRoute.params.group
       const formData = this.formData
       if (this.validator()) {
-        debugger
         await this.postJob({ groupId, formData })
       }
     },

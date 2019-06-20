@@ -54,7 +54,15 @@ export default {
     ...mapGetters('groups/members', ['members'])
   },
   async asyncData({ store }) {
-    const groupId = store.$router.history.current.params.id || store.$router.history.pending.params.id
+    const idCategory = 'group'
+    const routes = store.$router.history
+    const currentUrl = routes.current ? routes.current.path : ''
+    const pendingUrl = routes.pending ? routes.pending.path : ''
+    const regexp = new RegExp(`${idCategory}s\\/(\\d*)`)
+    const groupId = [
+      currentUrl.match(regexp) ? currentUrl.match(regexp)[1] : null,
+      pendingUrl.match(regexp) ? pendingUrl.match(regexp)[1] : null
+    ].find(elm => elm)
     await store.dispatch('groups/showGroup', { groupId: groupId })
     await store.dispatch('groups/jobs/indexJobs', { groupId: groupId })
     await store.dispatch('groups/members/indexMembers', { groupId: groupId })
