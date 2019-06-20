@@ -6,8 +6,7 @@
           <nuxt-link :to="'/groups/'+group.id">
             <v-img
               :src="group.image"
-            >
-            </v-img>
+            />
           </nuxt-link>
           <v-card-title primary-title>
             <div>
@@ -17,7 +16,9 @@
           <v-btn
             color="indigo lighten-2"
             @click="deleteGroupWithId(group.id)"
-          >delete</v-btn>
+          >
+            delete
+          </v-btn>
         </v-card>
       </v-flex>
     </v-layout>

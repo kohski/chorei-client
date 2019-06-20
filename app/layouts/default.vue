@@ -97,6 +97,11 @@ export default {
           icon: 'pan_tool',
           title: 'New Group',
           to: '/groups/new'
+        },
+        {
+          icon: 'add_to_queue',
+          title: 'New Job',
+          to: '/groups/37/jobs/new'
         }
       ],
       miniVariant: false,

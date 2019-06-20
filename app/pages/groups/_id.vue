@@ -4,21 +4,34 @@
       <v-flex xs10 offset-xs1>
         {{ group }}
         <hr>
-        <v-layout row justify-right>
+        <v-layout row justify-start wrap>
           <member-card
-          v-for="member in members"
-          :key="member.id"
-          :val=member
-          class="member_card"/>
+            v-for="member in members"
+            :key="member.id"
+            :val="member"
+            class="member_card"
+          />
         </v-layout>
         <member-register />
         <hr>
-        <v-layout row justify-right>
-          <job-card
-          v-for="job in jobs"
-          :key=job.id
-          :val=job
-          class="job_card"/>
+        <v-layout row justify-center>
+          <v-btn :to="`/groups/${this.$nuxt.$route.params.id}/jobs/new`">
+            new job
+          </v-btn>
+        </v-layout>
+        <v-layout row justify-start wrap>
+          <v-flex
+            v-for="job in jobs"
+            :key="job.id"
+            xs4
+          >
+            <v-layout column align-space-between>
+              <job-card
+                :val="job"
+                class="job_card"
+              />
+            </v-layout>
+          </v-flex>
         </v-layout>
       </v-flex>
     </v-layout>
@@ -55,7 +68,7 @@ export default {
 </script>
 <style>
   .job_card{
-    margin-top: 10%;
+    margin: 5%;
   }
   .member_card{
     margin: 5%;

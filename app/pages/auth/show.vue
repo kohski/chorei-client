@@ -3,7 +3,9 @@
     <v-layout>
       <v-flex xs10 offset-xs1 sm6 offset-sm3>
         <v-layout row justify-center>
-          <h1 class="display-1 grey--text darken-3">Your Profile</h1>
+          <h1 class="display-1 grey--text darken-3">
+            Your Profile
+          </h1>
         </v-layout>
         <v-text-field
           v-model="name"
@@ -19,15 +21,15 @@
           :disabled="toggleDisabled"
         />
         <v-layout row justify-center>
-          <v-img :src="image" max-width="120"></v-img>
+          <v-img :src="image" max-width="120" />
         </v-layout>
         <v-textarea
           v-model="description"
           label="description"
           :disabled="toggleDisabled"
-        ></v-textarea>
+        />
         <v-layout row justify-center>
-          <v-btn round dark to='/auth/edit'>
+          <v-btn round dark to="/auth/edit">
             Edit
           </v-btn>
         </v-layout>

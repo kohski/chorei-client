@@ -18,11 +18,11 @@
           type="password"
           label="Password"
         />
-        <image-uploader @imageRecieve="imageRecieve"/>
+        <image-uploader @imageRecieve="imageRecieve" />
         <v-textarea
           v-model="formData.description"
           placeholder="add your description"
-        ></v-textarea>
+        />
         <v-layout row justify-center>
           <v-btn round dark @click="handleClickSubmit">
             submit

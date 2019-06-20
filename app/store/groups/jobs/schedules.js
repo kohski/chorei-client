@@ -1,30 +1,25 @@
-// import Vue from 'vue'
-
 export const state = () => ({
-  jobs: [],
-  job: {}
+  schedules: [],
+  schedule: {}
 })
 
 export const getters = {
-  jobs(state) { return state.jobs },
-  job(state) { return state.job }
+  schedules(state) { return state.schedules }
 }
 
 export const mutations = {
-  setJobs(state, jobs) {
-    state.jobs = jobs
+  setSchedules(state, schedules) {
+    state.schedules = schedules
   },
-  addJob(state, job) {
-    state.jobs.push(job)
-  },
-  setJob(state, job) {
-    state.job = job
+  setSchedule(state, schedule) {
+    state.schedule = schedule
   }
 }
+
 export const actions = {
-  async indexJobs({ commit, state }, { groupId }) {
+  async indexSchedules({ commit }, { jobId }) {
     await this.$axios.get(
-      `groups/${groupId}/jobs`,
+      `jobs/${jobId}/schedules`,
       {
         headers: {
           'Accept': 'application/json',
@@ -33,21 +28,24 @@ export const actions = {
       }
     )
       .then((res) => {
-        commit('setJobs', res.data.data)
+        commit('setSchedules', res.data.data)
       })
       .catch((e) => {
-        commit('setJobs', [])
+        commit('setSchedules', [])
         if (process.server) {
           return
         }
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async postJob({ commit }, { groupId, formData }) {
+  async postSchedule({ commit }, { jobId, memo, image }) {
     await this.$axios.post(
-      `groups/${groupId}/jobs`,
+      `jobs/${jobId}/schedules`,
       {
-        job: formData
+        schedules: {
+          memo: memo,
+          image: image
+        }
       },
       {
         headers: {
@@ -57,17 +55,15 @@ export const actions = {
       }
     )
       .then((res) => {
-        const jobId = res.data.data.id
-        this.$toast.success('job is successfully created')
-        this.$router.push(`/jobs/${jobId}`)
+        this.$toast.success('schedule is successfully created')
       })
       .catch((e) => {
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async deleteJob({ commit }, id) {
+  async deleteSchedule({ commit }, { scheduleId }) {
     await this.$axios.delete(
-      `/jobs/${id}`,
+      `/schedule/${scheduleId}`,
       {
         headers: {
           'Accept': 'application/json',
@@ -82,9 +78,15 @@ export const actions = {
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async showJob({ commit }, { jobId }) {
-    await this.$axios.get(
-      `/jobs/${jobId}`,
+  async putSchedule({ commit }, { scheduleId, image, memo }) {
+    await this.$axios.put(
+      `/schedule/${scheduleId}`,
+      {
+        schedule: {
+          memo: memo,
+          image: image
+        }
+      },
       {
         headers: {
           'Accept': 'application/json',
@@ -93,12 +95,10 @@ export const actions = {
       }
     )
       .then((res) => {
-        commit('setJob', res.data.data)
+        this.$toast.success('Successfully Updated!!')
       })
       .catch((e) => {
-        if (process.client) {
-          this.$toast.error(e.response.data.message || e)
-        }
+        this.$toast.error(e.response.data.message || e)
       })
   }
 }

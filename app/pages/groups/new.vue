@@ -23,20 +23,20 @@
           {{ msg }}
         </v-alert>
         <v-text-field
-          v-model="formData.name"
           id="name_field"
+          v-model="formData.name"
           type="text"
           label="Group Name"
         />
         <v-text-field
           id="imagePicker"
           type="file"
-          v-on:change="onFileChange"
+          @change="onFileChange"
         />
         <v-img
           v-model="formData.image"
           :src="formData.image"
-        ></v-img>
+        />
         <div class="text-sm-center">
           <v-btn round dark @click="postGroupWithPayload">
             submit

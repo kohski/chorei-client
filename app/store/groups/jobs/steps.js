@@ -1,30 +1,26 @@
-// import Vue from 'vue'
-
 export const state = () => ({
-  jobs: [],
-  job: {}
+  steps: [],
+  step: {}
 })
 
 export const getters = {
-  jobs(state) { return state.jobs },
-  job(state) { return state.job }
+  steps(state) { return state.steps },
+  step(state) { return state.step }
 }
 
 export const mutations = {
-  setJobs(state, jobs) {
-    state.jobs = jobs
+  setSteps(state, steps) {
+    state.steps = steps
   },
-  addJob(state, job) {
-    state.jobs.push(job)
-  },
-  setJob(state, job) {
-    state.job = job
+  setStep(state, step) {
+    state.step = step
   }
 }
+
 export const actions = {
-  async indexJobs({ commit, state }, { groupId }) {
+  async indexSteps({ commit }, { jobId }) {
     await this.$axios.get(
-      `groups/${groupId}/jobs`,
+      `jobs/${jobId}/steps`,
       {
         headers: {
           'Accept': 'application/json',
@@ -33,21 +29,24 @@ export const actions = {
       }
     )
       .then((res) => {
-        commit('setJobs', res.data.data)
+        commit('setSteps', res.data.data)
       })
       .catch((e) => {
-        commit('setJobs', [])
+        commit('setSteps', [])
         if (process.server) {
           return
         }
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async postJob({ commit }, { groupId, formData }) {
+  async postStep({ commit }, { jobId, memo, image }) {
     await this.$axios.post(
-      `groups/${groupId}/jobs`,
+      `jobs/${jobId}/steps`,
       {
-        job: formData
+        steps: {
+          memo: memo,
+          image: image
+        }
       },
       {
         headers: {
@@ -57,17 +56,15 @@ export const actions = {
       }
     )
       .then((res) => {
-        const jobId = res.data.data.id
-        this.$toast.success('job is successfully created')
-        this.$router.push(`/jobs/${jobId}`)
+        this.$toast.success('step is successfully created')
       })
       .catch((e) => {
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async deleteJob({ commit }, id) {
+  async deleteStep({ commit }, { stepId }) {
     await this.$axios.delete(
-      `/jobs/${id}`,
+      `/steps/${stepId}`,
       {
         headers: {
           'Accept': 'application/json',
@@ -82,9 +79,15 @@ export const actions = {
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async showJob({ commit }, { jobId }) {
-    await this.$axios.get(
-      `/jobs/${jobId}`,
+  async putStep({ commit }, { stepId, image, memo }) {
+    await this.$axios.put(
+      `/steps/${stepId}`,
+      {
+        step: {
+          memo: memo,
+          image: image
+        }
+      },
       {
         headers: {
           'Accept': 'application/json',
@@ -93,12 +96,10 @@ export const actions = {
       }
     )
       .then((res) => {
-        commit('setJob', res.data.data)
+        this.$toast.success('Successfully Updated!!')
       })
       .catch((e) => {
-        if (process.client) {
-          this.$toast.error(e.response.data.message || e)
-        }
+        this.$toast.error(e.response.data.message || e)
       })
   }
 }

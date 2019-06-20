@@ -1,22 +1,24 @@
 <template>
   <div>
     <v-layout row justify-center>
-      <v-flex xs10 offset-xs1>
-        <v-card  @click="dialog = !dialog" width="200px">
+      <v-flex xs12>
+        <v-card min-width="200px" @click="dialog = !dialog">
           <v-layout row justify-center>
-            <v-img :src="user_image" max-width="80px"  class="dummy_user_image"></v-img>
+            <v-img :src="user_image" max-width="80px" class="dummy_user_image" />
           </v-layout>
           <v-card-title primary-title class="member_name">
             {{ val.name }}
           </v-card-title>
-          <v-btn flat small color="error" @click.stop="destroyMember">delete</v-btn>
+          <v-btn flat small color="error" @click.stop="destroyMember">
+            delete
+          </v-btn>
         </v-card>
       </v-flex>
     </v-layout>
     <v-layout row justify-center>
       <v-dialog v-model="dialog" width="40%">
         <v-card>
-          <v-img :src="user_image"></v-img>
+          <v-img :src="user_image" />
           <v-card-title>
             <span class="headline">{{ val.name }}</span>
           </v-card-title>
@@ -32,12 +34,12 @@ import dummyUserImage from '~/assets/images/dummy_user_image.png'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'MemberCard',
+  props: ['val'],
   data() {
     return {
       dialog: false
     }
   },
-  props: ['val'],
   computed: {
     user_image() {
       return this.val.image ? this.val.image : dummyUserImage
