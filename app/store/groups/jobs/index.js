@@ -2,12 +2,14 @@
 
 export const state = () => ({
   jobs: [],
-  job: {}
+  job: {},
+  groupId: ''
 })
 
 export const getters = {
   jobs(state) { return state.jobs },
-  job(state) { return state.job }
+  job(state) { return state.job },
+  groupId(state) { return state.groupId }
 }
 
 export const mutations = {
@@ -19,6 +21,9 @@ export const mutations = {
   },
   setJob(state, job) {
     state.job = job
+  },
+  setGroupId(state, groupId) {
+    state.groupId = groupId
   }
 }
 export const actions = {
@@ -94,6 +99,25 @@ export const actions = {
     )
       .then((res) => {
         commit('setJob', res.data.data)
+      })
+      .catch((e) => {
+        if (process.client) {
+          this.$toast.error(e.response.data.message || e)
+        }
+      })
+  },
+  async getGroupId({ commit }, { jobId }) {
+    await this.$axios.get(
+      `/groups/group_id_with_job_id?job_id=${jobId}`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+      .then((res) => {
+        commit('setGroupId', res.data.data)
       })
       .catch((e) => {
         if (process.client) {

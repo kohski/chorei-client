@@ -1,6 +1,6 @@
 <template>
   <v-layout row justify-center class="space">
-    <v-flex xs5>
+    <v-flex xs10>
       <image-uploader @imageRecieve="imageRecieve" />
       <v-textarea
         v-model="formData.memo"
@@ -8,6 +8,12 @@
         counter
         maxlength="400"
       />
+      <!-- <v-layout row justify-center>
+        <v-select
+          label="order"
+          :items="oreder_items"
+        />
+      </v-layout> -->
       <v-layout row justify-center>
         <v-btn round dark small @click="postStepWithParams">
           SUBMIT
@@ -24,12 +30,21 @@ export default {
   components: {
     ImageUploader
   },
+  props: ['val'],
   data() {
     return {
       formData: {
         image: '',
-        memo: ''
+        memo: '',
+        order: 0
       }
+    }
+  },
+  computed: {
+    oreder_items() {
+      const arr = new Array(this.val).fill(null).map((elm, index) => index + 1)
+      arr.push(this.val + 1)
+      return arr
     }
   },
   methods: {
@@ -44,6 +59,7 @@ export default {
         await this.indexSteps({ jobId: jobId })
         this.formData.image = ''
         this.formData.memo = ''
+        this.formData.order = ''
         this.$children[0].$data.imageUrl = ''
       }
     },

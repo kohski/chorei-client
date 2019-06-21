@@ -1,15 +1,20 @@
 <template>
   <div>
     <!-- job section -->
-    <v-layout row justify-center>
+    <v-layout row justify-start>
       <v-flex xs5>
-        <job-display :val="job"/>
+        <job-display :val="job" />
       </v-flex>
     </v-layout>
 
     <!-- assign section -->
     <v-layout row justify-center>
-      <v-flex xs5 />
+      <v-flex xs5>
+        <assign-register
+          :members="members"
+          :assigns="assigns"
+        />
+      </v-flex>
     </v-layout>
 
     <!-- tag -->
@@ -18,18 +23,25 @@
     </v-layout>
 
     <!-- step -->
-    <v-layout row justify-center>
-      <v-flex xs5>
-        <step-card
-          v-for="step in steps"
-          :key="step.id"
-          :val="step"
-        />
+    <v-layout row justify-start wrap>
+      <v-flex
+        v-for="(step,index) in steps"
+        :key="step.id"
+        xs4
+      >
+        <v-layout column align-space-between>
+          <step-card
+            :val="step"
+            :index="index"
+          />
+        </v-layout>
       </v-flex>
     </v-layout>
     <v-layout row justify-center>
       <v-flex xs5>
-        <step-register />
+        <step-register
+          :val="steps.length"
+        />
       </v-flex>
     </v-layout>
   </div>
@@ -39,11 +51,13 @@ import { mapGetters } from 'vuex'
 import JobDisplay from '~/components/cards/JobDisplay'
 import StepRegister from '~/components/registers/StepRegister'
 import StepCard from '~/components/cards/StepCard'
+import AssignRegister from '~/components/registers/AssignRegister'
 export default {
   components: {
     JobDisplay,
     StepRegister,
-    StepCard
+    StepCard,
+    AssignRegister
   },
   async asyncData({ store }) {
     const idCategory = 'job'
@@ -57,10 +71,16 @@ export default {
     ].find(elm => elm)
     await store.dispatch('groups/jobs/showJob', { jobId })
     await store.dispatch('groups/jobs/steps/indexSteps', { jobId })
+    await store.dispatch('groups/jobs/getGroupId', { jobId })
+    const groupId = store.state.groups.jobs.groupId
+    await store.dispatch('groups/members/indexMembers', { groupId })
+    await store.dispatch('groups/jobs/assigns/indexAssigns', { jobId })
   },
   computed: {
-    ...mapGetters('groups/jobs', ['job', 'jobs']),
-    ...mapGetters('groups/jobs/steps', ['step', 'steps'])
+    ...mapGetters('groups/jobs', ['job', 'jobs', 'groupId']),
+    ...mapGetters('groups/jobs/steps', ['step', 'steps']),
+    ...mapGetters('groups/members', ['members']),
+    ...mapGetters('groups/jobs/assigns', ['assigns'])
   }
 }
 </script>

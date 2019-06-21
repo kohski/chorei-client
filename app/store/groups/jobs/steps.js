@@ -10,7 +10,15 @@ export const getters = {
 
 export const mutations = {
   setSteps(state, steps) {
-    state.steps = steps
+    const sortedSteps = steps.sort((a, b) => {
+      if (a.order > b.order) {
+        return 1
+      }
+      if (a.order < b.order) {
+        return -1
+      }
+    })
+    state.steps = sortedSteps
   },
   setStep(state, step) {
     state.step = step
@@ -34,7 +42,7 @@ export const actions = {
       .catch((e) => {
         commit('setSteps', [])
         if (process.client) {
-          this.$toast.error(e.response.data.message || e)
+          this.$toast.info(e.response.data.message || e)
         }
       })
   },
@@ -44,7 +52,8 @@ export const actions = {
       {
         step: {
           memo: formData.memo,
-          image: formData.image
+          image: formData.image,
+          order: formData.order
         }
       },
       {
@@ -78,13 +87,14 @@ export const actions = {
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async putStep({ commit }, { stepId, image, memo }) {
+  async putStep({ commit }, { stepId, formData }) {
     await this.$axios.put(
       `/steps/${stepId}`,
       {
         step: {
-          memo: memo,
-          image: image
+          memo: formData.memo,
+          image: formData.image,
+          order: formData.order
         }
       },
       {
