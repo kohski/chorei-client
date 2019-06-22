@@ -1,23 +1,36 @@
 <template>
   <v-layout row justify-center>
-    <v-flex xs5>
+    <v-flex xs10>
       <v-text-field
-        v-model="email"
-        label="dummy"
+        v-model="name"
+        label="Create Tag"
         tabindex="1"
       />
+      <v-layout row justify-center>
+        <v-btn small dark round @click="postTageWithParmas">
+          submit
+        </v-btn>
+      </v-layout>
     </v-flex>
   </v-layout>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
-  name: 'ScheduleRegister',
-  computed: {
-    ...mapGetters()
+  name: 'TagRegister',
+  data() {
+    return {
+      name: ''
+    }
   },
   methods: {
-    ...mapActions()
+    async postTageWithParmas() {
+      const name = this.name
+      const jobId = this.$route.params.id
+      await this.postTag({ name: name, jobId: jobId })
+      await this.indexTags({ jobId: jobId })
+    },
+    ...mapActions('groups/tags', ['postTag', 'indexTags'])
   }
 }
 </script>

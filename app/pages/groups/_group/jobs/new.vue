@@ -14,7 +14,7 @@
 <script>
 import JobRegister from '~/components/registers/JobRegister'
 // import StepRegister from '~/components/registers/StepRegister'
-// import AssignRegister from '~/components/registers/AssignRegister'
+// import AssignSelector from '~/components/registers/AssignSelector'
 // import ScheduleRegister from '~/components/registers/ScheduleRegister'
 // import TagRegister from '~/components/registers/TagRegister'
 // import { mapGetters, mapActions } from 'vuex'
@@ -22,7 +22,7 @@ export default {
   components: {
     JobRegister
     // StepRegister
-    // AssignRegister,
+    // AssignSelector,
     // ScheduleRegister,
     // TagRegister
   }

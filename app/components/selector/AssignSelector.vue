@@ -4,7 +4,7 @@
       <v-select
         v-model="assignNames"
         :items="members.map(elm => elm.name)"
-        :value="members"
+        :value="assignIds"
         attach
         chips
         label="Members"
@@ -31,7 +31,7 @@ export default {
     })
     this.assigns.forEach((elm) => {
       this.assignIds.push(elm.id)
-      this.assignNames.push(elm.id)
+      this.assignNames.push(elm.name)
     })
   },
   methods: {

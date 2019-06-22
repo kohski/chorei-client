@@ -1,6 +1,5 @@
 export const state = () => ({
-  tags: [],
-  tag: {}
+  tags: []
 })
 
 export const getters = {
@@ -19,7 +18,7 @@ export const mutations = {
 export const actions = {
   async indexTags({ commit }, { jobId }) {
     await this.$axios.get(
-      `jobs/${jobId}/tags`,
+      `/tags/tags_with_job_id?job_id=${jobId}`,
       {
         headers: {
           'Accept': 'application/json',
@@ -32,19 +31,17 @@ export const actions = {
       })
       .catch((e) => {
         commit('setTags', [])
-        if (process.server) {
-          return
+        if (process.client) {
+          this.$toast.error(e.response.data.message || e)
         }
-        this.$toast.error(e.response.data.message || e)
       })
   },
-  async postTag({ commit }, { jobId, memo, image }) {
+  async postTag({ commit }, { name, jobId }) {
     await this.$axios.post(
-      `jobs/${jobId}/tags`,
+      `/tags/tags_with_job_id?job_id=${jobId}`,
       {
-        tags: {
-          memo: memo,
-          image: image
+        tag: {
+          name: name
         }
       },
       {
@@ -58,7 +55,9 @@ export const actions = {
         this.$toast.success('tag is successfully created')
       })
       .catch((e) => {
-        this.$toast.error(e.response.data.message || e)
+        if (process.client) {
+          this.$toast.error(e.response.data.message || e)
+        }
       })
   },
   async deleteTag({ commit }, { tagId }) {
@@ -73,29 +72,6 @@ export const actions = {
     )
       .then((res) => {
         this.$toast.success('Destroy Completed!!')
-      })
-      .catch((e) => {
-        this.$toast.error(e.response.data.message || e)
-      })
-  },
-  async putTag({ commit }, { tagId, image, memo }) {
-    await this.$axios.put(
-      `/tags/${tagId}`,
-      {
-        tag: {
-          memo: memo,
-          image: image
-        }
-      },
-      {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }
-    )
-      .then((res) => {
-        this.$toast.success('Successfully Updated!!')
       })
       .catch((e) => {
         this.$toast.error(e.response.data.message || e)

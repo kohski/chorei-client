@@ -10,7 +10,7 @@
     <!-- assign section -->
     <v-layout row justify-center>
       <v-flex xs5>
-        <assign-register
+        <assign-selector
           :members="members"
           :assigns="assigns"
         />
@@ -19,7 +19,9 @@
 
     <!-- tag -->
     <v-layout row justify-center>
-      <v-flex xs5 />
+      <v-flex xs5>
+        <tag-card />
+      </v-flex>
     </v-layout>
 
     <!-- step -->
@@ -51,13 +53,15 @@ import { mapGetters } from 'vuex'
 import JobDisplay from '~/components/cards/JobDisplay'
 import StepRegister from '~/components/registers/StepRegister'
 import StepCard from '~/components/cards/StepCard'
-import AssignRegister from '~/components/registers/AssignRegister'
+import TagCard from '~/components/cards/TagCard'
+import AssignSelector from '~/components/selector/AssignSelector'
 export default {
   components: {
     JobDisplay,
     StepRegister,
     StepCard,
-    AssignRegister
+    AssignSelector,
+    TagCard
   },
   async asyncData({ store }) {
     const idCategory = 'job'
