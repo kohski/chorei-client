@@ -29,6 +29,7 @@ export default {
       const jobId = this.$route.params.id
       await this.postTag({ name: name, jobId: jobId })
       await this.indexTags({ jobId: jobId })
+      this.name = ''
     },
     ...mapActions('groups/tags', ['postTag', 'indexTags'])
   }
