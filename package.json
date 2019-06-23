@@ -11,14 +11,22 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "test": "jest"
+    "test": "jest",
+    "debug": "node --inspect-brk=9229 node_modules/nuxt/bin/nuxt"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.5.4",
+    "@nuxtjs/toast": "^3.2.1",
+    "cookie": "^0.4.0",
+    "cookie-machine": "^0.1.1",
     "cross-env": "^5.2.0",
+    "js-base64": "^2.5.1",
+    "js-cookie": "^2.2.0",
     "nuxt": "^2.4.0",
+    "universal-cookie": "^4.0.0",
     "vuetify": "^1.5.5",
-    "vuetify-loader": "^1.2.1"
+    "vuetify-loader": "^1.2.1",
+    "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",

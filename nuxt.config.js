@@ -4,7 +4,11 @@ import pkg from './package'
 export default {
   mode: 'universal',
   srcDir: 'app',
-
+  router: {
+    middleware: [
+      'auth'
+    ]
+  },
   /*
   ** Headers of the page
   */
@@ -41,7 +45,10 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/vuetify'
+    '@/plugins/vuetify',
+    // { src: '@/plugins/persistedstate', ssr: false },
+    '@/plugins/axios',
+    '@/plugins/selectId'
   ],
 
   /*
@@ -49,14 +56,15 @@ export default {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/toast'
   ],
   /*
   ** Axios module configuration
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: 'http://3.113.114.91'
+    baseURL: 'http://3.113.114.91/api/v1'
   },
 
   /*
@@ -84,5 +92,10 @@ export default {
         })
       }
     }
+  },
+  toast: {
+    position: 'top-center',
+    duration: 3000,
+    theme: 'bubble'
   }
 }

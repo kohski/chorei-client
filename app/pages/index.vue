@@ -13,6 +13,9 @@
         <logo />
         <vuetify-logo />
       </div>
+      <v-btn color="success" href="/groups">
+        to Group
+      </v-btn>
       <v-card>
         <v-card-title class="headline">
           Welcome to the Vuetify + Nuxt.js template
