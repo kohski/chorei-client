@@ -27,6 +27,7 @@
         item-text="text"
         item-value="value"
         label="頻度"
+        outline
       >
       </v-select>
       <v-select
@@ -34,6 +35,7 @@
         :items="[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
         label="回数"
         :disabled="repeatTimeChecker"
+        outline
       >
       </v-select>
     </v-layout>

@@ -3,7 +3,7 @@ import pkg from './package'
 
 export default {
   mode: 'universal',
-  srcDir: 'app',
+  srcDir: 'app/',
   router: {
     middleware: [
       'auth'

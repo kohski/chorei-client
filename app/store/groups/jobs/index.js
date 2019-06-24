@@ -88,7 +88,6 @@ export const actions = {
       })
   },
   async putJob({ commit }, { jobId, formData }) {
-    debugger
     await this.$axios.put(
       `/jobs/${jobId}`,
       {

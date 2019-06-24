@@ -1,7 +1,7 @@
 <template>
   <v-layout row justify-center class="step_card_wrapper">
     <v-flex xs10>
-      <p>{{ val.order + 1 }}</p>
+      <p>{{ index + 1 }}</p>
       <v-img :src="val.image" height="120" contain />
       <v-textarea
         v-model="val.memo"
@@ -32,6 +32,7 @@ export default {
       const jobId = this.$store.$router.currentRoute.params.id
       await this.deleteStep({ stepId: this.val.id })
       await this.indexSteps({ jobId: jobId })
+      await this.$emit('updateStepCard')
     },
     async toLeft() {
       if (this.val.order === 0) { return }
@@ -42,16 +43,18 @@ export default {
       }
       await this.putStep({ stepId, formData })
       await this.indexSteps({ jobId: jobId })
+      await this.$emit('updateStepCard')
     },
     async toRight() {
       // if (this.val.order === 0) { return }
       const jobId = this.$store.$router.currentRoute.params.id
       const stepId = this.val.id
       const formData = {
-        order: (this.val.order + 1)
+        order: (this.val.order + 2)
       }
       await this.putStep({ stepId, formData })
       await this.indexSteps({ jobId: jobId })
+      await this.$emit('updateStepCard', { jobId: jobId })
     },
     ...mapActions('groups/jobs/steps', ['deleteStep', 'indexSteps', 'putStep'])
   }

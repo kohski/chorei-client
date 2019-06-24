@@ -7,7 +7,8 @@
         :value="assignIds"
         attach
         chips
-        label="Members"
+        outline
+        label="Assign"
         multiple
         @change="handleSelect"
       />

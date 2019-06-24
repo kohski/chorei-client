@@ -5,8 +5,8 @@
         <img v-if="imageUrl" :src="imageUrl" height="150">
       </v-layout>
       <br>
-      <v-btn small prepend-icon="attach_file" @click="pickFile">
-        Image
+      <v-btn small round dark prepend-icon="attach_file" @click="pickFile">
+        image
       </v-btn>
       <input
         ref="image"

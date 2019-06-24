@@ -48,7 +48,6 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-// import { Base64 } from 'js-base64'
 export default {
   asyncData({ redirect, store }) {
     return {

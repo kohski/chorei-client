@@ -1,24 +1,25 @@
 <template>
-  <v-layout row justify-center class="space">
-    <v-flex xs10>
-      <image-uploader @imageRecieve="imageRecieve" />
-      <v-textarea
-        v-model="formData.memo"
-        label="memo"
-        counter
-        maxlength="400"
-      />
-      <!-- <v-layout row justify-center>
-        <v-select
-          label="order"
-          :items="oreder_items"
-        />
-      </v-layout> -->
+  <v-layout row justify-center>
+    <v-flex xs12>
       <v-layout row justify-center>
-        <v-btn round dark small @click="postStepWithParams">
-          SUBMIT
-        </v-btn>
+        <v-btn round small dark @click="toggleModal"> + Step</v-btn>
       </v-layout>
+      <v-dialog v-model="dialog" width="30%">
+        <v-card  class="step_space">
+          <image-uploader @imageRecieve="imageRecieve" />
+          <v-textarea
+            v-model="formData.memo"
+            label="memo"
+            counter
+            maxlength="400"
+          />
+          <v-layout row justify-center>
+            <v-btn round dark small @click="postStepWithParams">
+              SUBMIT
+            </v-btn>
+          </v-layout>
+        </v-card>
+      </v-dialog>
     </v-flex>
   </v-layout>
 </template>
@@ -37,7 +38,8 @@ export default {
         image: '',
         memo: '',
         order: 0
-      }
+      },
+      dialog: false
     }
   },
   computed: {
@@ -61,6 +63,7 @@ export default {
         this.formData.memo = ''
         this.formData.order = ''
         this.$children[0].$data.imageUrl = ''
+        this.dialog = false
       }
     },
     validator() {
@@ -71,13 +74,15 @@ export default {
       }
       return flag
     },
+    toggleModal() {
+      this.dialog = !this.dialog
+    },
     ...mapActions('groups/jobs/steps', ['postStep', 'indexSteps'])
   }
 }
 </script>
 <style>
-  .space {
+  .step_space {
     padding: 5%;
-    background-color: #dddddd;
   }
 </style>

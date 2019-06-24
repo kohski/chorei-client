@@ -1,11 +1,13 @@
 export const state = () => ({
   groups: [],
-  group: {}
+  group: {},
+  groupId: ''
 })
 
 export const getters = {
   groups(state) { return state.groups },
-  group(state) { return state.group }
+  group(state) { return state.group },
+  groupId(state) { return state.groupId }
 }
 
 export const mutations = {
@@ -17,6 +19,9 @@ export const mutations = {
   },
   setGroup(state, group) {
     state.group = group
+  },
+  setGroupId(state, groupId) {
+    state.groupId = groupId
   }
 }
 export const actions = {
@@ -96,6 +101,47 @@ export const actions = {
           return
         }
         this.$toast.error(e.response.data.message || e)
+      })
+  },
+  async putGroup({ commit }, { groupId, formData }) {
+    await this.$axios.put(
+      `/groups/${groupId}`,
+      {
+        group: formData
+      },
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+      .then((res) => {
+        commit('setGroup', res.data.data)
+      })
+      .catch((e) => {
+        if (process.client) {
+          this.$toast.error(e.response.data.message || e)
+        }
+      })
+  },
+  async getGroupIdWithJobId({ commit }, { jobId }) {
+    await this.$axios.get(
+      `/groups/group_id_with_job_id?job_id=${jobId}`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+      .then((res) => {
+        commit('setGroupId', res.data.data)
+      })
+      .catch((e) => {
+        if (process.client) {
+          this.$toast.error(e.response.data.message || e)
+        }
       })
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- job section -->
-    <v-layout row justify-start wrap>
+    <v-layout row justify-center wrap>
       <v-flex md6 lg3>
         <job-display :val="job" />
       </v-flex>
@@ -31,6 +31,13 @@
     </v-layout>
 
     <!-- step -->
+    <v-layout row justify-center>
+      <v-flex xs12>
+        <step-register
+          :val="steps.length"
+        />
+      </v-flex>
+    </v-layout>
     <v-layout row justify-start wrap>
       <v-flex
         v-for="(step,index) in steps"
@@ -45,17 +52,10 @@
         </v-layout>
       </v-flex>
     </v-layout>
-    <v-layout row justify-center>
-      <v-flex xs5>
-        <step-register
-          :val="steps.length"
-        />
-      </v-flex>
-    </v-layout>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import JobDisplay from '~/components/cards/JobDisplay'
 import StepRegister from '~/components/registers/StepRegister'
 import StepCard from '~/components/cards/StepCard'
@@ -87,6 +87,12 @@ export default {
     const groupId = store.state.groups.jobs.groupId
     await store.dispatch('groups/members/indexMembers', { groupId })
     await store.dispatch('groups/jobs/assigns/indexAssigns', { jobId })
+  },
+  methods: {
+    async updateStepCard({ jobId }) {
+      await this.indexSteps({ jobId })
+    },
+    ...mapActions('groups/jobs/steps', ['indexSteps'])
   },
   computed: {
     ...mapGetters('groups/jobs', ['job', 'jobs', 'groupId']),

@@ -8,6 +8,7 @@
           item-text="name"
           item-value="id"
           label="Delete Tag"
+          outline
         />
         <v-layout row justify-center>
           <v-btn small dark round @click="deleteTagWithId">

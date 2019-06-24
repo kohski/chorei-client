@@ -9,6 +9,7 @@
         chips
         label="Tags"
         multiple
+        outline
         @change="handleSelect"
       />
     </v-flex>
