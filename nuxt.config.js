@@ -1,6 +1,14 @@
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
 import pkg from './package'
 
+let API_URL
+const env = process.env.NODE_ENV || 'development';
+if (env === 'development' || env === 'test') {
+  API_URL = 'http://3.113.114.91/api/v1'
+} else {
+  API_URL = process.env.API_URL
+}
+
 export default {
   mode: 'universal',
   srcDir: 'app/',
@@ -65,7 +73,9 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: 'http://3.113.114.91/api/v1'
+    // baseURL: 'http://3.113.114.91/api/v1'
+    // eslint-disable-next-line no-undef
+    baseURL: API_URL
   },
 
   /*
