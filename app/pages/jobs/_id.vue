@@ -1,25 +1,31 @@
 <template>
   <div>
     <!-- job section -->
-    <v-layout row justify-start>
-      <v-flex xs5>
+    <v-layout row justify-start wrap>
+      <v-flex md6 lg3>
         <job-display :val="job" />
       </v-flex>
-    </v-layout>
+    <!-- </v-layout> -->
+    <!-- datetime picker -->
+    <!-- <v-layout row justify-start> -->
+      <v-flex md6 lg3>
+        <datetime-selector :val="job" />
+      </v-flex>
+    <!-- </v-layout> -->
 
     <!-- assign section -->
-    <v-layout row justify-center>
-      <v-flex xs5>
+    <!-- <v-layout row justify-center> -->
+      <v-flex md6 lg3>
         <assign-selector
           :members="members"
           :assigns="assigns"
         />
       </v-flex>
-    </v-layout>
+    <!-- </v-layout> -->
 
     <!-- tag -->
-    <v-layout row justify-center>
-      <v-flex xs5>
+    <!-- <v-layout row justify-start> -->
+      <v-flex md6 lg3>
         <tag-card />
       </v-flex>
     </v-layout>
@@ -55,13 +61,15 @@ import StepRegister from '~/components/registers/StepRegister'
 import StepCard from '~/components/cards/StepCard'
 import TagCard from '~/components/cards/TagCard'
 import AssignSelector from '~/components/selector/AssignSelector'
+import DatetimeSelector from '~/components/selector/DatetimeSelector'
 export default {
   components: {
     JobDisplay,
     StepRegister,
     StepCard,
     AssignSelector,
-    TagCard
+    TagCard,
+    DatetimeSelector
   },
   async asyncData({ store }) {
     const idCategory = 'job'

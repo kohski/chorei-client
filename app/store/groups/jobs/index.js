@@ -70,9 +70,9 @@ export const actions = {
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async deleteJob({ commit }, id) {
+  async deleteJob({ commit }, jobId) {
     await this.$axios.delete(
-      `/jobs/${id}`,
+      `/jobs/${jobId}`,
       {
         headers: {
           'Accept': 'application/json',
@@ -82,6 +82,27 @@ export const actions = {
     )
       .then((res) => {
         this.$toast.success('Destroy Completed!!')
+      })
+      .catch((e) => {
+        this.$toast.error(e.response.data.message || e)
+      })
+  },
+  async putJob({ commit }, { jobId, formData }) {
+    debugger
+    await this.$axios.put(
+      `/jobs/${jobId}`,
+      {
+        job: formData
+      },
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+      .then((res) => {
+        this.$toast.success('UpdateCompleted Completed!!')
       })
       .catch((e) => {
         this.$toast.error(e.response.data.message || e)

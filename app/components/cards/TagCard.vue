@@ -4,7 +4,7 @@
       <v-flex xs12>
         <tagging-selector />
         <tag-register />
-        <tag-delete-selector/>
+        <tag-delete-selector />
       </v-flex>
     </v-layout>
   </div>

@@ -3,12 +3,12 @@
     <v-layout row justify-center>
       <v-flex xs10>
         <v-select
+          v-model="deleteTarget"
           :items="tags"
           item-text="name"
           item-value="id"
-          v-model="deleteTarget"
           label="Delete Tag"
-        ></v-select>
+        />
         <v-layout row justify-center>
           <v-btn small dark round @click="deleteTagWithId">
             submit
