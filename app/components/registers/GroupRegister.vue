@@ -1,0 +1,66 @@
+<template>
+  <v-container>
+    <v-layout row justify-center>
+      <v-btn round dark small @click="toggleDisplay">new Group</v-btn>
+      <v-dialog v-model="dialog" width="40%">
+        <v-flex xs12>
+          <v-card  class="group_register_space">
+            <v-text-field
+              v-model="formData.name"
+              label="Group Name"
+            />
+            <image-uploader
+              @imageRecieve="imageRecieve"
+            ></image-uploader>
+            <v-layout row justify-center>
+              <v-btn round dark @click="postGroupWithPayload">
+                submit
+              </v-btn>
+            </v-layout>
+          </v-card>
+        </v-flex>
+      </v-dialog>
+    </v-layout>
+  </v-container>
+</template>
+<script>
+import ImageUploader from '~/components/registers/ImageUploader'
+import { mapActions } from 'vuex'
+export default {
+  components: {
+    ImageUploader
+  },
+  data() {
+    return {
+      formData: {
+        name: '',
+        image: ''
+      },
+      isSuccess: false,
+      errors: {
+        isError: false,
+        full_messages: []
+      },
+      dialog: false
+    }
+  },
+  methods: {
+    async postGroupWithPayload() {
+      await this.postGroup(this.formData)
+      this.$router.push('/groups')
+    },
+    imageRecieve(imageUrl) {
+      this.formData.image = imageUrl
+    },
+    toggleDisplay() {
+      this.dialog = !this.dialog
+    },
+    ...mapActions('groups', ['postGroup'])
+  }
+}
+</script>
+<style>
+  .group_register_space {
+    padding: 5%;
+  }
+</style>

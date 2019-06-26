@@ -2,41 +2,15 @@
   <v-container>
     <v-layout>
       <v-flex xs10 offset-xs1 sm6 offset-sm3>
-        <v-alert
-          :value="isSuccess"
-          color="success"
-          icon="check_circle"
-          transition="scale-transition"
-          outline
-        >
-          groups is successfully created!
-        </v-alert>
-        <v-alert
-          v-for="msg in errors.full_messages"
-          :key="msg"
-          :value="errors.isError"
-          color="error"
-          icon="warning"
-          transition="scale-transition"
-          outline
-        >
-          {{ msg }}
-        </v-alert>
         <v-text-field
           id="name_field"
           v-model="formData.name"
           type="text"
           label="Group Name"
         />
-        <v-text-field
-          id="imagePicker"
-          type="file"
-          @change="onFileChange"
-        />
-        <v-img
-          v-model="formData.image"
-          :src="formData.image"
-        />
+        <image-uploader
+          @imageRecieve="imageRecieve"
+        ></image-uploader>
         <div class="text-sm-center">
           <v-btn round dark @click="postGroupWithPayload">
             submit
@@ -47,8 +21,12 @@
   </v-container>
 </template>
 <script>
+import ImageUploader from '~/components/registers/ImageUploader'
 import { mapActions } from 'vuex'
 export default {
+  components: {
+    ImageUploader
+  },
   asyncData({ redirect, store }) {
     return {
       formData: {
@@ -78,6 +56,9 @@ export default {
     async postGroupWithPayload() {
       await this.postGroup(this.formData)
       this.$router.push('/groups')
+    },
+    imageRecieve(imageUrl) {
+      this.formData.image = imageUrl
     },
     ...mapActions('groups', ['postGroup'])
   }

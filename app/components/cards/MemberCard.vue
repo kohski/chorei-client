@@ -2,9 +2,9 @@
   <div>
     <v-layout row justify-center>
       <v-flex xs12>
-        <v-card min-width="200px" @click="dialog = !dialog">
+        <v-card @click="dialog = !dialog">
           <v-layout row justify-center>
-            <v-img :src="user_image" max-width="80px" class="dummy_user_image" />
+            <v-img :src="user_image" width="80px" height="80px" class="user_image" contain/>
           </v-layout>
           <v-card-title primary-title class="member_name">
             {{ val.name }}
@@ -58,7 +58,7 @@ export default {
 }
 </script>
 <style>
-  .dummy_user_image{
+  .user_image{
     background-color: #dddddd ;
     border-radius: 50%;
     margin: 5%;

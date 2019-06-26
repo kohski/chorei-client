@@ -6,7 +6,7 @@
           v-if="!updatable"
           @imageRecieve="imageRecieve"
         />
-        <v-img :src="formData.image" v-if="updatable"/>
+        <v-img v-if="updatable" :src="formData.image" />
         <v-text-field
           v-model="formData.title"
           label="title"
@@ -19,28 +19,42 @@
           :disabled="updatable"
           auto-grow
         />
+        <v-select
+          v-model="formData.is_public"
+          :items="is_publics"
+          item-text="text"
+          item-value= "value"
+          label="公開設定"
+          :disabled="updatable"
+        />
         <v-btn
+          v-if="updatable"
           round
           small
           color="info"
-          v-if="updatable"
           @click="makeUpdatable"
-        >EDIT</v-btn>
+        >
+          EDIT
+        </v-btn>
         <v-btn
+          v-if="!updatable"
           round
           small
           color="warning"
-          v-if="!updatable"
           @click="putJobWithParams"
-        >update</v-btn>
+        >
+          update
+        </v-btn>
         <v-btn
+          v-if="!updatable"
           flat
           round
           small
           color="error"
-          v-if="!updatable"
           @click="makeUpdatable"
-        >cancel</v-btn>
+        >
+          cancel
+        </v-btn>
       </v-card>
     </v-flex>
   </v-layout>
@@ -50,24 +64,30 @@ import ImageUploader from '~/components/registers/ImageUploader'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'StepRegister',
+  components: {
+    ImageUploader
+  },
+  props: ['val'],
   data() {
     return {
       formData: {
         image: '',
         title: '',
-        description: ''
+        description: '',
+        is_public: false
       },
-      updatable: true
+      updatable: true,
+      is_publics: [
+        { text: '公開', value: true },
+        { text: '非公開', value: false }
+      ]
     }
   },
-  components: {
-    ImageUploader
-  },
-  props: ['val'],
   mounted() {
     this.formData.image = this.val.image
     this.formData.title = this.val.title
     this.formData.description = this.val.description
+    this.formData.is_public = this.val.is_public
   },
   computed: {
     ...mapGetters('groups', ['groupId'])

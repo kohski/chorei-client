@@ -8,7 +8,7 @@
         <v-btn icon flat small @click="startTimeToggle = !startTimeToggle">
           <v-icon>access_time</v-icon>
         </v-btn>
-        <v-text-field readonly :value="startDateTime" outline label="Start"/>
+        <v-text-field readonly :value="startDateTime" outline label="Start" />
       </v-flex>
     </v-layout>
     <v-layout column align-center wrap>
@@ -19,7 +19,7 @@
         <v-btn icon flat small @click="endTimeToggle = !endTimeToggle">
           <v-icon>access_time</v-icon>
         </v-btn>
-        <v-text-field readonly :value="endDateTime" outline label="End"  :error-messages="errorMessage" />
+        <v-text-field readonly :value="endDateTime" outline label="End" :error-messages="errorMessage" />
       </v-flex>
       <v-select
         v-model="frequency"
@@ -28,19 +28,17 @@
         item-value="value"
         label="頻度"
         outline
-      >
-      </v-select>
+      />
       <v-select
         v-model="repeatTimes"
         :items="[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
         label="回数"
         :disabled="repeatTimeChecker"
         outline
-      >
-      </v-select>
+      />
     </v-layout>
     <v-layout row justify-center>
-      <v-btn small dark round @click="putJobWithParams" :disabled="dateChecker">
+      <v-btn small dark round :disabled="dateChecker" @click="putJobWithParams">
         update
       </v-btn>
     </v-layout>

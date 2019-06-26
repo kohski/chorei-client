@@ -2,18 +2,26 @@
   <v-container>
     <v-layout>
       <v-flex xs10 offset-xs1>
-        {{ group }}
+        <v-layout row justify-center>
+          <h1 class="headline">GroupPage: {{ group.name }}</h1>
+        </v-layout>
         <hr>
+        <h2 class="title">Members</h2>
         <v-layout row justify-start wrap>
-          <member-card
+          <v-flex
             v-for="member in members"
             :key="member.id"
-            :val="member"
-            class="member_card"
-          />
+            xs4
+          >
+            <member-card
+              :val="member"
+              class="member_card"
+            />
+          </v-flex>
         </v-layout>
         <member-register />
         <hr>
+        <h2 class="title">Job</h2>
         <v-layout row justify-center>
           <v-btn :to="`/groups/${this.$nuxt.$route.params.id}/jobs/new`">
             new job

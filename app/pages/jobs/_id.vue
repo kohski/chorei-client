@@ -5,26 +5,26 @@
       <v-flex md6 lg3>
         <job-display :val="job" />
       </v-flex>
-    <!-- </v-layout> -->
-    <!-- datetime picker -->
-    <!-- <v-layout row justify-start> -->
+      <!-- </v-layout> -->
+      <!-- datetime picker -->
+      <!-- <v-layout row justify-start> -->
       <v-flex md6 lg3>
         <datetime-selector :val="job" />
       </v-flex>
-    <!-- </v-layout> -->
+      <!-- </v-layout> -->
 
-    <!-- assign section -->
-    <!-- <v-layout row justify-center> -->
+      <!-- assign section -->
+      <!-- <v-layout row justify-center> -->
       <v-flex md6 lg3>
         <assign-selector
           :members="members"
           :assigns="assigns"
         />
       </v-flex>
-    <!-- </v-layout> -->
+      <!-- </v-layout> -->
 
-    <!-- tag -->
-    <!-- <v-layout row justify-start> -->
+      <!-- tag -->
+      <!-- <v-layout row justify-start> -->
       <v-flex md6 lg3>
         <tag-card />
       </v-flex>

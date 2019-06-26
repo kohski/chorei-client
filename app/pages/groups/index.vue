@@ -2,6 +2,9 @@
   <v-container>
     <v-layout>
       <v-flex xs10 offset-xs1 sm6 offset-sm3>
+        <v-layout row justify-center>
+          <group-register />
+        </v-layout>
         <v-card v-for="group in groups" :key="group.id" class="each_groups">
           <nuxt-link :to="'/groups/'+group.id">
             <v-img
@@ -14,7 +17,9 @@
             </div>
           </v-card-title>
           <v-btn
-            color="indigo lighten-2"
+            flat
+            color="error"
+            small
             @click="deleteGroupWithId(group.id)"
           >
             delete
@@ -25,8 +30,12 @@
   </v-container>
 </template>
 <script>
+import GroupRegister from '~/components/registers/GroupRegister'
 import { mapActions, mapGetters } from 'vuex'
 export default {
+  components: {
+    GroupRegister
+  },
   computed: {
     ...mapGetters('groups', ['groups'])
   },

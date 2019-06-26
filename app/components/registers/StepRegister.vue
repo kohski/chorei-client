@@ -2,10 +2,12 @@
   <v-layout row justify-center>
     <v-flex xs12>
       <v-layout row justify-center>
-        <v-btn round small dark @click="toggleModal"> + Step</v-btn>
+        <v-btn round small dark @click="toggleModal">
+          + Step
+        </v-btn>
       </v-layout>
       <v-dialog v-model="dialog" width="30%">
-        <v-card  class="step_space">
+        <v-card class="step_space">
           <image-uploader @imageRecieve="imageRecieve" />
           <v-textarea
             v-model="formData.memo"

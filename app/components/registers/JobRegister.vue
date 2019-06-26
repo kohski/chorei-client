@@ -16,6 +16,13 @@
         counter
         maxlength="1200"
       />
+      <v-select
+        v-model="formData.is_public"
+        :items="is_publics"
+        item-text="text"
+        item-value="value"
+        label="公開設定"
+      />
       <v-layout row justify-center>
         <v-btn round dark @click="postJobWithParams">
           SUBMIT
@@ -37,8 +44,13 @@ export default {
       formData: {
         image: '',
         title: '',
-        description: ''
-      }
+        description: '',
+        is_public: false
+      },
+      is_publics: [
+        { text: '非公開', value: false },
+        { text: '公開', value: true }
+      ]
     }
   },
   computed: {
