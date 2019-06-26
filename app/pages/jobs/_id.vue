@@ -63,6 +63,7 @@ import TagCard from '~/components/cards/TagCard'
 import AssignSelector from '~/components/selector/AssignSelector'
 import DatetimeSelector from '~/components/selector/DatetimeSelector'
 export default {
+  layout: 'default',
   components: {
     JobDisplay,
     StepRegister,
@@ -89,7 +90,7 @@ export default {
     await store.dispatch('groups/jobs/assigns/indexAssigns', { jobId })
   },
   methods: {
-    async updateStepCard({ jobId }) {
+    async updateStepCards({ jobId }) {
       await this.indexSteps({ jobId })
     },
     ...mapActions('groups/jobs/steps', ['indexSteps'])

@@ -30,26 +30,9 @@
       app
     >
       <v-toolbar-side-icon @click="drawer = !drawer" />
-      <!-- <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon>{{ `chevron_${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn> -->
-      <!-- <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>remove</v-icon>
-      </v-btn> -->
       <v-toolbar-title v-text="title" />
       <v-spacer />
+      <user-label :val="showInfo" @click="toProfile"></user-label>
     </v-toolbar>
     <v-content>
       <v-container>
@@ -66,7 +49,12 @@
 </template>
 
 <script>
+import UserLabel from '~/components/chips/UserLabel'
+import { mapGetters } from 'vuex'
 export default {
+  components: {
+    UserLabel
+  },
   data() {
     return {
       clipped: false,
@@ -74,34 +62,20 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'apps',
-          title: 'LogIn',
-          to: '/auth/login'
-        },
-        {
-          icon: 'bubble_chart',
-          title: 'SignUp',
-          to: '/auth/signup'
-        },
-        {
           icon: 'account_box',
           title: 'Profile',
-          to: '/auth/show'
+          to: '/profile'
         },
         {
           icon: 'group_work',
-          title: 'Groups',
-          to: '/groups'
+          title: 'My Page',
+          to: '/mypage'
         },
         {
-          icon: 'pan_tool',
-          title: 'New Group',
-          to: '/groups/new'
-        },
-        {
-          icon: 'add_to_queue',
-          title: 'New Job',
-          to: '/groups/37/jobs/new'
+          icon: 'public',
+          title: 'public jobs',
+          to: '/jobs/public'
+
         }
       ],
       miniVariant: false,
@@ -109,6 +83,22 @@ export default {
       rightDrawer: false,
       title: 'Chorei'
     }
+  },
+  computed: {
+    ...mapGetters('auth', ['showInfo'])
+  },
+  methods: {
+    toProfile() {
+      debugger
+      this.$router.push('/profile')
+    }
   }
 }
 </script>
+<style>
+  .default_layout_image{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
+</style>

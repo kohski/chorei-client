@@ -24,6 +24,7 @@
 import ImageUploader from '~/components/registers/ImageUploader'
 import { mapActions } from 'vuex'
 export default {
+  layout: 'default',
   components: {
     ImageUploader
   },
@@ -55,7 +56,7 @@ export default {
     },
     async postGroupWithPayload() {
       await this.postGroup(this.formData)
-      this.$router.push('/groups')
+      this.$router.push('/mypage')
     },
     imageRecieve(imageUrl) {
       this.formData.image = imageUrl

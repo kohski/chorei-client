@@ -23,9 +23,7 @@
         <hr>
         <h2 class="title">Job</h2>
         <v-layout row justify-center>
-          <v-btn :to="`/groups/${this.$nuxt.$route.params.id}/jobs/new`">
-            new job
-          </v-btn>
+          <job-register></job-register>
         </v-layout>
         <v-layout row justify-start wrap>
           <v-flex
@@ -48,13 +46,16 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import JobCard from '~/components/cards/JobCard.vue'
+import JobRegister from '~/components/registers/JobRegister'
 import MemberCard from '~/components/cards/MemberCard.vue'
 import MemberRegister from '~/components/registers/MemberRegister.vue'
 export default {
+  layout: 'default',
   components: {
     JobCard,
     MemberCard,
-    MemberRegister
+    MemberRegister,
+    JobRegister
   },
   computed: {
     ...mapGetters('groups', ['group']),

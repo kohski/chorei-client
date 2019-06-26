@@ -1,6 +1,6 @@
 <template>
   <div class="text-xs-center">
-    <v-chip close>
+    <v-chip>
       <v-avatar>
         <img v-if="val.image" :src="val.image">
       </v-avatar>

@@ -1,22 +1,31 @@
 <template>
   <form>
     <v-layout row justify-center>
-      <v-flex xs5>
-        <v-text-field
-          v-model="email"
-          label="Email"
-          tabindex="1"
-          @change="emailValidate"
-        />
+      <v-flex xs12>
+        <v-layout row justify-center="">
+          <v-btn small dark round @click="toggleDialog">add member</v-btn>
+        </v-layout>
+        <v-dialog v-model="dialog" width="30%">
+          <v-card class="member_register_space">
+            <v-text-field
+              v-model="email"
+              label="Email"
+              tabindex="1"
+              @change="emailValidate"
+            />
+            <v-layout row justify-center>
+              <v-btn
+                small
+                dark
+                round
+                @click="createMember"
+              >
+                Register
+              </v-btn>
+            </v-layout>
+          </v-card>
+        </v-dialog>
       </v-flex>
-    </v-layout>
-    <v-layout row justify-center>
-      <v-btn
-        tabindex="2"
-        @click="createMember"
-      >
-        Register
-      </v-btn>
     </v-layout>
   </form>
 </template>
@@ -26,7 +35,8 @@ export default {
   data() {
     return {
       cannotRegister: true,
-      email: ''
+      email: '',
+      dialog: false
     }
   },
   methods: {
@@ -46,6 +56,9 @@ export default {
       this.email = ''
       await this.indexMembers({ groupId: groupId })
     },
+    toggleDialog() {
+      this.dialog = !this.dialog
+    },
     ...mapActions('groups/members', ['postMember', 'indexMembers'])
   },
   computed: {
@@ -53,3 +66,8 @@ export default {
   }
 }
 </script>
+<style>
+  .member_register_space{
+    padding: 5%;
+  }
+</style>

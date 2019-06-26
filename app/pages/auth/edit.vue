@@ -41,6 +41,7 @@ import { mapGetters, mapActions } from 'vuex'
 import ImageUploader from '~/components/registers/ImageUploader'
 import dummyUserImage from '~/assets/images/dummy_user_image.png'
 export default {
+  layout: 'default',
   components: {
     ImageUploader
   },

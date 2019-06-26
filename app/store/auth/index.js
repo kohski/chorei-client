@@ -71,7 +71,7 @@ export const actions = {
         const payload = res.headers
         Object.assign(payload, res.data.data)
         commit('setLoginInfo', { payload })
-        this.$router.push('/groups')
+        this.$router.push('/mypage')
       })
       .catch((e) => {
         if (process.client) {
@@ -145,6 +145,31 @@ export const actions = {
         this.$router.push('/auth/show')
       })
       .catch((e) => {
+        if (process.client) {
+          this.$toast.error(e)
+        }
+      })
+  },
+  async logout({ commit }) {
+    await this.$axios.delete(
+      `/auth/sign_out`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+      .then((res) => {
+        if (process.client) {
+          this.$toast.success('Signed Out!')
+          const cookies = new Cookies()
+          cookies.remove('chorei-server')
+        }
+        this.$router.push('/')
+      })
+      .catch((e) => {
+        console.log('sex')
         if (process.client) {
           this.$toast.error(e)
         }

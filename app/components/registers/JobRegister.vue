@@ -1,33 +1,42 @@
 <template>
   <v-layout row justify-center>
-    <v-flex xs5>
-      <image-uploader @imageRecieve="imageRecieve" />
-      <v-text-field
-        v-model="formData.title"
-        label="title"
-        tabindex="1"
-        counter
-        maxlength="100"
-      />
-      <v-textarea
-        v-model="formData.description"
-        label="description"
-        tabindex="2"
-        counter
-        maxlength="1200"
-      />
-      <v-select
-        v-model="formData.is_public"
-        :items="is_publics"
-        item-text="text"
-        item-value="value"
-        label="公開設定"
-      />
+    <v-flex xs12>
       <v-layout row justify-center>
-        <v-btn round dark @click="postJobWithParams">
-          SUBMIT
+        <v-btn small dark round @click="toggleDialog">
+          new job
         </v-btn>
       </v-layout>
+      <v-dialog v-model="dialog" width=40%>
+        <v-card class="job_register_space">
+          <image-uploader @imageRecieve="imageRecieve" />
+          <v-text-field
+            v-model="formData.title"
+            label="title"
+            tabindex="1"
+            counter
+            maxlength="100"
+          />
+          <v-textarea
+            v-model="formData.description"
+            label="description"
+            tabindex="2"
+            counter
+            maxlength="1200"
+          />
+          <v-select
+            v-model="formData.is_public"
+            :items="is_publics"
+            item-text="text"
+            item-value="value"
+            label="公開設定"
+          />
+          <v-layout row justify-center>
+            <v-btn round dark @click="postJobWithParams">
+              詳細へ
+            </v-btn>
+          </v-layout>
+        </v-card>
+      </v-dialog>
     </v-flex>
   </v-layout>
 </template>
@@ -50,7 +59,8 @@ export default {
       is_publics: [
         { text: '非公開', value: false },
         { text: '公開', value: true }
-      ]
+      ],
+      dialog: false
     }
   },
   computed: {
@@ -61,7 +71,7 @@ export default {
       this.formData.image = imageUrl
     },
     async postJobWithParams() {
-      const groupId = this.$store.$router.currentRoute.params.group
+      const groupId = this.$route.params.id
       const formData = this.formData
       if (this.validator()) {
         await this.postJob({ groupId, formData })
@@ -79,7 +89,15 @@ export default {
       }
       return flag
     },
+    toggleDialog() {
+      this.dialog = !this.dialog
+    },
     ...mapActions('groups/jobs', ['postJob'])
   }
 }
 </script>
+<style>
+  .job_register_space {
+    padding: 5%;
+  }
+</style>

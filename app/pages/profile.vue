@@ -32,15 +32,21 @@
           <v-btn round dark to="/auth/edit">
             Edit
           </v-btn>
+          <v-btn
+            round
+            color="error"
+            @click="logoutInShowPage"
+          >Logtout</v-btn>
         </v-layout>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import dummyUserImage from '~/assets/images/dummy_user_image.png'
 export default {
+  layout: 'default',
   async asyncData({ redirect, store }) {
     await store.dispatch('auth/getUser')
   },
@@ -61,6 +67,12 @@ export default {
       return true
     },
     ...mapGetters('auth', ['showInfo'])
+  },
+  methods: {
+    async logoutInShowPage() {
+      await this.logout()
+    },
+    ...mapActions('auth', ['logout'])
   }
 }
 </script>

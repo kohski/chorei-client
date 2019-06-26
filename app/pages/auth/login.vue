@@ -1,7 +1,10 @@
 <template>
   <v-container>
-    <v-layout>
-      <v-flex xs10 offset-xs1 sm6 offset-sm3>
+    <v-layout row justify-center>
+      <v-flex xs8>
+        <v-layout row justify-center>
+          <h1 class="headline">Log In</h1>
+        </v-layout>
         <v-alert
           :value="isSuccess"
           color="success"
@@ -34,7 +37,10 @@
         />
         <v-layout row justify-center>
           <v-btn round dark @click="handleClickSubmit">
-            submit
+            Log In
+          </v-btn>
+          <v-btn round dark color="info" to="/auth/signup">
+            Sign Up Page
           </v-btn>
         </v-layout>
       </v-flex>
@@ -44,6 +50,7 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
+  layout: 'landingpage',
   asyncData({ redirect, store }) {
     return {
       formData: {
@@ -61,7 +68,7 @@ export default {
   methods: {
     async handleClickSubmit() {
       await this.logIn({ ...this.formData })
-      this.$router.push('/groups')
+      this.$router.push('/mypage')
     },
     ...mapActions('auth', ['logIn'])
   }

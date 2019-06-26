@@ -60,15 +60,15 @@ export const actions = {
     )
       .then((res) => {
         this.$toast.success('group is successfully created')
-        this.$router.push('/groups')
+        this.$router.push('/mypage')
       })
       .catch((e) => {
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async deleteGroup({ commit }, payload) {
+  async deleteGroup({ commit }, { groupId }) {
     await this.$axios.delete(
-      `/groups/${payload.id}`,
+      `/groups/${groupId}`,
       {
         headers: {
           'Accept': 'application/json',
@@ -118,6 +118,9 @@ export const actions = {
     )
       .then((res) => {
         commit('setGroup', res.data.data)
+        if (process.client) {
+          this.$toast.info('Group is Updated!!')
+        }
       })
       .catch((e) => {
         if (process.client) {

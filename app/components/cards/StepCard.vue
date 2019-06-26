@@ -32,7 +32,7 @@ export default {
       const jobId = this.$store.$router.currentRoute.params.id
       await this.deleteStep({ stepId: this.val.id })
       await this.indexSteps({ jobId: jobId })
-      await this.$emit('updateStepCard')
+      await this.$emit('updateStepCards')
     },
     async toLeft() {
       if (this.val.order === 0) { return }
@@ -43,7 +43,7 @@ export default {
       }
       await this.putStep({ stepId, formData })
       await this.indexSteps({ jobId: jobId })
-      await this.$emit('updateStepCard')
+      await this.$emit('updateStepCards')
     },
     async toRight() {
       // if (this.val.order === 0) { return }
@@ -54,7 +54,7 @@ export default {
       }
       await this.putStep({ stepId, formData })
       await this.indexSteps({ jobId: jobId })
-      await this.$emit('updateStepCard', { jobId: jobId })
+      await this.$emit('updateStepCards', { jobId: jobId })
     },
     ...mapActions('groups/jobs/steps', ['deleteStep', 'indexSteps', 'putStep'])
   }

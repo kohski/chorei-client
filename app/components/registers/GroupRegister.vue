@@ -47,7 +47,8 @@ export default {
   methods: {
     async postGroupWithPayload() {
       await this.postGroup(this.formData)
-      this.$router.push('/groups')
+      await this.$emit('updateGroupCards')
+      this.toggleDisplay()
     },
     imageRecieve(imageUrl) {
       this.formData.image = imageUrl

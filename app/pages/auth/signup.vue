@@ -1,7 +1,10 @@
 <template>
   <v-container>
-    <v-layout>
-      <v-flex xs10 offset-xs1 sm6 offset-sm3>
+    <v-layout row justify-center>
+      <v-flex xs8>
+        <v-layout row justify-center>
+          <h1 class="headline">Sign Up</h1>
+        </v-layout>
         <v-text-field
           v-model="formData.name"
           type="text"
@@ -27,6 +30,9 @@
           <v-btn round dark @click="handleClickSubmit">
             submit
           </v-btn>
+          <v-btn round dark color="info" to="/auth/login">
+            Log In Page
+          </v-btn>
         </v-layout>
       </v-flex>
     </v-layout>
@@ -36,6 +42,7 @@
 import { mapActions } from 'vuex'
 import ImageUploader from '~/components/registers/ImageUploader'
 export default {
+  layout: 'landingpage',
   components: {
     ImageUploader
   },
