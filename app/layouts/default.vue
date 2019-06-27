@@ -32,7 +32,7 @@
       <v-toolbar-side-icon @click="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <user-label :val="showInfo" @click="toProfile"></user-label>
+      <user-label :val="showInfo" @click="toProfile" />
     </v-toolbar>
     <v-content>
       <v-container>
@@ -89,7 +89,6 @@ export default {
   },
   methods: {
     toProfile() {
-      debugger
       this.$router.push('/profile')
     }
   }

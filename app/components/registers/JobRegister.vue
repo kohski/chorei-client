@@ -6,7 +6,7 @@
           new job
         </v-btn>
       </v-layout>
-      <v-dialog v-model="dialog" width=40%>
+      <v-dialog v-model="dialog" width="40%">
         <v-card class="job_register_space">
           <image-uploader @imageRecieve="imageRecieve" />
           <v-text-field
@@ -64,7 +64,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('/groups/jobs', ['job', 'jobs'])
+    ...mapGetters('groups/jobs', ['job', 'jobs'])
   },
   methods: {
     imageRecieve(imageUrl) {
@@ -75,6 +75,8 @@ export default {
       const formData = this.formData
       if (this.validator()) {
         await this.postJob({ groupId, formData })
+        const jobId = this.job.id
+        this.$router.push(`/jobs/${jobId}`)
       }
     },
     validator() {

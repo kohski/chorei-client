@@ -36,7 +36,9 @@
             round
             color="error"
             @click="logoutInShowPage"
-          >Logtout</v-btn>
+          >
+            Logtout
+          </v-btn>
         </v-layout>
       </v-flex>
     </v-layout>

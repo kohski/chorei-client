@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row justify-center wrap>
       <v-flex xs12>
-        <group-register @updateGroupCards="updateGroupCards"/>
+        <group-register @updateGroupCards="updateGroupCards" />
       </v-flex>
     </v-layout>
     <v-layout row justify-center wrap>
@@ -11,10 +11,10 @@
         :key="group.id"
         xs4
       >
-      <group-card
-        :val="group"
-        @updateGroupCards="updateGroupCards"
-      ></group-card>
+        <group-card
+          :val="group"
+          @updateGroupCards="updateGroupCards"
+        />
       </v-flex>
     </v-layout>
   </v-container>

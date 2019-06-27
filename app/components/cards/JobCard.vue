@@ -41,6 +41,9 @@
             <v-btn round dark :to="`/jobs/${val.id}`">
               Detail
             </v-btn>
+            <v-btn round dark color="error" @click="deleteJobWithId">
+              Delete
+            </v-btn>
           </v-layout>
         </v-card>
       </v-dialog>
@@ -61,7 +64,12 @@ export default {
     ...mapGetters('/groups/jobs', ['job'])
   },
   methods: {
-    ...mapActions('groups/jobs', ['showJob'])
+    async deleteJobWithId() {
+      const jobId = this.val.id
+      await this.deleteJob(jobId)
+      this.$emit('updateIndexPage')
+    },
+    ...mapActions('groups/jobs', ['showJob', 'deleteJob'])
   }
 }
 </script>

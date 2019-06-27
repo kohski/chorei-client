@@ -1,17 +1,19 @@
 <template>
   <v-container>
     <v-layout row justify-center>
-      <v-btn round dark small @click="toggleDisplay">new Group</v-btn>
+      <v-btn round dark small @click="toggleDisplay">
+        new Group
+      </v-btn>
       <v-dialog v-model="dialog" width="40%">
         <v-flex xs12>
-          <v-card  class="group_register_space">
+          <v-card class="group_register_space">
             <v-text-field
               v-model="formData.name"
               label="Group Name"
             />
             <image-uploader
               @imageRecieve="imageRecieve"
-            ></image-uploader>
+            />
             <v-layout row justify-center>
               <v-btn round dark @click="postGroupWithPayload">
                 submit

@@ -142,7 +142,7 @@ export const actions = {
         if (process.client) {
           this.$toast.success('User Editted!')
         }
-        this.$router.push('/auth/show')
+        this.$router.push('/profile')
       })
       .catch((e) => {
         if (process.client) {

@@ -4,14 +4,16 @@ export const state = () => ({
   jobs: [],
   job: {},
   groupId: '',
-  publicJobs: []
+  publicJobs: [],
+  assignedJobs: []
 })
 
 export const getters = {
   jobs(state) { return state.jobs },
   job(state) { return state.job },
   groupId(state) { return state.groupId },
-  publicJobs(state) { return state.publicJobs }
+  publicJobs(state) { return state.publicJobs },
+  assignedJobs(state) { return state.assignedJobs }
 }
 
 export const mutations = {
@@ -29,6 +31,9 @@ export const mutations = {
   },
   setPublicJobs(state, publicJobs) {
     state.publicJobs = publicJobs
+  },
+  setAssignedJobs(state, assignedJobs) {
+    state.assignedJobs = assignedJobs
   }
 }
 export const actions = {
@@ -67,9 +72,9 @@ export const actions = {
       }
     )
       .then((res) => {
-        const jobId = res.data.data.id
+        // const jobId = res.data.data.id
+        commit('setJob', res.data.data)
         this.$toast.success('job is successfully created')
-        this.$router.push(`/jobs/${jobId}`)
       })
       .catch((e) => {
         this.$toast.error(e.response.data.message || e)
@@ -164,6 +169,26 @@ export const actions = {
         commit('setPublicJobs', res.data.data)
       })
       .catch((e) => {
+        if (process.client) {
+          this.$toast.error(e.response.data.message || e)
+        }
+      })
+  },
+  async assignedJobs({ commit, state }, { groupId }) {
+    await this.$axios.get(
+      `/assigned_jobs`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+      .then((res) => {
+        commit('setAssignedJobs', res.data.data)
+      })
+      .catch((e) => {
+        commit('setAssignedJobs', [])
         if (process.client) {
           this.$toast.error(e.response.data.message || e)
         }

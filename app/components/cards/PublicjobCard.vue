@@ -22,7 +22,7 @@
       </v-flex>
     </v-layout>
     <v-layout row justify-center>
-      <v-dialog v-model="dialog" width="40%">
+      <v-dialog v-model="dialog" width="60%">
         <v-card class="modal_wrapper">
           <v-img :src="val.image" />
           <v-text-field
@@ -37,31 +37,88 @@
             auto-grow
             disabled
           />
-          <v-layout row justify-center="">
-            <v-btn round dark :to="`/jobs/${val.id}`">
-              Detail
-            </v-btn>
+          <v-layout row justify-start wrap>
+            <v-flex
+              v-for="(step,index) in val.steps"
+              :key="step.id"
+              xs6
+            >
+              <step-display :val="step" :index="index"></step-display>
+            </v-flex>
           </v-layout>
+          <v-layout row justify-center>
+            <v-btn dark round small @click="selectGroup">複製</v-btn>
+          </v-layout>
+          <v-dialog v-model="groupSelectDialog" width="40%">
+            <v-card class="group_select_space">
+              <p class="title">複製する先のグループを選択してください</p>
+              <v-select
+                v-model="selectedGroupId"
+                :items="groups"
+                item-text="name"
+                item-value="id"
+              ></v-select>
+              <v-layout row justify-center>
+                <v-btn @click="cloneJob" small round dark>複製する</v-btn>
+              </v-layout>
+            </v-card>
+          </v-dialog>
         </v-card>
       </v-dialog>
     </v-layout>
   </div>
 </template>
 <script>
+import StepDisplay from '~/components/cards/StepDisplay'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'StepRegister',
+  components: {
+    StepDisplay
+  },
+  mounted() {
+    this.indexGroups()
+  },
   props: ['val'],
   data() {
     return {
-      dialog: false
+      dialog: false,
+      groupSelectDialog: false,
+      selectedGroupId: ''
     }
   },
   computed: {
-    ...mapGetters('/groups/jobs', ['job'])
+    ...mapGetters('groups/jobs', ['job']),
+    ...mapGetters('groups', ['groups'])
   },
   methods: {
-    ...mapActions('groups/jobs', ['showJob'])
+    selectGroup() {
+      this.groupSelectDialog = true
+    },
+    async cloneJob() {
+      const groupId = this.selectedGroupId
+      const jobFormData = {
+        title: this.val.title,
+        desctiprion: this.val.description,
+        image: this.val.image,
+        is_public: this.val.is_public
+      }
+      await this.postJob({ groupId: groupId, formData: jobFormData })
+      const jobId = this.job.id
+      const steps = this.val.steps
+      for (let i = 0; i < steps.length; i++) {
+        const stepFormData = {
+          image: steps[i].image,
+          memo: steps[i].memo,
+          order: steps[i].order
+        }
+        this.postStep({ jobId: jobId, formData: stepFormData })
+      }
+      this.$router.push(`/jobs/${jobId}`)
+    },
+    ...mapActions('groups/jobs', ['showJob', 'postJob']),
+    ...mapActions('groups', ['indexGroups']),
+    ...mapActions('groups/jobs/steps', ['postStep'])
   }
 }
 </script>
@@ -71,6 +128,9 @@ export default {
     padding-right:5%;
   }
   .modal_wrapper {
+    padding: 5%;
+  }
+  .group_select_space {
     padding: 5%;
   }
 </style>

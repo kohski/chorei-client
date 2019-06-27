@@ -3,7 +3,9 @@
     <v-layout row justify-center>
       <v-flex xs12>
         <v-layout row justify-center="">
-          <v-btn small dark round @click="toggleDialog">add member</v-btn>
+          <v-btn small dark round @click="toggleDialog">
+            add member
+          </v-btn>
         </v-layout>
         <v-dialog v-model="dialog" width="30%">
           <v-card class="member_register_space">

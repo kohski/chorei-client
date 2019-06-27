@@ -4,7 +4,7 @@
       <v-flex xs12>
         <v-card @click="dialog = !dialog">
           <v-layout row justify-center>
-            <v-img :src="user_image" width="80px" height="80px" class="user_image" contain/>
+            <v-img :src="user_image" width="80px" height="80px" class="user_image" contain />
           </v-layout>
           <v-card-title primary-title class="member_name">
             {{ val.name }}

@@ -3,10 +3,14 @@
     <v-layout>
       <v-flex xs10 offset-xs1>
         <v-layout row justify-center>
-          <h1 class="headline">GroupPage: {{ group.name }}</h1>
+          <h1 class="headline">
+            GroupPage: {{ group.name }}
+          </h1>
         </v-layout>
         <hr>
-        <h2 class="title">Members</h2>
+        <h2 class="title">
+          Members
+        </h2>
         <v-layout row justify-start wrap>
           <v-flex
             v-for="member in members"
@@ -21,9 +25,11 @@
         </v-layout>
         <member-register />
         <hr>
-        <h2 class="title">Job</h2>
+        <h2 class="title">
+          Job
+        </h2>
         <v-layout row justify-center>
-          <job-register></job-register>
+          <job-register />
         </v-layout>
         <v-layout row justify-start wrap>
           <v-flex
@@ -35,6 +41,7 @@
               <job-card
                 :val="job"
                 class="job_card"
+                @updateIndexPage="updateIndexPage"
               />
             </v-layout>
           </v-flex>
@@ -77,6 +84,10 @@ export default {
     await store.dispatch('groups/members/indexMembers', { groupId: groupId })
   },
   methods: {
+    async updateIndexPage() {
+      const groupId = this.$route.params.id
+      await this.indexJobs({ groupId: groupId })
+    },
     ...mapActions('groups', ['showGroup']),
     ...mapActions('groups/jobs', ['indexJobs']),
     ...mapActions('groups/members', ['indexMember'])

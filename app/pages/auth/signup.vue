@@ -3,7 +3,9 @@
     <v-layout row justify-center>
       <v-flex xs8>
         <v-layout row justify-center>
-          <h1 class="headline">Sign Up</h1>
+          <h1 class="headline">
+            Sign Up
+          </h1>
         </v-layout>
         <v-text-field
           v-model="formData.name"

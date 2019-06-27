@@ -6,7 +6,7 @@
           v-if="!updatable"
           @imageRecieve="imageRecieve"
         />
-        <v-img v-if="updatable" :src="formData.image" @click="toDetailPage"/>
+        <v-img v-if="updatable" :src="formData.image" @click="toDetailPage" />
         <v-text-field
           v-model="formData.name"
           label="Name"

@@ -23,7 +23,7 @@
           v-model="formData.is_public"
           :items="is_publics"
           item-text="text"
-          item-value= "value"
+          item-value="value"
           label="公開設定"
           :disabled="updatable"
         />

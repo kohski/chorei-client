@@ -10,7 +10,7 @@
         />
         <image-uploader
           @imageRecieve="imageRecieve"
-        ></image-uploader>
+        />
         <div class="text-sm-center">
           <v-btn round dark @click="postGroupWithPayload">
             submit

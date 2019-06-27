@@ -3,7 +3,9 @@
     <v-layout row justify-center>
       <v-flex xs8>
         <v-layout row justify-center>
-          <h1 class="headline">Log In</h1>
+          <h1 class="headline">
+            Log In
+          </h1>
         </v-layout>
         <v-alert
           :value="isSuccess"
