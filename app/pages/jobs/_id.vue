@@ -3,13 +3,13 @@
     <!-- job section -->
     <v-layout row justify-center align-space-between wrap>
       <v-flex md6 lg3>
-        <job-display :val="job" class="each_card_space"/>
+        <job-display :val="job" class="each_card_space" />
       </v-flex>
       <!-- </v-layout> -->
       <!-- datetime picker -->
       <!-- <v-layout row justify-start> -->
       <v-flex md6 lg3>
-        <datetime-selector :val="job" class="each_card_space"/>
+        <datetime-selector :val="job" class="each_card_space" />
       </v-flex>
       <!-- </v-layout> -->
 
@@ -32,7 +32,7 @@
     </v-layout>
 
     <!-- step -->
-    <v-divider class="divider_space"></v-divider>
+    <v-divider class="divider_space" />
     <v-layout row justify-center>
       <v-flex xs12>
         <step-register

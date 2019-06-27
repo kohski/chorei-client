@@ -4,7 +4,9 @@
       <v-layout column align-center wrap>
         <v-flex xs10>
           <v-layout row justify-center>
-            <p class="title">日付関連</p>
+            <p class="title">
+              日付関連
+            </p>
           </v-layout>
           <v-btn icon flat small @click="startDateToggle = !startDateToggle">
             <v-icon>date_range</v-icon>

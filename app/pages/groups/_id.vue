@@ -7,7 +7,7 @@
             {{ group.name }} のページ
           </h1>
         </v-layout>
-        <v-divider class="diveider_space"/>
+        <v-divider class="diveider_space" />
         <h2 class="title">
           参加中のメンバー
         </h2>
@@ -24,7 +24,7 @@
           </v-flex>
         </v-layout>
         <member-register />
-        <v-divider darl class="diveider_space"/>
+        <v-divider darl class="diveider_space" />
         <h2 class="title">
           登録されているジョブ
         </h2>

@@ -6,7 +6,7 @@
           v-if="!updatable"
           @imageRecieve="imageRecieve"
         />
-        <v-img v-if="updatable" :src="formData.image" @click="toDetailPage" height="180px" contain/>
+        <v-img v-if="updatable" :src="formData.image" height="180px" contain @click="toDetailPage" />
         <v-text-field
           v-model="formData.name"
           label="グループ名"

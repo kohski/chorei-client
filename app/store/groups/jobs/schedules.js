@@ -1,10 +1,12 @@
 export const state = () => ({
   schedules: [],
-  schedule: {}
+  schedule: {},
+  assignedSchedules: []
 })
 
 export const getters = {
-  schedules(state) { return state.schedules }
+  schedules(state) { return state.schedules },
+  assignedSchedules(state) { return state.assignedSchedules }
 }
 
 export const mutations = {
@@ -13,6 +15,9 @@ export const mutations = {
   },
   setSchedule(state, schedule) {
     state.schedule = schedule
+  },
+  setAssignedSchedules(state, assignedSchedules) {
+    state.assignedSchedules = assignedSchedules
   }
 }
 
@@ -95,10 +100,28 @@ export const actions = {
       }
     )
       .then((res) => {
-        this.$toast.success('Successfully Updated!!')
+        this.$toast.success('更新が完了しました')
       })
       .catch((e) => {
         this.$toast.error(e.response.data.message || e)
+      })
+  },
+  async indexAssignedSchedules({ commit }) {
+    await this.$axios.get(
+      `/assigned_schedules`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((res) => {
+        commit('setAssignedSchedules', res.data.data)
+      })
+      .catch((e) => {
+        if (process.client) {
+          this.$toast.error('スケジュールを取得できませんでした')
+        }
       })
   }
 }

@@ -43,23 +43,29 @@
               :key="step.id"
               xs6
             >
-              <step-display :val="step" :index="index"></step-display>
+              <step-display :val="step" :index="index" />
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-btn dark round small @click="selectGroup">複製</v-btn>
+            <v-btn dark round small @click="selectGroup">
+              複製
+            </v-btn>
           </v-layout>
           <v-dialog v-model="groupSelectDialog" width="40%">
             <v-card class="group_select_space">
-              <p class="title">複製する先のグループを選択してください</p>
+              <p class="title">
+                複製する先のグループを選択してください
+              </p>
               <v-select
                 v-model="selectedGroupId"
                 :items="groups"
                 item-text="name"
                 item-value="id"
-              ></v-select>
+              />
               <v-layout row justify-center>
-                <v-btn @click="cloneJob" small round dark>複製する</v-btn>
+                <v-btn small round dark @click="cloneJob">
+                  複製する
+                </v-btn>
               </v-layout>
             </v-card>
           </v-dialog>
@@ -76,9 +82,6 @@ export default {
   components: {
     StepDisplay
   },
-  mounted() {
-    this.indexGroups()
-  },
   props: ['val'],
   data() {
     return {
@@ -86,6 +89,9 @@ export default {
       groupSelectDialog: false,
       selectedGroupId: ''
     }
+  },
+  mounted() {
+    this.indexGroups()
   },
   computed: {
     ...mapGetters('groups/jobs', ['job']),
@@ -112,7 +118,7 @@ export default {
           memo: steps[i].memo,
           order: steps[i].order
         }
-        this.postStep({ jobId: jobId, formData: stepFormData })
+        await this.postStep({ jobId: jobId, formData: stepFormData })
       }
       this.$router.push(`/jobs/${jobId}`)
     },

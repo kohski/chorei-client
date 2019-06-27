@@ -7,7 +7,9 @@
       <v-dialog v-model="dialog" width="40%">
         <v-flex xs12>
           <v-card class="group_register_space">
-            <p class="title">グループの新規作成</p>
+            <p class="title">
+              グループの新規作成
+            </p>
             <v-text-field
               v-model="formData.name"
               label="グループ名"

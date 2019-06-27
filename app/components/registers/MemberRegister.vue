@@ -9,7 +9,9 @@
         </v-layout>
         <v-dialog v-model="dialog" width="30%">
           <v-card class="member_register_space">
-            <p class="title">メールアドレスを入力してメンバーを招待</p>
+            <p class="title">
+              メールアドレスを入力してメンバーを招待
+            </p>
             <v-text-field
               v-model="email"
               label="Email"

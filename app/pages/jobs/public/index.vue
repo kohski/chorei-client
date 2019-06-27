@@ -5,7 +5,7 @@
       :key="job.id"
       xs4
     >
-      <publicjob-card :val="job" class="public_job_card_space"/>
+      <publicjob-card :val="job" class="public_job_card_space" />
     </v-flex>
   </v-layout>
 </template>

@@ -1,21 +1,21 @@
 <template>
-    <v-layout row justify-center align-space-around>
-      <v-flex xs10>
-        <v-card class="assign_selector_space">
-          <v-select
-            v-model="assignNames"
-            :items="members.map(elm => elm.name)"
-            :value="assignIds"
-            attach
-            chips
-            outline
-            label="担当者"
-            multiple
-            @change="handleSelect"
-          />
-        </v-card>
-      </v-flex>
-    </v-layout>
+  <v-layout row justify-center align-space-around>
+    <v-flex xs10>
+      <v-card class="assign_selector_space">
+        <v-select
+          v-model="assignNames"
+          :items="members.map(elm => elm.name)"
+          :value="assignIds"
+          attach
+          chips
+          outline
+          label="担当者"
+          multiple
+          @change="handleSelect"
+        />
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 <script>
 import { mapActions } from 'vuex'
