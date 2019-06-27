@@ -3,7 +3,7 @@
     <v-flex xs12>
       <v-layout row justify-center>
         <v-btn round small dark @click="toggleModal">
-          + Step
+          ステップ登録
         </v-btn>
       </v-layout>
       <v-dialog v-model="dialog" width="30%">
@@ -11,13 +11,13 @@
           <image-uploader @imageRecieve="imageRecieve" />
           <v-textarea
             v-model="formData.memo"
-            label="memo"
+            label="メモ"
             counter
             maxlength="400"
           />
           <v-layout row justify-center>
             <v-btn round dark small @click="postStepWithParams">
-              SUBMIT
+              登録
             </v-btn>
           </v-layout>
         </v-card>
@@ -71,7 +71,7 @@ export default {
     validator() {
       let flag = true
       if (this.formData.memo === '') {
-        this.$toast.error('memo is not valid')
+        this.$toast.error('メモが不正です')
         flag = false
       }
       return flag

@@ -4,11 +4,12 @@
       <v-flex xs12>
         <v-layout row justify-center="">
           <v-btn small dark round @click="toggleDialog">
-            add member
+            メンバーを招待
           </v-btn>
         </v-layout>
         <v-dialog v-model="dialog" width="30%">
           <v-card class="member_register_space">
+            <p class="title">メールアドレスを入力してメンバーを招待</p>
             <v-text-field
               v-model="email"
               label="Email"
@@ -22,7 +23,7 @@
                 round
                 @click="createMember"
               >
-                Register
+                招待
               </v-btn>
             </v-layout>
           </v-card>

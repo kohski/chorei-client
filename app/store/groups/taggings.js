@@ -28,7 +28,8 @@ export const actions = {
       })
       .catch((e) => {
         if (process.client) {
-          this.$toast.error(e.response.data.message || e)
+          // this.$toast.error(e.response.data.message || e)
+          this.$toast.error('タグづけがありません')
         }
       })
   },
@@ -49,11 +50,14 @@ export const actions = {
       }
     )
       .then((res) => {
-        this.$toast.success('tagging is successfully created')
+        this.$toast.success('タグづけされました')
       })
       .catch((e) => {
         if (process.client) {
-          this.$toast.error(e.response.data.message || e)
+          if (process.client) {
+            // this.$toast.error(e.response.data.message || e)
+            this.$toast.error('タグづけに失敗しました')
+          }
         }
       })
   },
@@ -68,10 +72,13 @@ export const actions = {
       }
     )
       .then((res) => {
-        this.$toast.success('Destroy Completed!!')
+        this.$toast.success('タグづけを解除しました')
       })
       .catch((e) => {
-        this.$toast.error(e.response.data.message || e)
+        if (process.client) {
+          // this.$toast.error(e.response.data.message || e)
+          this.$toast.error('タグづけが解除されませんでした')
+        }
       })
   }
 }

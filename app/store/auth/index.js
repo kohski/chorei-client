@@ -75,7 +75,7 @@ export const actions = {
       })
       .catch((e) => {
         if (process.client) {
-          this.$toast.error(e.response.statusText || e)
+          this.$toast.error('新規登録できませんでした')
         }
       })
   },
@@ -99,7 +99,7 @@ export const actions = {
         commit('setLoginInfo', { payload })
       })
       .catch((e) => {
-        this.$toast.error(e)
+        this.$toast.error('ログインできませんでした')
       })
   },
   async getUser({ commit }) {
@@ -118,7 +118,7 @@ export const actions = {
         return res.data.data
       })
       .catch((e) => {
-        this.$toast.error(e)
+        this.$toast.error('ユーザー情報を取得できませんでした')
       })
   },
   async updateUser({ commit }, { name, image, description }) {
@@ -146,7 +146,7 @@ export const actions = {
       })
       .catch((e) => {
         if (process.client) {
-          this.$toast.error(e)
+          this.$toast.error('更新できませんでした')
         }
       })
   },
@@ -169,9 +169,8 @@ export const actions = {
         this.$router.push('/')
       })
       .catch((e) => {
-        console.log('sex')
         if (process.client) {
-          this.$toast.error(e)
+          this.$toast.error('ログアウトできませんでした')
         }
       })
   }

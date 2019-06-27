@@ -2,9 +2,11 @@
   <div>
     <v-layout row justify-center>
       <v-flex xs12>
-        <tagging-selector />
-        <tag-register />
-        <tag-delete-selector />
+        <v-card class="tag_card_space">
+          <tagging-selector />
+          <tag-register />
+          <tag-delete-selector />
+        </v-card>
       </v-flex>
     </v-layout>
   </div>
@@ -30,5 +32,8 @@ export default {
   }
   .member_name {
     text-align: center;
+  }
+  .tag_card_space {
+    padding: 5%;
   }
 </style>

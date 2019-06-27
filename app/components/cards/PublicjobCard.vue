@@ -7,14 +7,14 @@
           <div class="spacer">
             <v-text-field
               v-model="val.title"
-              label="title"
+              label="名称"
               disabled
               d-flex
               child-flex
             />
             <v-textarea
               v-model="val.description"
-              label="description"
+              label="概要"
               disabled
             />
           </div>
@@ -27,13 +27,13 @@
           <v-img :src="val.image" />
           <v-text-field
             v-model="val.title"
-            label="title"
+            label="名称"
             disabled
             auto-grow
           />
           <v-textarea
             v-model="val.description"
-            label="description"
+            label="概要"
             auto-grow
             disabled
           />
@@ -101,7 +101,7 @@ export default {
         title: this.val.title,
         desctiprion: this.val.description,
         image: this.val.image,
-        is_public: this.val.is_public
+        is_public: false
       }
       await this.postJob({ groupId: groupId, formData: jobFormData })
       const jobId = this.job.id

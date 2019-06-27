@@ -1,47 +1,52 @@
 <template>
   <div>
-    <v-layout column align-center wrap>
-      <v-flex xs10>
-        <v-btn icon flat small @click="startDateToggle = !startDateToggle">
-          <v-icon>date_range</v-icon>
+    <v-card class="date_time_selector_space">
+      <v-layout column align-center wrap>
+        <v-flex xs10>
+          <v-layout row justify-center>
+            <p class="title">日付関連</p>
+          </v-layout>
+          <v-btn icon flat small @click="startDateToggle = !startDateToggle">
+            <v-icon>date_range</v-icon>
+          </v-btn>
+          <v-btn icon flat small @click="startTimeToggle = !startTimeToggle">
+            <v-icon>access_time</v-icon>
+          </v-btn>
+          <v-text-field readonly :value="startDateTime" outline label="開始" />
+        </v-flex>
+      </v-layout>
+      <v-layout column align-center wrap>
+        <v-flex xs10>
+          <v-btn icon flat small @click="endDateToggle = !endDateToggle">
+            <v-icon>date_range</v-icon>
+          </v-btn>
+          <v-btn icon flat small @click="endTimeToggle = !endTimeToggle">
+            <v-icon>access_time</v-icon>
+          </v-btn>
+          <v-text-field readonly :value="endDateTime" outline label="終了" :error-messages="errorMessage" />
+        </v-flex>
+        <v-select
+          v-model="frequency"
+          :items="frequencies"
+          item-text="text"
+          item-value="value"
+          label="頻度"
+          outline
+        />
+        <v-select
+          v-model="repeatTimes"
+          :items="[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+          label="回数"
+          :disabled="repeatTimeChecker"
+          outline
+        />
+      </v-layout>
+      <v-layout row justify-center>
+        <v-btn small dark round :disabled="dateChecker" @click="putJobWithParams">
+          登録・更新
         </v-btn>
-        <v-btn icon flat small @click="startTimeToggle = !startTimeToggle">
-          <v-icon>access_time</v-icon>
-        </v-btn>
-        <v-text-field readonly :value="startDateTime" outline label="Start" />
-      </v-flex>
-    </v-layout>
-    <v-layout column align-center wrap>
-      <v-flex xs10>
-        <v-btn icon flat small @click="endDateToggle = !endDateToggle">
-          <v-icon>date_range</v-icon>
-        </v-btn>
-        <v-btn icon flat small @click="endTimeToggle = !endTimeToggle">
-          <v-icon>access_time</v-icon>
-        </v-btn>
-        <v-text-field readonly :value="endDateTime" outline label="End" :error-messages="errorMessage" />
-      </v-flex>
-      <v-select
-        v-model="frequency"
-        :items="frequencies"
-        item-text="text"
-        item-value="value"
-        label="頻度"
-        outline
-      />
-      <v-select
-        v-model="repeatTimes"
-        :items="[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
-        label="回数"
-        :disabled="repeatTimeChecker"
-        outline
-      />
-    </v-layout>
-    <v-layout row justify-center>
-      <v-btn small dark round :disabled="dateChecker" @click="putJobWithParams">
-        update
-      </v-btn>
-    </v-layout>
+      </v-layout>
+    </v-card>
 
     <!-- modal windows -->
     <v-dialog v-model="startDateToggle" width="30%">
@@ -143,3 +148,8 @@ export default {
   }
 }
 </script>
+<style>
+  .date_time_selector_space {
+    padding: 5%;
+  }
+</style>

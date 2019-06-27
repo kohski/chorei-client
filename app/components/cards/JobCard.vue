@@ -7,14 +7,14 @@
           <div class="spacer">
             <v-text-field
               v-model="val.title"
-              label="title"
+              label="ジョブの名称"
               disabled
               d-flex
               child-flex
             />
             <v-textarea
               v-model="val.description"
-              label="description"
+              label="ジョブの概要"
               disabled
             />
           </div>
@@ -27,22 +27,22 @@
           <v-img :src="val.image" />
           <v-text-field
             v-model="val.title"
-            label="title"
+            label="ジョブの名称"
             disabled
             auto-grow
           />
           <v-textarea
             v-model="val.description"
-            label="description"
+            label="ジョブの概要"
             auto-grow
             disabled
           />
           <v-layout row justify-center="">
             <v-btn round dark :to="`/jobs/${val.id}`">
-              Detail
+              詳細
             </v-btn>
             <v-btn round dark color="error" @click="deleteJobWithId">
-              Delete
+              削除
             </v-btn>
           </v-layout>
         </v-card>

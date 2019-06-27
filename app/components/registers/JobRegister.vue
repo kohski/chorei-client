@@ -3,7 +3,7 @@
     <v-flex xs12>
       <v-layout row justify-center>
         <v-btn small dark round @click="toggleDialog">
-          new job
+          新しいジョブ
         </v-btn>
       </v-layout>
       <v-dialog v-model="dialog" width="40%">
@@ -11,14 +11,14 @@
           <image-uploader @imageRecieve="imageRecieve" />
           <v-text-field
             v-model="formData.title"
-            label="title"
+            label="名称"
             tabindex="1"
             counter
             maxlength="100"
           />
           <v-textarea
             v-model="formData.description"
-            label="description"
+            label="概要"
             tabindex="2"
             counter
             maxlength="1200"
@@ -32,7 +32,7 @@
           />
           <v-layout row justify-center>
             <v-btn round dark @click="postJobWithParams">
-              詳細へ
+              詳細設定へ
             </v-btn>
           </v-layout>
         </v-card>
@@ -82,11 +82,11 @@ export default {
     validator() {
       let flag = true
       if (this.formData.title === '') {
-        this.$toast.error('title is not valid')
+        this.$toast.error('ジョブの名称が不正です')
         flag = false
       }
       if (this.formData.description === '') {
-        this.$toast.error('description is not valid')
+        this.$toast.error('ジョブの概要が不正です')
         flag = false
       }
       return flag

@@ -1,15 +1,15 @@
 <template>
   <div>
     <!-- job section -->
-    <v-layout row justify-center wrap>
+    <v-layout row justify-center align-space-between wrap>
       <v-flex md6 lg3>
-        <job-display :val="job" />
+        <job-display :val="job" class="each_card_space"/>
       </v-flex>
       <!-- </v-layout> -->
       <!-- datetime picker -->
       <!-- <v-layout row justify-start> -->
       <v-flex md6 lg3>
-        <datetime-selector :val="job" />
+        <datetime-selector :val="job" class="each_card_space"/>
       </v-flex>
       <!-- </v-layout> -->
 
@@ -19,6 +19,7 @@
         <assign-selector
           :members="members"
           :assigns="assigns"
+          class="each_card_space"
         />
       </v-flex>
       <!-- </v-layout> -->
@@ -31,6 +32,7 @@
     </v-layout>
 
     <!-- step -->
+    <v-divider class="divider_space"></v-divider>
     <v-layout row justify-center>
       <v-flex xs12>
         <step-register
@@ -103,3 +105,11 @@ export default {
   }
 }
 </script>
+<style>
+  .each_card_space {
+    margin: 2%;
+  }
+  .divider_space {
+    margin: 5%;
+  }
+</style>

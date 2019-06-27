@@ -4,45 +4,25 @@
       <v-flex xs8>
         <v-layout row justify-center>
           <h1 class="headline">
-            Log In
+            ログイン
           </h1>
         </v-layout>
-        <v-alert
-          :value="isSuccess"
-          color="success"
-          icon="check_circle"
-          transition="scale-transition"
-          outline
-        >
-          This is a success alert.
-        </v-alert>
-        <v-alert
-          v-for="msg in errors.full_messages"
-          :key="msg"
-          :value="errors.isError"
-          color="error"
-          icon="warning"
-          transition="scale-transition"
-          outline
-        >
-          {{ msg }}
-        </v-alert>
         <v-text-field
           v-model="formData.email"
           type="text"
-          label="Email"
+          label="メールアドレス"
         />
         <v-text-field
           v-model="formData.password"
           type="password"
-          label="Password"
+          label="パスワード"
         />
         <v-layout row justify-center>
           <v-btn round dark @click="handleClickSubmit">
-            Log In
+            ログイン
           </v-btn>
           <v-btn round dark color="info" to="/auth/signup">
-            Sign Up Page
+            新規登録へ
           </v-btn>
         </v-layout>
       </v-flex>
@@ -57,13 +37,8 @@ export default {
     return {
       formData: {
         name: '',
-        email: 'nuxt@test.com',
-        password: 'password'
-      },
-      isSuccess: false,
-      errors: {
-        isError: false,
-        full_messages: []
+        email: '',
+        password: ''
       }
     }
   },

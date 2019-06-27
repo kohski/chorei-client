@@ -7,12 +7,12 @@
           :items="tags"
           item-text="name"
           item-value="id"
-          label="Delete Tag"
+          label="タグの削除"
           outline
         />
         <v-layout row justify-center>
           <v-btn small dark round @click="deleteTagWithId">
-            submit
+            削除
           </v-btn>
         </v-layout>
       </v-flex>

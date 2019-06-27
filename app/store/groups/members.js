@@ -33,10 +33,9 @@ export const actions = {
       })
       .catch((e) => {
         commit('setMembers', [])
-        if (process.server) {
-          return
+        if (process.client) {
+          this.$toast.error(e.response.data.message || e)
         }
-        this.$toast.error(e.response.data.message || e)
       })
   },
   async postMember({ commit, store }, { email, groupId }) {
@@ -55,10 +54,13 @@ export const actions = {
       }
     )
       .then((res) => {
-        this.$toast.success('member is successfully created')
+        this.$toast.success('メンバーを招待しました')
       })
       .catch((e) => {
-        this.$toast.error(e.response.data.message || e)
+        if (process.client) {
+          // this.$toast.error(e.response.data.message || e)
+          this.$toast.error('メンバーが存在しません')
+        }
       })
   },
   async deleteMember({ commit }, { groupId, userId }) {
@@ -72,7 +74,9 @@ export const actions = {
       }
     )
       .then((res) => {
-        this.$toast.success('Destroy Completed!!')
+        if (process.client) {
+          this.$toast.success('メンバーを除外しました')
+        }
       })
       .catch((e) => {
         this.$toast.error(e.response.data.message || e)

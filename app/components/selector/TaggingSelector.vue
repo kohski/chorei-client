@@ -7,7 +7,7 @@
         :value="taggingIds"
         attach
         chips
-        label="Tags"
+        label="タグ選択"
         multiple
         outline
         @change="handleSelect"

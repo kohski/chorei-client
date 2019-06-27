@@ -4,20 +4,20 @@
       <v-flex xs10 offset-xs1 sm6 offset-sm3>
         <v-layout row justify-center>
           <h1 class="display-1 grey--text darken-3">
-            Your Profile
+            登録情報
           </h1>
         </v-layout>
         <v-text-field
           v-model="name"
           type="text"
-          label="Name"
+          label="名前"
           style="margin-top: 20px;"
           :disabled="toggleDisabled"
         />
         <v-text-field
           v-model="email"
           type="text"
-          label="Email"
+          label="メールアドレス"
           :disabled="toggleDisabled"
         />
         <v-layout row justify-center>
@@ -25,19 +25,19 @@
         </v-layout>
         <v-textarea
           v-model="description"
-          label="description"
+          label="自己紹介"
           :disabled="toggleDisabled"
         />
         <v-layout row justify-center>
           <v-btn round dark to="/auth/edit">
-            Edit
+            編集
           </v-btn>
           <v-btn
             round
             color="error"
             @click="logoutInShowPage"
           >
-            Logtout
+            ログアウト
           </v-btn>
         </v-layout>
       </v-flex>

@@ -42,7 +42,8 @@ export const actions = {
       .catch((e) => {
         commit('setSteps', [])
         if (process.client) {
-          this.$toast.info(e.response.data.message || e)
+          // this.$toast.error(e.response.data.message || e)
+          this.$toast.error('ステップが存在しません')
         }
       })
   },
@@ -64,7 +65,7 @@ export const actions = {
       }
     )
       .then((res) => {
-        this.$toast.success('step is successfully created')
+        this.$toast.success('ステップが登録されました')
       })
       .catch((e) => {
         this.$toast.error(e.response.data.message || e)

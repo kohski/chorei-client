@@ -4,12 +4,12 @@
       <v-flex xs10 offset-xs1>
         <v-layout row justify-center>
           <h1 class="headline">
-            GroupPage: {{ group.name }}
+            {{ group.name }} のページ
           </h1>
         </v-layout>
-        <hr>
+        <v-divider class="diveider_space"/>
         <h2 class="title">
-          Members
+          参加中のメンバー
         </h2>
         <v-layout row justify-start wrap>
           <v-flex
@@ -24,9 +24,9 @@
           </v-flex>
         </v-layout>
         <member-register />
-        <hr>
+        <v-divider darl class="diveider_space"/>
         <h2 class="title">
-          Job
+          登録されているジョブ
         </h2>
         <v-layout row justify-center>
           <job-register />
@@ -99,6 +99,9 @@ export default {
     margin: 5%;
   }
   .member_card{
+    margin: 5%;
+  }
+  .diveider_space{
     margin: 5%;
   }
 </style>

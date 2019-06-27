@@ -10,7 +10,7 @@
             {{ val.name }}
           </v-card-title>
           <v-btn flat small color="error" @click.stop="destroyMember">
-            delete
+            グループから除外
           </v-btn>
         </v-card>
       </v-flex>

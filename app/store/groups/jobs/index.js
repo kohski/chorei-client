@@ -52,10 +52,10 @@ export const actions = {
       })
       .catch((e) => {
         commit('setJobs', [])
-        if (process.server) {
-          return
+        if (process.client) {
+          // this.$toast.error(e.response.data.message || e)
+          this.$toast.error('ジョブがありません')
         }
-        this.$toast.error(e.response.data.message || e)
       })
   },
   async postJob({ commit }, { groupId, formData }) {
@@ -74,10 +74,13 @@ export const actions = {
       .then((res) => {
         // const jobId = res.data.data.id
         commit('setJob', res.data.data)
-        this.$toast.success('job is successfully created')
+        this.$toast.success('ジョブが作成されました')
       })
       .catch((e) => {
-        this.$toast.error(e.response.data.message || e)
+        if (process.client) {
+          // this.$toast.error(e.response.data.message || e)
+          this.$toast.error('登録情報が正しくありません')
+        }
       })
   },
   async deleteJob({ commit }, jobId) {
@@ -91,7 +94,7 @@ export const actions = {
       }
     )
       .then((res) => {
-        this.$toast.success('Destroy Completed!!')
+        this.$toast.success('ジョブを削除しました')
       })
       .catch((e) => {
         this.$toast.error(e.response.data.message || e)
@@ -111,10 +114,13 @@ export const actions = {
       }
     )
       .then((res) => {
-        this.$toast.success('UpdateCompleted Completed!!')
+        this.$toast.success('ジョブが更新されました')
       })
       .catch((e) => {
-        this.$toast.error(e.response.data.message || e)
+        if (process.client) {
+          // this.$toast.error(e.response.data.message || e)
+          this.$toast.error('ジョブが更新されませんでした')
+        }
       })
   },
   async showJob({ commit }, { jobId }) {

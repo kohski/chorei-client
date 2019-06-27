@@ -3,12 +3,12 @@
     <v-flex xs10>
       <v-text-field
         v-model="name"
-        label="Create Tag"
+        label="タグ新規作成"
         tabindex="1"
       />
       <v-layout row justify-center>
         <v-btn small dark round @click="postTageWithParmas">
-          submit
+          タグ登録
         </v-btn>
       </v-layout>
     </v-flex>

@@ -63,17 +63,17 @@ export default {
       items: [
         {
           icon: 'account_box',
-          title: 'Profile',
+          title: 'プロフィール',
           to: '/profile'
         },
         {
           icon: 'group_work',
-          title: 'My Page',
+          title: 'マイページ',
           to: '/mypage'
         },
         {
           icon: 'public',
-          title: 'public jobs',
+          title: '公開ジョブ一覧',
           to: '/jobs/public'
 
         }

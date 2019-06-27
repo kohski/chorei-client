@@ -4,36 +4,36 @@
       <v-flex xs8>
         <v-layout row justify-center>
           <h1 class="headline">
-            Sign Up
+            新規登録
           </h1>
         </v-layout>
         <v-text-field
           v-model="formData.name"
           type="text"
-          label="Name"
+          label="名前"
           style="margin-top: 20px;"
         />
         <v-text-field
           v-model="formData.email"
           type="text"
-          label="Email"
+          label="メールアドレス"
         />
         <v-text-field
           v-model="formData.password"
           type="password"
-          label="Password"
+          label="パスワード"
         />
         <image-uploader @imageRecieve="imageRecieve" />
         <v-textarea
           v-model="formData.description"
-          placeholder="add your description"
+          placeholder="自由記入欄"
         />
         <v-layout row justify-center>
           <v-btn round dark @click="handleClickSubmit">
-            submit
+            新規登録
           </v-btn>
           <v-btn round dark color="info" to="/auth/login">
-            Log In Page
+            ログインページへ
           </v-btn>
         </v-layout>
       </v-flex>
@@ -48,7 +48,7 @@ export default {
   components: {
     ImageUploader
   },
-  asyncData({ redirect, store }) {
+  data() {
     return {
       formData: {
         name: '',
@@ -62,11 +62,11 @@ export default {
   methods: {
     async handleClickSubmit() {
       await this.signUp({ ...this.formData })
-      this.$data.formData.name = ''
-      this.$data.formData.email = ''
-      this.$data.formData.password = ''
-      this.$data.fomrData.image = ''
-      this.$data.fomrData.description = ''
+      this.formData.name = ''
+      this.formData.email = ''
+      this.formData.password = ''
+      this.formData.image = ''
+      this.formData.description = ''
     },
     imageRecieve(imageUrl) {
       this.formData.image = imageUrl

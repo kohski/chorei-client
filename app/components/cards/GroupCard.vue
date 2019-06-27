@@ -6,10 +6,10 @@
           v-if="!updatable"
           @imageRecieve="imageRecieve"
         />
-        <v-img v-if="updatable" :src="formData.image" @click="toDetailPage" />
+        <v-img v-if="updatable" :src="formData.image" @click="toDetailPage" height="180px" contain/>
         <v-text-field
           v-model="formData.name"
-          label="Name"
+          label="グループ名"
           :disabled="updatable"
         />
         <v-layout row justify-center>
@@ -21,7 +21,7 @@
             color="info"
             @click.stop="makeUpdatable"
           >
-            EDIT
+            編集
           </v-btn>
           <v-btn
             v-if="updatable"
@@ -31,7 +31,7 @@
             color="error"
             @click.stop="deleteGroupWithId"
           >
-            DELETE
+            削除
           </v-btn>
           <v-btn
             v-if="!updatable"

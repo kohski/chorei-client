@@ -2,21 +2,22 @@
   <v-container>
     <v-layout row justify-center>
       <v-btn round dark small @click="toggleDisplay">
-        new Group
+        新しいグループ
       </v-btn>
       <v-dialog v-model="dialog" width="40%">
         <v-flex xs12>
           <v-card class="group_register_space">
+            <p class="title">グループの新規作成</p>
             <v-text-field
               v-model="formData.name"
-              label="Group Name"
+              label="グループ名"
             />
             <image-uploader
               @imageRecieve="imageRecieve"
             />
             <v-layout row justify-center>
-              <v-btn round dark @click="postGroupWithPayload">
-                submit
+              <v-btn round dark small @click="postGroupWithPayload">
+                登録
               </v-btn>
             </v-layout>
           </v-card>

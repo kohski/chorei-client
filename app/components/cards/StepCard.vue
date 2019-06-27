@@ -5,7 +5,7 @@
       <v-img :src="val.image" height="120" contain />
       <v-textarea
         v-model="val.memo"
-        label="memo"
+        label="メモ"
         disabled
       />
       <v-layout row justify-space-between>
@@ -13,7 +13,7 @@
           <v-icon>chevron_left</v-icon>
         </v-btn>
         <v-btn flat small color="error" @click.stop="deleteStepWithId">
-          delete
+          削除
         </v-btn>
         <v-btn icon flat @click="toRight">
           <v-icon>chevron_right</v-icon>

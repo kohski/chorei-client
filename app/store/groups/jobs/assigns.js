@@ -33,7 +33,8 @@ export const actions = {
       })
       .catch((e) => {
         if (process.client) {
-          this.$toast.info(e.response.data.message || e)
+          // this.$toast.info(e.response.data.message || e)
+          this.$toast.error('担当者がいません')
         }
       })
   },
@@ -54,10 +55,13 @@ export const actions = {
       }
     )
       .then((res) => {
-        this.$toast.success('assign is successfully created')
+        this.$toast.success('担当を割り当てました')
       })
       .catch((e) => {
-        this.$toast.error(e.response.data.message || e)
+        if (process.client) {
+          // this.$toast.error(e.response.data.message || e)
+          this.$toast.error('担当を割り当てできませんでした')
+        }
       })
   },
   async deleteAssign({ commit }, { jobId, userId }) {
@@ -71,10 +75,13 @@ export const actions = {
       }
     )
       .then((res) => {
-        this.$toast.success('Destroy Completed!!')
+        this.$toast.success('担当を解除しました')
       })
       .catch((e) => {
-        this.$toast.error(e.response.data.message || e)
+        if (process.client) {
+          // this.$toast.error(e.response.data.message || e)
+          this.$toast.error('担当を解除できませんでした')
+        }
       })
   }
 }

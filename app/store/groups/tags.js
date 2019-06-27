@@ -32,7 +32,8 @@ export const actions = {
       .catch((e) => {
         commit('setTags', [])
         if (process.client) {
-          this.$toast.error(e.response.data.message || e)
+          // this.$toast.error(e.response.data.message || e)
+          this.$toast.error('タグが存在しません')
         }
       })
   },
@@ -52,11 +53,12 @@ export const actions = {
       }
     )
       .then((res) => {
-        this.$toast.success('tag is successfully created')
+        this.$toast.success('タグが登録されました。タグはグループで共有されます。')
       })
       .catch((e) => {
         if (process.client) {
-          this.$toast.error(e.response.data.message || e)
+          // this.$toast.error(e.response.data.message || e)
+          this.$toast.error('タグを登録できませんでした')
         }
       })
   },
@@ -71,10 +73,13 @@ export const actions = {
       }
     )
       .then((res) => {
-        this.$toast.success('Destroy Completed!!')
+        this.$toast.success('タグを削除しました')
       })
       .catch((e) => {
-        this.$toast.error(e.response.data.message || e)
+        if (process.client) {
+          // this.$toast.error(e.response.data.message || e)
+          this.$toast.error('タグを削除できませんでした')
+        }
       })
   }
 }

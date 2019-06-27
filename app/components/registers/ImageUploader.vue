@@ -7,7 +7,7 @@
       <br>
 
       <v-btn small round dark prepend-icon="attach_file" @click="pickFile">
-        image
+        画像
       </v-btn>
       <input
         ref="image"

@@ -5,7 +5,7 @@
       <v-img :src="val.image" height="120" contain />
       <v-textarea
         v-model="val.memo"
-        label="memo"
+        label="メモ"
         disabled
       />
     </v-flex>

@@ -39,10 +39,10 @@ export const actions = {
         commit('setGroups', res.data.data)
       })
       .catch((e) => {
-        if (process.server) {
-          return
+        if (process.client) {
+          // this.$toast.error(e.response.data.message || e)
+          this.$toast.error('参加中のグループはありません')
         }
-        this.$toast.error(e.response.data.message || e)
       })
   },
   async postGroup({ commit }, formData) {
@@ -59,11 +59,14 @@ export const actions = {
       }
     )
       .then((res) => {
-        this.$toast.success('group is successfully created')
+        this.$toast.success('グループが作成されました')
         this.$router.push('/mypage')
       })
       .catch((e) => {
-        this.$toast.error(e.response.data.message || e)
+        if (process.client) {
+          // this.$toast.error(e.response.data.message || e)
+          this.$toast.error('登録が行われませんでした')
+        }
       })
   },
   async deleteGroup({ commit }, { groupId }) {

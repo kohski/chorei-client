@@ -9,13 +9,13 @@
         <v-img v-if="updatable" :src="formData.image" />
         <v-text-field
           v-model="formData.title"
-          label="title"
+          label="名称"
           :disabled="updatable"
           auto-grow
         />
         <v-textarea
           v-model="formData.description"
-          label="description"
+          label="概要"
           :disabled="updatable"
           auto-grow
         />
@@ -34,7 +34,7 @@
           color="info"
           @click="makeUpdatable"
         >
-          EDIT
+          編集
         </v-btn>
         <v-btn
           v-if="!updatable"
@@ -43,7 +43,7 @@
           color="warning"
           @click="putJobWithParams"
         >
-          update
+          更新
         </v-btn>
         <v-btn
           v-if="!updatable"
@@ -53,7 +53,7 @@
           color="error"
           @click="makeUpdatable"
         >
-          cancel
+          キャンセル
         </v-btn>
       </v-card>
     </v-flex>

@@ -4,19 +4,19 @@
       <v-flex xs10 offset-xs1 sm6 offset-sm3>
         <v-layout row justify-center>
           <h1 class="display-1 grey--text darken-3">
-            Your Profile
+            登録情報
           </h1>
         </v-layout>
         <v-text-field
           v-model="showInfo.name"
           type="text"
-          label="Name"
+          label="名前"
           style="margin-top: 20px;"
         />
         <v-text-field
           v-model="showInfo.email"
           type="text"
-          label="Email"
+          label="メールアドレス"
           disabled
         />
         <v-layout row justify-center>
@@ -25,11 +25,11 @@
         <image-uploader @imageRecieve="imageRecieve" />
         <v-textarea
           v-model="showInfo.description"
-          label="description"
+          label="自己紹介"
         />
         <v-layout row justify-center>
           <v-btn round dark @click="updateUserWithParams">
-            Update
+            更新
           </v-btn>
         </v-layout>
       </v-flex>

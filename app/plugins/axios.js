@@ -11,4 +11,10 @@ export default function ({ $axios, redirect, req }) {
       config.headers.common.client = credential.client
     }
   })
+
+  $axios.onError((err) => {
+    if (err.response.status === 401) {
+      redirect('/auth/login')
+    }
+  })
 }
