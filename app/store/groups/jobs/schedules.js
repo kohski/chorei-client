@@ -83,13 +83,12 @@ export const actions = {
         this.$toast.error(e.response.data.message || e)
       })
   },
-  async putSchedule({ commit }, { scheduleId, image, memo }) {
+  async putSchedule({ commit }, { scheduleId, isDone }) {
     await this.$axios.put(
-      `/schedule/${scheduleId}`,
+      `/schedules/${scheduleId}`,
       {
         schedule: {
-          memo: memo,
-          image: image
+          is_done: isDone
         }
       },
       {

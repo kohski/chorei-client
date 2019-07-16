@@ -1,6 +1,5 @@
 <template>
   <v-app class="main">
-    <v-img :src="mainImage" class="main_image"></v-img>
     <v-content>
       <v-container>
         <nuxt />
@@ -20,7 +19,6 @@
 
 <script>
 import logoImage from '~/assets/images/Logo2.png'
-import mainImage from '~/assets/images/top_image_logo.png'
 export default {
   data() {
     return {
@@ -31,8 +29,7 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'chorei',
-      logoImage: logoImage,
-      mainImage: mainImage
+      logoImage: logoImage
     }
   }
 }
@@ -42,6 +39,4 @@ export default {
     background-color #B9E1DC
   .footer
     background-color #B9E1DC
-  .main_image
-    border: none;
 </style>

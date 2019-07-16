@@ -1,14 +1,6 @@
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
 import pkg from './package'
 
-let API_URL
-const env = process.env.NODE_ENV || 'development'
-if (env === 'development' || env === 'test') {
-  API_URL = 'http://3.113.114.91/api/v1'
-} else {
-  API_URL = process.env.API_URL
-}
-
 export default {
   mode: 'universal',
   srcDir: 'app/',
@@ -21,14 +13,14 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'chorei',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/chorei.ico' },
       {
         rel: 'stylesheet',
         href:
@@ -75,7 +67,7 @@ export default {
     // See https://github.com/nuxt-community/axios-module#options
     // baseURL: 'http://3.113.114.91/api/v1'
     // eslint-disable-next-line no-undef
-    baseURL: API_URL
+    baseURL: 'https://api.chorei.site/api/v1'
   },
 
   /*

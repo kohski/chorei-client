@@ -32,7 +32,7 @@
         担当になっているジョブ
       </p>
     </v-layout>
-    <schedule-selector :vals="assignedSchedules"/>
+    <schedule-selector :vals="assignedSchedules" :groups="groups" />
   </v-container>
 </template>
 <script>
@@ -76,19 +76,4 @@ export default {
   .divider_space{
     margin: 5%;
   }
-  .my-event {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    border-radius: 2px;
-    background-color: #1867c0;
-    color: #ffffff;
-    border: 1px solid #1867c0;
-    width: 100%;
-    font-size: 12px;
-    padding: 3px;
-    cursor: pointer;
-    margin-bottom: 1px;
-  }
-
 </style>

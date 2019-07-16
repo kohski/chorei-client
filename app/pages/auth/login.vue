@@ -32,7 +32,7 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-  layout: 'landingpage',
+  layout: 'auth',
   asyncData({ redirect, store }) {
     return {
       formData: {

@@ -13,7 +13,8 @@
     "precommit": "npm run lint",
     "test": "jest",
     "debug": "node --inspect-brk=9229 node_modules/nuxt/bin/nuxt",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "devHttps": "node server/index.js"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.5.4",

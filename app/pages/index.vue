@@ -1,52 +1,104 @@
 <template>
-  <v-layout row justify-center>
-    <v-flex xs12>
-      <h1 class="display-1">家事管理アプリ Chorei</h1>
-      <hr>
-      <h2>作成した目的</h2>
-      <p>家事の共有を支援することで効率的な分担を促す</p>
-      <h2>使用方法</h2>
-        <h3>1. ジョブ登録</h3>
-        <ol>
-          <li>まずはユーザー登録</li>
-          <li>つづいてグループの作成</li>
-          <li>グループを作成したらメールアドレスでメンバーを招待</li>
-          <li>グループで共有すべきジョブを作成（まずは名称と概要）。</li>
-          <li>詳細画面へ</li>
-            <ol>
-              <li>開始日程・終了日程・頻度・繰返回数を指定</li>
-              <li>担当者を設定（グループ内のメンバーから選択</li>
-              <li>必要に応じてタグを作成・設定（作成したタグはグループ内で共有される）</li>
-              <li>細かい手順はステップに追加していく（ステップは順番の変更も可能）</li>
-            </ol>
-          <li>ジョブが登録できて汎用性がありそうなものは公開設定が可能</li>
-        </ol>
-      <h3>2.公開ジョブ</h3>
-        <ol>
-          <li>公開ジョブは「公開ジョブ一覧」より確認できる</li>
-          <li>気に入った公開ジョブを選択して自分のグループに対してジョブの複製登録が可能</li>
-          <li>日程、担当者、タグはコピーされないので自分のグループ用にカスタマイズする</li>
-        </ol>
-      <h3>3.マイページ</h3>
-        <ol>
-          <li>自分が所属しているグループの一覧が出る</li>
-          <li>また、自分が担当になっているジョブをカレンダー形式で確認ができる</li>
-          <li>カレンダーから各ジョブのページへ飛ぶことができる</li>
-        </ol>
-      <v-layout row justify-center>
-        <v-btn large round color="warning" to="/auth/login">
-          ログイン
-        </v-btn>
-        <v-btn large round color="info" to="/auth/signup">
-          新規登録
-        </v-btn>
-      </v-layout>
-    </v-flex>
-  </v-layout>
+  <v-app>
+    <v-layout row justify-center>
+      <v-flex xs12>
+        <h1 class="display-3 top_logo_title">
+          家事管理アプリ Chorei
+        </h1>
+        <v-layout row justify-center wrap>
+          <h2 class="display-2 top_logo_title">
+            Choreiでできること
+          </h2>
+          <v-flex class="top_points" xs12>
+            <v-layout row wrap justify-start>
+              <v-flex xs2>
+                <v-img :src="CalenderImage"></v-img>
+              </v-flex>
+              <v-spacer></v-spacer>
+              <v-flex xs9>
+                <p class="display-1">家事をスケジュールできる</p>
+                <p class="title">家事を、個人単位ではなくグループ単位で登録することで、モレを防ぐことができます。</p>
+                <p class="title"></p>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+          <v-flex class="top_points" xs12>
+            <v-layout row wrap justify-start>
+              <v-flex xs2>
+                <v-img :src="FileImage"></v-img>
+              </v-flex>
+              <v-spacer></v-spacer>
+              <v-flex xs9>
+                <p class="display-1">家事の細かい手順を記録</p>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+          <v-flex class="top_points" xs12>
+            <v-layout row wrap justify-start>
+              <v-flex xs2>
+                <v-img :src="KeyImage"></v-img>
+              </v-flex>
+              <v-spacer></v-spacer>
+              <v-flex xs9>
+                <p class="display-1">公開されている家事の手順を参考に</p>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+        </v-layout>
+        <v-layout row justify-center>
+          <v-btn large round color="warning" to="/auth/login">
+            ログイン
+          </v-btn>
+          <v-btn large round color="info" to="/auth/signup">
+            新規登録
+          </v-btn>
+        </v-layout>
+      </v-flex>
+    </v-layout>
+  </v-app>
 </template>
 
 <script>
+// import mainImage from '~/assets/images/top_image_logo.png'
+// import mainLogo from '~/assets/images/Logo.png'
+import CalenderImage from '~/assets/images/calender.png'
+import FileImage from '~/assets/images/file.png'
+import KeyImage from '~/assets/images/public_key.png'
 export default {
-  layout: 'landingpage'
+  layout: 'landingpage',
+  data() {
+    return {
+      CalenderImage: CalenderImage,
+      FileImage: FileImage,
+      KeyImage: KeyImage
+    }
+  }
 }
 </script>
+<style>
+  .top_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-center;
+  }
+  .top_main_img {
+    max-width: 100%;
+  }
+  .top_main_logo {
+    max-width: 50%;
+  }
+  .top_logo_title {
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+  .top_points {
+    padding: 3%;
+    background-color: #efefef;
+    border-radius: 8px;
+    margin-bottom: 5%;
+  }
+  .points_image {
+    max-height: 100px;
+  }
+</style>

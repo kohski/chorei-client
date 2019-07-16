@@ -44,7 +44,7 @@
 import { mapActions } from 'vuex'
 import ImageUploader from '~/components/registers/ImageUploader'
 export default {
-  layout: 'landingpage',
+  layout: 'auth',
   components: {
     ImageUploader
   },
