@@ -13,6 +13,13 @@
           :disabled="updatable"
         />
         <v-layout row justify-center>
+          <user-label
+          v-for="member in val.members"
+          :key="member.id"
+          :val="member"></user-label>
+        </v-layout>
+        <v-divider></v-divider>
+        <v-layout row justify-center>
           <v-btn
             v-if="updatable"
             round
@@ -59,11 +66,13 @@
 </template>
 <script>
 import ImageUploader from '~/components/registers/ImageUploader'
+import UserLabel from '~/components/chips/UserLabel'
 import { mapActions } from 'vuex'
 export default {
   name: 'StepRegister',
   components: {
-    ImageUploader
+    ImageUploader,
+    UserLabel
   },
   props: ['val'],
   data() {

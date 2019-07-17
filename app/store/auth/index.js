@@ -1,6 +1,7 @@
 import Cookies from 'universal-cookie'
 
 export const state = () => ({
+  id: '',
   uid: '',
   accessToken: '',
   client: '',
@@ -15,6 +16,7 @@ export const getters = {
   client: state => state.client,
   showInfo: (state) => {
     return {
+      id: state.id,
       name: state.name,
       image: state.image,
       description: state.description,
@@ -41,7 +43,8 @@ export const mutations = {
       cookies.set('chorei-server', credentials, { expire: 365 })
     }
   },
-  setShowInfo(state, { name, uid, image, description }) {
+  setShowInfo(state, { id, name, uid, image, description }) {
+    state.id = id
     state.name = name
     state.uid = uid
     state.image = image

@@ -19,6 +19,7 @@
           >
             <member-card
               :val="member"
+              :current_user="showInfo"
               class="member_card"
             />
           </v-flex>
@@ -67,7 +68,8 @@ export default {
   computed: {
     ...mapGetters('groups', ['group']),
     ...mapGetters('groups/jobs', ['jobs']),
-    ...mapGetters('groups/members', ['members'])
+    ...mapGetters('groups/members', ['members']),
+    ...mapGetters('auth', ['showInfo'])
   },
   async asyncData({ store }) {
     const idCategory = 'group'
@@ -82,6 +84,7 @@ export default {
     await store.dispatch('groups/showGroup', { groupId: groupId })
     await store.dispatch('groups/jobs/indexJobs', { groupId: groupId })
     await store.dispatch('groups/members/indexMembers', { groupId: groupId })
+    await store.dispatch('auth/getUser')
   },
   methods: {
     async updateIndexPage() {

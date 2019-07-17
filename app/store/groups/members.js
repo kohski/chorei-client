@@ -81,5 +81,29 @@ export const actions = {
       .catch((e) => {
         this.$toast.error(e.response.data.message || e)
       })
+  },
+  async updateMember({ commit }, { memberId }) {
+    await this.$axios.put(
+      `/members/${memberId}`,
+      {
+        member: {
+          is_owner: true
+        }
+      },
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+      .then((res) => {
+        if (process.client) {
+          this.$toast.success('オーナーを変更しました')
+        }
+      })
+      .catch((e) => {
+        this.$toast.error(e.response.data.message || e)
+      })
   }
 }
