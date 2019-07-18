@@ -1,12 +1,14 @@
 export const state = () => ({
   schedules: [],
   schedule: {},
-  assignedSchedules: []
+  assignedSchedules: [],
+  groupSchedules: []
 })
 
 export const getters = {
   schedules(state) { return state.schedules },
-  assignedSchedules(state) { return state.assignedSchedules }
+  assignedSchedules(state) { return state.assignedSchedules },
+  groupSchedules(state) { return state.groupSchedules }
 }
 
 export const mutations = {
@@ -18,6 +20,9 @@ export const mutations = {
   },
   setAssignedSchedules(state, assignedSchedules) {
     state.assignedSchedules = assignedSchedules
+  },
+  setGroupSchedules(state, groupSchedules) {
+    state.groupSchedules = groupSchedules
   }
 }
 
@@ -116,6 +121,24 @@ export const actions = {
       })
       .then((res) => {
         commit('setAssignedSchedules', res.data.data)
+      })
+      .catch((e) => {
+        if (process.client) {
+          this.$toast.error('スケジュールを取得できませんでした')
+        }
+      })
+  },
+  async indexGroupSchedules({ commit }, { groupId }) {
+    await this.$axios.get(
+      `/group_schedules?group_id=${groupId}`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((res) => {
+        commit('setGroupSchedules', res.data.data)
       })
       .catch((e) => {
         if (process.client) {

@@ -40,20 +40,23 @@
         <tag-card />
       </v-flex>
     </v-layout>
-      <v-flex xs12>
-        <v-divider darl class="diveider_space" />
-        <h2 class="title">
-          登録されているジョブ
-        </h2>
-        <v-layout row justify-center>
-          <job-register />
-        </v-layout>
-        <v-layout row justify-start wrap>
-          <v-flex xs12>
-            <job-index :jobs="jobs" :tags="tags" />
-          </v-flex>
-        </v-layout>
-      </v-flex>
+    <v-flex xs12>
+      <v-divider darl class="diveider_space" />
+      <h2 class="title">
+        登録されているジョブ
+      </h2>
+      <v-layout row justify-center>
+        <job-register />
+      </v-layout>
+      <v-layout row justify-start wrap>
+        <v-flex xs12>
+          <job-index :jobs="jobs" :tags="tags" />
+        </v-flex>
+      </v-layout>
+    </v-flex>
+    <v-flex xs12>
+      <schedule-selector :vals="groupSchedules"></schedule-selector>
+    </v-flex>
   </v-container>
 </template>
 <script>
@@ -62,6 +65,7 @@ import JobIndex from '~/components/cards/JobIndexCard.vue'
 import JobRegister from '~/components/registers/JobRegister'
 import MemberCard from '~/components/cards/MemberCard.vue'
 import MemberRegister from '~/components/registers/MemberRegister.vue'
+import ScheduleSelector from '~/components/selector/ScheduleSelectorForGroup.vue'
 import TagCard from '~/components/cards/TagCardForGroup'
 export default {
   layout: 'default',
@@ -70,6 +74,7 @@ export default {
     MemberRegister,
     JobRegister,
     TagCard,
+    ScheduleSelector,
     JobIndex
   },
   computed: {
@@ -80,7 +85,8 @@ export default {
     ...mapGetters('groups/jobs', ['jobs']),
     ...mapGetters('groups/members', ['members']),
     ...mapGetters('auth', ['showInfo']),
-    ...mapGetters('groups/tags', ['tags'])
+    ...mapGetters('groups/tags', ['tags']),
+    ...mapGetters('groups/jobs/schedules', ['groupSchedules'])
   },
   async asyncData({ store }) {
     const idCategory = 'group'
@@ -97,6 +103,7 @@ export default {
     await store.dispatch('auth/getUser')
     await store.dispatch('groups/tags/indexTagsByGroup', { groupId: groupId })
     await store.dispatch('groups/members/indexMembers', { groupId: groupId })
+    await store.dispatch('groups/jobs/schedules/indexGroupSchedules', { groupId: groupId })
   },
   methods: {
     async updateIndexPage() {
