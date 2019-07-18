@@ -23,7 +23,7 @@
                     <v-avatar size="30px">
                       <img v-if="event.groupImage" :src="event.groupImage">
                     </v-avatar>
-                    {{event.title}}
+                    {{ event.title }}
                   </div>
                 </template>
                 <v-card
@@ -44,12 +44,12 @@
                   </v-toolbar>
                   <v-card-title primary-title>
                     <span v-html="event.details" />
-                    <v-divider></v-divider>
+                    <v-divider />
                     <v-switch
                       v-model="event.isDone"
                       :label="event.isDone? '完了':'未了'"
                       @change.self="updateSchedule(event)"
-                    ></v-switch>
+                    />
                   </v-card-title>
                 </v-card>
               </v-menu>

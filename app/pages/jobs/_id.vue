@@ -1,20 +1,12 @@
 <template>
   <div>
-    <!-- job section -->
     <v-layout row justify-center align-space-between wrap>
       <v-flex md6 lg3>
         <job-display :val="job" class="each_card_space" />
       </v-flex>
-      <!-- </v-layout> -->
-      <!-- datetime picker -->
-      <!-- <v-layout row justify-start> -->
       <v-flex md6 lg3>
         <datetime-selector :val="job" class="each_card_space" />
       </v-flex>
-      <!-- </v-layout> -->
-
-      <!-- assign section -->
-      <!-- <v-layout row justify-center> -->
       <v-flex md6 lg3>
         <assign-selector
           :members="members"
@@ -22,10 +14,6 @@
           class="each_card_space"
         />
       </v-flex>
-      <!-- </v-layout> -->
-
-      <!-- tag -->
-      <!-- <v-layout row justify-start> -->
       <v-flex md6 lg3>
         <tag-card />
       </v-flex>

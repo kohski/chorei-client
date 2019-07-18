@@ -32,7 +32,8 @@ export default {
     this.members.forEach((elm) => {
       this.memberNames.push(elm.name)
     })
-    this.assigns.forEach((elm) => {
+    const assigns = this.assigns || []
+    assigns.forEach((elm) => {
       this.assignIds.push(elm.id)
       this.assignNames.push(elm.name)
     })

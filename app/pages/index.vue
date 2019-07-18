@@ -12,36 +12,48 @@
           <v-flex class="top_points" xs12>
             <v-layout row wrap justify-start>
               <v-flex xs2>
-                <v-img :src="CalenderImage"></v-img>
+                <v-img :src="CalenderImage" />
               </v-flex>
-              <v-spacer></v-spacer>
+              <v-spacer />
               <v-flex xs9>
-                <p class="display-1">スケジュール管理機能</p>
-                <p class="title">家事を、個人単位ではなくグループ単位で登録することで、モレを防ぐことができます。完了・未完了をカレンダー形式で管理することができます。</p>
+                <p class="display-1">
+                  スケジュール管理機能
+                </p>
+                <p class="title">
+                  家事を、個人単位ではなくグループ単位で登録することで、モレを防ぐことができます。完了・未完了をカレンダー形式で管理することができます。
+                </p>
               </v-flex>
             </v-layout>
           </v-flex>
           <v-flex class="top_points" xs12>
             <v-layout row wrap justify-start>
               <v-flex xs2>
-                <v-img :src="FileImage"></v-img>
+                <v-img :src="FileImage" />
               </v-flex>
-              <v-spacer></v-spacer>
+              <v-spacer />
               <v-flex xs9>
-                <p class="display-1">家事の細かい手順を記録</p>
-                <p class="title">家事をステップごとに詳細に記録することで、家事の方法を記録しておくことができます。</p>
+                <p class="display-1">
+                  家事の細かい手順を記録
+                </p>
+                <p class="title">
+                  家事をステップごとに詳細に記録することで、家事の方法を記録しておくことができます。
+                </p>
               </v-flex>
             </v-layout>
           </v-flex>
           <v-flex class="top_points" xs12>
             <v-layout row wrap justify-start>
               <v-flex xs2>
-                <v-img :src="KeyImage"></v-img>
+                <v-img :src="KeyImage" />
               </v-flex>
-              <v-spacer></v-spacer>
+              <v-spacer />
               <v-flex xs9>
-                <p class="display-1">公開されている家事の手順を参考に</p>
-                <p class="title">よくできた家事記録は公開設定をすることができます。方法がわからない家事は公開されているものから検索することができます。</p>
+                <p class="display-1">
+                  公開されている家事の手順を参考に
+                </p>
+                <p class="title">
+                  よくできた家事記録は公開設定をすることができます。方法がわからない家事は公開されているものから検索することができます。
+                </p>
               </v-flex>
             </v-layout>
           </v-flex>

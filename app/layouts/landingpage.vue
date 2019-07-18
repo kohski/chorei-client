@@ -1,6 +1,6 @@
 <template>
   <v-app class="main">
-    <v-img :src="mainImage" class="main_image"></v-img>
+    <v-img :src="mainImage" class="main_image" />
     <v-content>
       <v-container>
         <nuxt />

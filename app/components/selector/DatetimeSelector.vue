@@ -27,21 +27,25 @@
           </v-btn>
           <v-text-field readonly :value="endDateTime" outline label="終了" :error-messages="errorMessage" />
         </v-flex>
-        <v-select
-          v-model="frequency"
-          :items="frequencies"
-          item-text="text"
-          item-value="value"
-          label="頻度"
-          outline
-        />
-        <v-select
-          v-model="repeatTimes"
-          :items="[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
-          label="回数"
-          :disabled="repeatTimeChecker"
-          outline
-        />
+      </v-layout>
+      <v-layout column align-center wrap>
+        <v-flex xs8>
+          <v-select
+            v-model="frequency"
+            :items="frequencies"
+            item-text="text"
+            item-value="value"
+            label="頻度"
+            outline
+          />
+          <v-select
+            v-model="repeatTimes"
+            :items="times"
+            label="回数"
+            :disabled="repeatTimeChecker"
+            outline
+          />
+        </v-flex>
       </v-layout>
       <v-layout row justify-center>
         <v-btn small dark round :disabled="dateChecker" @click="putJobWithParams">
@@ -125,6 +129,9 @@ export default {
         return '終了日付は開始日付以降を指定'
       }
       return ''
+    },
+    times() {
+      return [...Array(60).keys()].map(i => ++i)
     },
     ...mapGetters('groups/jobs', ['job'])
   },

@@ -5,21 +5,27 @@
         <v-card @click="dialog = !dialog">
           <v-layout row justify-start class="member_spacer">
             <v-badge overlap>
-              <template v-slot:badge v-if="val.member.is_owner">
-                <v-icon dark>done</v-icon>
+              <template v-if="val.member.is_owner" v-slot:badge>
+                <v-icon dark>
+                  done
+                </v-icon>
               </template>
-                <v-avatar size="50px">
-                  <v-img :src="user_image" class="user_image"/>
-                </v-avatar>
+              <v-avatar size="50px">
+                <v-img :src="user_image" class="user_image" />
+              </v-avatar>
             </v-badge>
-            <v-card-title>{{val.name}}</v-card-title>
+            <v-card-title>{{ val.name }}</v-card-title>
           </v-layout>
           <v-layout row justify-space-around>
-            <v-btn flat fab color="primary" @click.stop="putMember(val)" v-if="!val.member.is_owner">
-              <v-icon dark right class="member_btn">how_to_reg</v-icon>
+            <v-btn v-if="can_owner_change" flat fab color="primary" @click.stop="putMember(val)">
+              <v-icon dark right class="member_btn">
+                how_to_reg
+              </v-icon>
             </v-btn>
-            <v-btn flat fab color="error" @click.stop="destroyMember" v-if="can_delete">
-              <v-icon dark right class="member_btn">delete</v-icon>
+            <v-btn v-if="can_delete" flat fab color="error" @click.stop="destroyMember">
+              <v-icon dark right class="member_btn">
+                delete
+              </v-icon>
             </v-btn>
           </v-layout>
         </v-card>
@@ -44,20 +50,29 @@ import dummyUserImage from '~/assets/images/dummy_user_image.png'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'MemberCard',
-  props: ['val', 'current_user'],
+  props: ['val', 'current_user', 'owner'],
   data() {
     return {
       dialog: false
     }
+  },
+  async created() {
+    const groupId = this.$store.$router.currentRoute.params.id
+    await this.showGroup({ groupId: groupId })
   },
   computed: {
     user_image() {
       return this.val.image ? this.val.image : dummyUserImage
     },
     can_delete() {
-      const isOwner = this.val.member.is_owner
+      const isCurrentUserOwner = this.current_user.id === this.owner.member.user_id
       const isSelf = this.val.member.user_id === this.current_user.id
-      return !isOwner || isSelf
+      return isCurrentUserOwner || isSelf
+    },
+    can_owner_change() {
+      const isCurrentUserOwner = this.current_user.id === this.owner.member.user_id
+      const notOwnerNow = !this.val.member.is_owner
+      return isCurrentUserOwner && notOwnerNow
     },
     ...mapGetters('groups/members', ['members'])
   },

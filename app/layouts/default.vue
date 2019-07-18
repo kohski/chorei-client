@@ -30,7 +30,7 @@
       app
     >
       <v-toolbar-side-icon @click="drawer = !drawer" />
-      <v-img :src="logoImage" contain height="60%" position="left"></v-img>
+      <v-img :src="logoImage" contain height="60%" position="left" />
       <v-spacer />
       <user-label :val="showInfo" @click="toProfile" />
     </v-toolbar>

@@ -20,11 +20,17 @@
             <member-card
               :val="member"
               :current_user="showInfo"
+              :owner="owner"
               class="member_card"
             />
           </v-flex>
         </v-layout>
         <member-register />
+        <v-divider darl class="diveider_space" />
+        <h2 class="title">
+          登録されているタグ
+        </h2>
+        <tag-card />
         <v-divider darl class="diveider_space" />
         <h2 class="title">
           登録されているジョブ
@@ -57,19 +63,25 @@ import JobCard from '~/components/cards/JobCard.vue'
 import JobRegister from '~/components/registers/JobRegister'
 import MemberCard from '~/components/cards/MemberCard.vue'
 import MemberRegister from '~/components/registers/MemberRegister.vue'
+import TagCard from '~/components/cards/TagCardForGroup'
 export default {
   layout: 'default',
   components: {
     JobCard,
     MemberCard,
     MemberRegister,
-    JobRegister
+    JobRegister,
+    TagCard
   },
   computed: {
+    owner() {
+      return this.members.find((elm) => { return elm.member.is_owner })
+    },
     ...mapGetters('groups', ['group']),
     ...mapGetters('groups/jobs', ['jobs']),
     ...mapGetters('groups/members', ['members']),
-    ...mapGetters('auth', ['showInfo'])
+    ...mapGetters('auth', ['showInfo']),
+    ...mapGetters('groups/tags', ['tags'])
   },
   async asyncData({ store }) {
     const idCategory = 'group'
@@ -83,8 +95,9 @@ export default {
     ].find(elm => elm)
     await store.dispatch('groups/showGroup', { groupId: groupId })
     await store.dispatch('groups/jobs/indexJobs', { groupId: groupId })
-    await store.dispatch('groups/members/indexMembers', { groupId: groupId })
     await store.dispatch('auth/getUser')
+    await store.dispatch('groups/tags/indexTagsByGroup', { groupId: groupId })
+    await store.dispatch('groups/members/indexMembers', { groupId: groupId })
   },
   methods: {
     async updateIndexPage() {
@@ -93,7 +106,8 @@ export default {
     },
     ...mapActions('groups', ['showGroup']),
     ...mapActions('groups/jobs', ['indexJobs']),
-    ...mapActions('groups/members', ['indexMember'])
+    ...mapActions('groups/members', ['indexMember']),
+    ...mapActions('groups/tags', ['indexTags'])
   }
 }
 </script>

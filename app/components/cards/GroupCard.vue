@@ -12,13 +12,14 @@
           label="グループ名"
           :disabled="updatable"
         />
-        <v-layout row justify-center>
+        <v-layout row justify-start wrap>
           <user-label
-          v-for="member in val.members"
-          :key="member.id"
-          :val="member"></user-label>
+            v-for="member in val.members"
+            :key="member.id"
+            :val="member"
+          />
         </v-layout>
-        <v-divider></v-divider>
+        <v-divider />
         <v-layout row justify-center>
           <v-btn
             v-if="updatable"
