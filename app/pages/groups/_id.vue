@@ -1,36 +1,46 @@
 <template>
   <v-container>
     <v-layout>
-      <v-flex xs10 offset-xs1>
+      <v-flex xs12>
         <v-layout row justify-center>
           <h1 class="headline">
             {{ group.name }} のページ
           </h1>
         </v-layout>
         <v-divider class="diveider_space" />
+      </v-flex>
+    </v-layout>
+    <v-layout>
+      <v-flex xs8>
         <h2 class="title">
           参加中のメンバー
         </h2>
-        <v-layout row justify-start wrap>
-          <v-flex
-            v-for="member in members"
-            :key="member.id"
-            xs4
-          >
-            <member-card
-              :val="member"
-              :current_user="showInfo"
-              :owner="owner"
-              class="member_card"
-            />
-          </v-flex>
-        </v-layout>
-        <member-register />
-        <v-divider darl class="diveider_space" />
+        <v-card>
+          <v-layout row justify-start wrap>
+            <v-flex
+              v-for="member in members"
+              :key="member.id"
+              xs4
+            >
+              <member-card
+                :val="member"
+                :current_user="showInfo"
+                :owner="owner"
+                class="member_card"
+              />
+            </v-flex>
+          </v-layout>
+          <member-register />
+        </v-card>
+      </v-flex>
+      <v-flex xs4>
         <h2 class="title">
           登録されているタグ
         </h2>
         <tag-card />
+      </v-flex>
+    </v-layout>
+      <v-flex xs12>
         <v-divider darl class="diveider_space" />
         <h2 class="title">
           登録されているジョブ
@@ -39,27 +49,16 @@
           <job-register />
         </v-layout>
         <v-layout row justify-start wrap>
-          <v-flex
-            v-for="job in jobs"
-            :key="job.id"
-            xs4
-          >
-            <v-layout column align-space-between>
-              <job-card
-                :val="job"
-                class="job_card"
-                @updateIndexPage="updateIndexPage"
-              />
-            </v-layout>
+          <v-flex xs12>
+            <job-index :jobs="jobs" :tags="tags" />
           </v-flex>
         </v-layout>
       </v-flex>
-    </v-layout>
   </v-container>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import JobCard from '~/components/cards/JobCard.vue'
+import JobIndex from '~/components/cards/JobIndexCard.vue'
 import JobRegister from '~/components/registers/JobRegister'
 import MemberCard from '~/components/cards/MemberCard.vue'
 import MemberRegister from '~/components/registers/MemberRegister.vue'
@@ -67,11 +66,11 @@ import TagCard from '~/components/cards/TagCardForGroup'
 export default {
   layout: 'default',
   components: {
-    JobCard,
     MemberCard,
     MemberRegister,
     JobRegister,
-    TagCard
+    TagCard,
+    JobIndex
   },
   computed: {
     owner() {

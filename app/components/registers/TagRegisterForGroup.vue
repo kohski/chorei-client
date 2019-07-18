@@ -8,8 +8,8 @@
       />
     </v-flex>
     <v-flex xs2>
-      <v-btn small dark round @click="postTageWithParmas">
-        登録
+      <v-btn small fab dark @click="postTageWithParmas">
+        <v-icon>add</v-icon>
       </v-btn>
     </v-flex>
   </v-layout>
