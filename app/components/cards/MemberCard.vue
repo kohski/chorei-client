@@ -50,7 +50,7 @@ import dummyUserImage from '~/assets/images/dummy_user_image.png'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'MemberCard',
-  props: ['val', 'current_user', 'owner'],
+  props: ['val', 'currentUser', 'owner'],
   data() {
     return {
       dialog: false
@@ -65,12 +65,12 @@ export default {
       return this.val.image ? this.val.image : dummyUserImage
     },
     can_delete() {
-      const isCurrentUserOwner = this.current_user.id === this.owner.member.user_id
-      const isSelf = this.val.member.user_id === this.current_user.id
+      const isCurrentUserOwner = this.currentUser.id === this.owner.member.user_id
+      const isSelf = this.val.member.user_id === this.currentUser.id
       return isCurrentUserOwner || isSelf
     },
     can_owner_change() {
-      const isCurrentUserOwner = this.current_user.id === this.owner.member.user_id
+      const isCurrentUserOwner = this.currentUser.id === this.owner.member.user_id
       const notOwnerNow = !this.val.member.is_owner
       return isCurrentUserOwner && notOwnerNow
     },

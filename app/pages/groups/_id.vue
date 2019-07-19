@@ -24,7 +24,7 @@
             >
               <member-card
                 :val="member"
-                :current_user="showInfo"
+                :currentUser="showInfo"
                 :owner="owner"
                 class="member_card"
               />
@@ -50,12 +50,16 @@
       </v-layout>
       <v-layout row justify-start wrap>
         <v-flex xs12>
-          <job-index :jobs="jobs" :tags="tags" />
+          <job-index :jobs="jobs" :tags="tags" :members="members"/>
         </v-flex>
       </v-layout>
     </v-flex>
+    <v-divider class="diveider_space"></v-divider>
+    <h2 class="title group_page_title">
+      ジョブカレンダー
+    </h2>
     <v-flex xs12>
-      <schedule-selector :vals="groupSchedules"></schedule-selector>
+      <schedule-selector :vals="groupSchedules" />
     </v-flex>
   </v-container>
 </template>
@@ -126,5 +130,8 @@ export default {
   }
   .diveider_space{
     margin: 5%;
+  }
+  .group_page_title {
+    margin-bottom: 2%;
   }
 </style>

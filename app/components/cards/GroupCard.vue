@@ -17,10 +17,11 @@
             v-for="member in val.members"
             :key="member.id"
             :val="member"
+            :group="val"
           />
         </v-layout>
         <v-divider />
-        <v-layout row justify-center>
+        <v-layout v-if="is_owner" row justify-center>
           <v-btn
             v-if="updatable"
             round
@@ -48,7 +49,7 @@
             color="warning"
             @click.stop="putGroupWithParams"
           >
-            update
+            更新
           </v-btn>
           <v-btn
             v-if="!updatable"
@@ -58,7 +59,7 @@
             color="error"
             @click.stop="makeUpdatable"
           >
-            cancel
+            キャンセル
           </v-btn>
         </v-layout>
       </v-card>
@@ -67,7 +68,7 @@
 </template>
 <script>
 import ImageUploader from '~/components/registers/ImageUploader'
-import UserLabel from '~/components/chips/UserLabel'
+import UserLabel from '~/components/chips/UserLabelForGroupCard'
 import { mapActions } from 'vuex'
 export default {
   name: 'StepRegister',
@@ -75,7 +76,7 @@ export default {
     ImageUploader,
     UserLabel
   },
-  props: ['val'],
+  props: ['val', 'currentUser'],
   data() {
     return {
       formData: {
@@ -89,6 +90,11 @@ export default {
         { text: '公開', value: true },
         { text: '非公開', value: false }
       ]
+    }
+  },
+  computed: {
+    is_owner() {
+      return this.val.owner.uid === this.currentUser.email
     }
   },
   mounted() {

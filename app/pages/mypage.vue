@@ -22,6 +22,7 @@
       >
         <group-card
           :val="group"
+          :currentUser="showInfo"
           @updateGroupCards="updateGroupCards"
         />
       </v-flex>

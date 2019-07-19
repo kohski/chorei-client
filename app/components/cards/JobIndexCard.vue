@@ -2,36 +2,55 @@
   <v-layout row justify-center>
     <v-flex xs12>
       <v-card>
-        <!-- <v-card-title>
-          Nutrition
-          <v-spacer></v-spacer>
-          <v-text-field
-            v-model="search"
-            append-icon="search"
-            label="Search"
-            single-line
-            hide-details
-          ></v-text-field>
-        </v-card-title> -->
+        <v-card-title>
+          <v-layout row justify-end>
+            <v-flex xs4>
+              <v-select
+                :items="members"
+                item-text="name"
+                item-value="item"
+                label="担当者で検索"
+                chips
+                multiple
+                @change="searchByMember"
+              ></v-select>
+            </v-flex>
+            <v-flex xs4 offset-xs1>
+              <v-select
+                :items="tags"
+                item-text="name"
+                item-value="item"
+                label="タグで検索"
+                chips
+                multiple
+                @change="searchByTag"
+              ></v-select>
+            </v-flex>
+          </v-layout>
+        </v-card-title>
         <v-data-table
           :headers="headers"
-          :items="jobs"
+          :items="jobItems"
         >
-          <template v-slot:items="props" >
+          <template v-slot:items="props">
             <td @click="transferJob(props.item)">
-              <v-img :src="props.item.image"></v-img>
+              <v-img :src="props.item.image" />
             </td>
-            <td @click="transferJob(props.item)">{{ props.item.title }}</td>
+            <td @click="transferJob(props.item)">
+              {{ props.item.title }}
+            </td>
             <td class="text-xs-left" @click="transferJob(props.item)">
               {{ props.item.description }}
             </td>
             <td @click="transferJob(props.item)">
               <v-layout row justify-start wrap>
-                <user-label v-for="user in props.item.assigns" :key="user.name" :val="user"></user-label>
+                <user-label v-for="user in props.item.assigns" :key="user.name" :val="user" />
               </v-layout>
             </td>
             <td @click="transferJob(props.item)">
-              <v-chip v-for="tag in props.item.tags" :key="tag">{{ tag }}</v-chip>
+              <v-chip v-for="tag in props.item.tags" :key="tag">
+                {{ tag }}
+              </v-chip>
             </td>
           </template>
           <template v-slot:no-results>
@@ -48,24 +67,101 @@
 import UserLabel from '~/components/chips/UserLabel'
 export default {
   name: 'JobIndexCard',
-  props: ['jobs', 'tags'],
   components: {
     UserLabel
   },
+  props: ['jobs', 'tags', 'members'],
   data() {
     return {
+      search: '',
       headers: [
         { text: '画像', value: '画像' },
         { text: '名称', value: '名称' },
         { text: '詳細', value: '詳細' },
         { text: '担当者', value: '担当者' },
         { text: 'タグ', value: 'タグ' }
-      ]
+      ],
+      jobItems: [],
+      filter_assigns: [],
+      filter_tags: []
+      // assign_sorted: false,
+      // tag_sorted: false
+    }
+  },
+  created() {
+    if (this.jobs.length > 0) {
+      this.jobs.forEach((elm) => {
+        this.jobItems.push(elm)
+      })
     }
   },
   methods: {
     transferJob(job) {
       this.$router.push(`/jobs/${job.id}`)
+    },
+    searchByMember(e) {
+      this.filter_assigns = []
+      e.forEach((elm) => {
+        this.filter_assigns.push(elm)
+      })
+      this.filtering()
+      // if (e.length === 0 && !this.tag_sorted) {
+      //   this.jobItems = []
+      //   this.jobs.forEach((elm) => {
+      //     this.jobItems.push(elm)
+      //   })
+      //   this.assign_sorted = false
+      // } else {
+      //   const items = this.assign_sorted ? this.jobs : this.jobItems
+      //   const filteredItems = items.filter(item => item.assigns.some(assign => e.some(member => member === assign.name)))
+      //   this.jobItems = []
+      //   filteredItems.forEach((elm) => {
+      //     this.jobItems.push(elm)
+      //   })
+      //   this.assign_sorted = true
+      // }
+    },
+    searchByTag(e) {
+      this.filter_tags = []
+      e.forEach((elm) => {
+        this.filter_tags.push(elm)
+      })
+      this.filtering()
+      // if (e.length === 0 && !this.assign_sorted) {
+      //   this.jobItems = []
+      //   this.jobs.forEach((elm) => {
+      //     this.jobItems.push(elm)
+      //   })
+      //   this.tag_sorted = false
+      // } else {
+      //   const items = this.tag_sorted ? this.jobs : this.jobItems
+      //   const filteredItems = items.filter(item => item.tags.some(tag => e.some(t => t === tag)))
+      //   this.jobItems = []
+      //   filteredItems.forEach((elm) => {
+      //     this.jobItems.push(elm)
+      //   })
+      //   this.tag_sorted = true
+      // }
+    },
+    filtering() {
+      // set initial items
+      const initItems = this.jobs
+      let filteredItems = []
+      // filtered by assigns
+      if (this.filter_assigns.length > 0) {
+        filteredItems = initItems.filter(item => item.assigns.some(assign => this.filter_assigns.some(member => member === assign.name)))
+      } else {
+        filteredItems = initItems
+      }
+      // filtered by tags
+      if (this.filter_tags.length > 0) {
+        filteredItems = filteredItems.filter(item => item.tags.some(tag => this.filter_tags.some(t => t === tag)))
+      }
+      // insert jobItems
+      this.jobItems = []
+      filteredItems.forEach((elm) => {
+        this.jobItems.push(elm)
+      })
     }
   }
 }
