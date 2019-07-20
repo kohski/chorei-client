@@ -39,9 +39,10 @@ export const actions = {
         commit('setGroups', res.data.data)
       })
       .catch((e) => {
+        commit('setGroups', [])
         if (process.client) {
           // this.$toast.error(e.response.data.message || e)
-          this.$toast.error('参加中のグループはありません')
+          // this.$toast.error('参加中のグループはありません')
         }
       })
   },
@@ -100,6 +101,7 @@ export const actions = {
         commit('setGroup', res.data.data)
       })
       .catch((e) => {
+        commit('setGroup', {})
         if (process.server) {
           return
         }
@@ -145,6 +147,7 @@ export const actions = {
         commit('setGroupId', res.data.data)
       })
       .catch((e) => {
+        commit('setGroupId', '')
         if (process.client) {
           this.$toast.error(e.response.data.message || e)
         }

@@ -2,7 +2,7 @@
   <v-layout row justify-center>
     <v-flex xs12>
       <v-layout row justify-center>
-        <v-btn small dark round @click="toggleDialog">
+        <v-btn small dark round color="#756c83" @click="toggleDialog">
           新しいジョブ
         </v-btn>
       </v-layout>
@@ -73,10 +73,10 @@ export default {
     async postJobWithParams() {
       const groupId = this.$route.params.id
       const formData = this.formData
+      debugger
       if (this.validator()) {
-        await this.postJob({ groupId, formData })
-        const jobId = this.job.id
-        this.$router.push(`/jobs/${jobId}`)
+        await this.postJob({ groupId: groupId, formData: formData })
+        // const jobId = this.job.id
       }
     },
     validator() {

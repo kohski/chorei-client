@@ -123,6 +123,7 @@ export const actions = {
         commit('setAssignedSchedules', res.data.data)
       })
       .catch((e) => {
+        commit('setAssignedSchedules', [])
         if (process.client) {
           this.$toast.error('スケジュールを取得できませんでした')
         }
@@ -141,6 +142,7 @@ export const actions = {
         commit('setGroupSchedules', res.data.data)
       })
       .catch((e) => {
+        commit('setGroupSchedules', [])
         if (process.client) {
           this.$toast.error('スケジュールを取得できませんでした')
         }

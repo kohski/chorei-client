@@ -8,6 +8,12 @@
           </h1>
         </v-layout>
         <v-text-field
+          solo
+          disabled
+          value="テストユーザーをセットしてあります"
+        >
+        </v-text-field>
+        <v-text-field
           v-model="formData.email"
           type="text"
           label="メールアドレス"
@@ -37,8 +43,8 @@ export default {
     return {
       formData: {
         name: '',
-        email: '',
-        password: ''
+        email: 'sample1@test.com',
+        password: 'password'
       }
     }
   },

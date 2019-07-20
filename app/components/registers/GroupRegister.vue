@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout row justify-center>
-      <v-btn round dark small @click="toggleDisplay">
+      <v-btn round dark small color="#756c83" @click="toggleDisplay">
         新しいグループ
       </v-btn>
       <v-dialog v-model="dialog" width="40%">
@@ -18,7 +18,7 @@
               @imageRecieve="imageRecieve"
             />
             <v-layout row justify-center>
-              <v-btn round dark small @click="postGroupWithPayload">
+              <v-btn round dark small color="#756c83" @click="postGroupWithPayload">
                 登録
               </v-btn>
             </v-layout>

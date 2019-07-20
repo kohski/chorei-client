@@ -1,6 +1,6 @@
 <template>
   <v-layout row justify-center>
-    <v-flex xs10>
+    <v-flex xs12>
       <v-select
         v-model="taggingTagNames"
         :items="tags.map(elm => elm.name)"

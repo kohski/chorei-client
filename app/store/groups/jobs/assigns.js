@@ -32,6 +32,7 @@ export const actions = {
         commit('setAssigns', res.data.data)
       })
       .catch((e) => {
+        commit('setAssigns', [])
         if (process.client) {
           // this.$toast.info(e.response.data.message || e)
           this.$toast.error('担当者がいません')

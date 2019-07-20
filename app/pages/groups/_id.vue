@@ -4,23 +4,37 @@
       <v-flex xs12>
         <v-layout row justify-center>
           <h1 class="headline">
-            {{ group.name }} のページ
+            {{ group.name }} のグループページ
           </h1>
         </v-layout>
         <v-divider class="diveider_space" />
       </v-flex>
     </v-layout>
     <v-layout>
-      <v-flex xs8>
-        <h2 class="title">
-          参加中のメンバー
+      <v-flex xs9>
+        <h2 class="title group_page_title">
+          登録ジョブ
         </h2>
-        <v-card>
+        <v-layout row justify-start wrap>
+          <v-flex xs12>
+            <job-index :jobs="jobs" :tags="tags" :members="members" class="group_page_title"/>
+          </v-flex>
+        </v-layout>
+        <v-layout row justify-center>
+          <job-register />
+        </v-layout>
+      </v-flex>
+      <v-flex xs3>
+        <h2 class="title group_page_title">
+          参加メンバー
+        </h2>
+        <v-card flat class="group_page_space">
           <v-layout row justify-start wrap>
             <v-flex
               v-for="member in members"
               :key="member.id"
-              xs4
+              xs12
+              lg6
             >
               <member-card
                 :val="member"
@@ -32,28 +46,13 @@
           </v-layout>
           <member-register />
         </v-card>
-      </v-flex>
-      <v-flex xs4>
-        <h2 class="title">
-          登録されているタグ
+        <v-divider class="diveider_space"></v-divider>
+        <h2 class="title group_page_title">
+          登録タグ
         </h2>
-        <tag-card />
+        <tag-card class="group_page_space"/>
       </v-flex>
     </v-layout>
-    <v-flex xs12>
-      <v-divider darl class="diveider_space" />
-      <h2 class="title">
-        登録されているジョブ
-      </h2>
-      <v-layout row justify-center>
-        <job-register />
-      </v-layout>
-      <v-layout row justify-start wrap>
-        <v-flex xs12>
-          <job-index :jobs="jobs" :tags="tags" :members="members"/>
-        </v-flex>
-      </v-layout>
-    </v-flex>
     <v-divider class="diveider_space"></v-divider>
     <h2 class="title group_page_title">
       ジョブカレンダー
@@ -132,6 +131,10 @@ export default {
     margin: 5%;
   }
   .group_page_title {
-    margin-bottom: 2%;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+  .group_page_space {
+    margin: 5%;
   }
 </style>

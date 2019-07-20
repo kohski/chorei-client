@@ -1,7 +1,7 @@
 <template>
   <v-layout row justify-center align-space-around>
-    <v-flex xs10>
-      <v-card class="assign_selector_space">
+    <v-flex xs12>
+      <v-card class="assign_selector_space" flat>
         <v-select
           v-model="assignNames"
           :items="members.map(elm => elm.name)"
@@ -29,6 +29,10 @@ export default {
     }
   },
   mounted() {
+    this.memberNames = []
+    this.assignNames = []
+    this.assignIds = []
+
     this.members.forEach((elm) => {
       this.memberNames.push(elm.name)
     })

@@ -2,7 +2,7 @@
   <div>
     <v-layout row justify-center>
       <v-flex xs12>
-        <v-card class="tag_card_space">
+        <v-card class="tag_card_space" flat>
           <tag-index />
           <tag-register />
         </v-card>

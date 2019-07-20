@@ -31,8 +31,7 @@
     >
       <v-toolbar-side-icon @click="drawer = !drawer" />
       <v-img :src="logoImage" contain height="60%" position="left" />
-      <v-spacer />
-      <user-label :val="showInfo" @click="toProfile" />
+      <user-label :val="showInfo" />
     </v-toolbar>
     <v-content>
       <v-container>
@@ -42,6 +41,7 @@
     <v-footer
       :fixed="fixed"
       app
+      color="#b9e1dc"
     >
       <v-layout row justify-center>
         <span>&copy; 2019 chorei.site All Right Reserved</span>
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import UserLabel from '~/components/chips/UserLabel'
+import UserLabel from '~/components/chips/UserLabelForLayout'
 import logoImage from '~/assets/images/Logo2.png'
 import { mapGetters } from 'vuex'
 export default {

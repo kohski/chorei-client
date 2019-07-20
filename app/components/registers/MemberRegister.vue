@@ -3,7 +3,7 @@
     <v-layout row justify-center>
       <v-flex xs12>
         <v-layout row justify-center="">
-          <v-btn small dark round @click="toggleDialog">
+          <v-btn small dark round color="#756c83" @click="toggleDialog">
             メンバーを招待
           </v-btn>
         </v-layout>

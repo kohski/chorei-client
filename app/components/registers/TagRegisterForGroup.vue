@@ -8,7 +8,7 @@
       />
     </v-flex>
     <v-flex xs2>
-      <v-btn small fab dark @click="postTageWithParmas">
+      <v-btn small fab dark color="#756c83" @click="postTageWithParmas">
         <v-icon>add</v-icon>
       </v-btn>
     </v-flex>

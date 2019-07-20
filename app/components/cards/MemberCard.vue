@@ -4,7 +4,7 @@
       <v-flex xs12>
         <v-card @click="dialog = !dialog">
           <v-layout row justify-start class="member_spacer">
-            <v-badge overlap>
+            <v-badge overlap color="#f38181">
               <template v-if="val.member.is_owner" v-slot:badge>
                 <v-icon dark>
                   done
@@ -17,12 +17,12 @@
             <v-card-title>{{ val.name }}</v-card-title>
           </v-layout>
           <v-layout row justify-space-around>
-            <v-btn v-if="can_owner_change" flat fab color="primary" @click.stop="putMember(val)">
+            <v-btn v-if="can_owner_change" flat fab color="#51b4b8" @click.stop="putMember(val)">
               <v-icon dark right class="member_btn">
                 how_to_reg
               </v-icon>
             </v-btn>
-            <v-btn v-if="can_delete" flat fab color="error" @click.stop="destroyMember">
+            <v-btn v-if="can_delete" flat fab color="#f38181" @click.stop="destroyMember">
               <v-icon dark right class="member_btn">
                 delete
               </v-icon>
@@ -65,12 +65,18 @@ export default {
       return this.val.image ? this.val.image : dummyUserImage
     },
     can_delete() {
-      const isCurrentUserOwner = this.currentUser.id === this.owner.member.user_id
+      let isCurrentUserOwner = false
+      if (this.owner && this.currentUser.id === this.owner.member.user_id) {
+        isCurrentUserOwner = true
+      }
       const isSelf = this.val.member.user_id === this.currentUser.id
       return isCurrentUserOwner || isSelf
     },
     can_owner_change() {
-      const isCurrentUserOwner = this.currentUser.id === this.owner.member.user_id
+      let isCurrentUserOwner = false
+      if (this.owner && this.currentUser.id === this.owner.member.user_id) {
+        isCurrentUserOwner = true
+      }
       const notOwnerNow = !this.val.member.is_owner
       return isCurrentUserOwner && notOwnerNow
     },

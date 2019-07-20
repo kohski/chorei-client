@@ -6,8 +6,15 @@
       </v-layout>
       <br>
 
-      <v-btn small round dark prepend-icon="attach_file" @click="pickFile">
-        画像
+      <v-btn
+        small
+        round
+        dark
+        prepend-icon="attach_file"
+        color="#756c83"
+        icon
+        @click="pickFile" >
+        <v-icon>add_photo_alternate</v-icon>
       </v-btn>
       <input
         ref="image"

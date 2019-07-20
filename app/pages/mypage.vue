@@ -1,39 +1,40 @@
 <template>
   <v-container>
-    <v-layout row justify-center="">
-      <h1 class="title">
-        {{ showInfo.name }}
+    <v-layout row justify-center>
+      <h1 class="display-2 mypage_title">
+        マイページ
       </h1>
     </v-layout>
-    <v-divider class="divider_space" />
+    <v-divider class="mypage_divider_space" />
     <v-layout row justify-center wrap>
-      <p class="title">
-        参加中のグループ
-      </p>
-      <v-flex xs12>
+      <v-flex xs9>
+        <v-layout row justify-center>
+          <p class="title">
+            ジョブ スケジュール
+          </p>
+        </v-layout>
+        <schedule-selector :vals="assignedSchedules" :groups="groups" />
+      </v-flex>
+      <v-flex xs3>
+        <p class="title">
+          参加中グループ
+        </p>
         <group-register @updateGroupCards="updateGroupCards" />
+        <v-layout row justify-center wrap>
+          <v-flex
+            v-for="group in groups"
+            :key="group.id"
+            xs12
+          >
+            <group-card
+              :val="group"
+              :currentUser="showInfo"
+              @updateGroupCards="updateGroupCards"
+            />
+          </v-flex>
+        </v-layout>
       </v-flex>
     </v-layout>
-    <v-layout row justify-center wrap>
-      <v-flex
-        v-for="group in groups"
-        :key="group.id"
-        xs4
-      >
-        <group-card
-          :val="group"
-          :currentUser="showInfo"
-          @updateGroupCards="updateGroupCards"
-        />
-      </v-flex>
-    </v-layout>
-    <v-divider class="divider_space" />
-    <v-layout row justify-center>
-      <p class="title">
-        担当になっているジョブ
-      </p>
-    </v-layout>
-    <schedule-selector :vals="assignedSchedules" :groups="groups" />
   </v-container>
 </template>
 <script>
@@ -54,6 +55,7 @@ export default {
     ...mapGetters('groups/jobs/schedules', ['assignedSchedules'])
   },
   async asyncData({ store }) {
+    await store.dispatch('auth/getUser')
     await store.dispatch('groups/indexGroups')
     await store.dispatch('groups/jobs/schedules/indexAssignedSchedules')
   },
@@ -74,7 +76,7 @@ export default {
   .each_groups{
     margin-bottom: 10%;
   }
-  .divider_space{
-    margin: 5%;
+  .mypage_divider_space {
+    margin: 3%;
   }
 </style>

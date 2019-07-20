@@ -1,9 +1,9 @@
 <template>
   <v-layout row justify-center>
     <v-flex xs12>
-      <v-card>
+      <v-card flat>
         <v-card-title>
-          <v-layout row justify-end>
+          <v-layout row justify-end align-center>
             <v-flex xs4>
               <v-select
                 :items="members"
@@ -12,6 +12,7 @@
                 label="担当者で検索"
                 chips
                 multiple
+                color="#51b4b8"
                 @change="searchByMember"
               ></v-select>
             </v-flex>
@@ -23,9 +24,13 @@
                 label="タグで検索"
                 chips
                 multiple
+                color="#51b4b8"
                 @change="searchByTag"
               ></v-select>
             </v-flex>
+            <v-btn small fab flat @click="resetSort">
+              <v-icon>clear</v-icon>
+            </v-btn>
           </v-layout>
         </v-card-title>
         <v-data-table
@@ -43,9 +48,10 @@
               {{ props.item.description }}
             </td>
             <td @click="transferJob(props.item)">
-              <v-layout row justify-start wrap>
+              <!-- <v-layout row justify-start wrap>
                 <user-label v-for="user in props.item.assigns" :key="user.name" :val="user" />
-              </v-layout>
+              </v-layout> -->
+              <span v-for="user in props.item.assigns" :key="user.name">{{user.name}}</span>
             </td>
             <td @click="transferJob(props.item)">
               <v-chip v-for="tag in props.item.tags" :key="tag">
@@ -64,11 +70,11 @@
   </v-layout>
 </template>
 <script>
-import UserLabel from '~/components/chips/UserLabel'
+// import UserLabel from '~/components/chips/UserLabelForJobIndex'
 export default {
   name: 'JobIndexCard',
   components: {
-    UserLabel
+    // UserLabel
   },
   props: ['jobs', 'tags', 'members'],
   data() {
@@ -84,8 +90,6 @@ export default {
       jobItems: [],
       filter_assigns: [],
       filter_tags: []
-      // assign_sorted: false,
-      // tag_sorted: false
     }
   },
   created() {
@@ -105,21 +109,6 @@ export default {
         this.filter_assigns.push(elm)
       })
       this.filtering()
-      // if (e.length === 0 && !this.tag_sorted) {
-      //   this.jobItems = []
-      //   this.jobs.forEach((elm) => {
-      //     this.jobItems.push(elm)
-      //   })
-      //   this.assign_sorted = false
-      // } else {
-      //   const items = this.assign_sorted ? this.jobs : this.jobItems
-      //   const filteredItems = items.filter(item => item.assigns.some(assign => e.some(member => member === assign.name)))
-      //   this.jobItems = []
-      //   filteredItems.forEach((elm) => {
-      //     this.jobItems.push(elm)
-      //   })
-      //   this.assign_sorted = true
-      // }
     },
     searchByTag(e) {
       this.filter_tags = []
@@ -127,21 +116,11 @@ export default {
         this.filter_tags.push(elm)
       })
       this.filtering()
-      // if (e.length === 0 && !this.assign_sorted) {
-      //   this.jobItems = []
-      //   this.jobs.forEach((elm) => {
-      //     this.jobItems.push(elm)
-      //   })
-      //   this.tag_sorted = false
-      // } else {
-      //   const items = this.tag_sorted ? this.jobs : this.jobItems
-      //   const filteredItems = items.filter(item => item.tags.some(tag => e.some(t => t === tag)))
-      //   this.jobItems = []
-      //   filteredItems.forEach((elm) => {
-      //     this.jobItems.push(elm)
-      //   })
-      //   this.tag_sorted = true
-      // }
+    },
+    resetSort() {
+      this.filter_assigns = []
+      this.filter_tags = []
+      this.filtering()
     },
     filtering() {
       // set initial items

@@ -1,15 +1,14 @@
 <template>
   <v-layout row justify-center>
     <v-flex xs10>
-      <v-card class="spacer" @click.self="toDetailPage">
+      <v-card  @click.self="toDetailPage" class="group_card_space">
         <image-uploader
           v-if="!updatable"
           @imageRecieve="imageRecieve"
         />
-        <v-img v-if="updatable" :src="formData.image" height="180px" contain @click="toDetailPage" />
+        <v-img v-if="updatable" :src="formData.image" contain @click="toDetailPage" />
         <v-text-field
           v-model="formData.name"
-          label="グループ名"
           :disabled="updatable"
         />
         <v-layout row justify-start wrap>
@@ -21,45 +20,51 @@
           />
         </v-layout>
         <v-divider />
-        <v-layout v-if="is_owner" row justify-center>
+        <v-layout v-if="is_owner" row justify-space-around>
           <v-btn
             v-if="updatable"
-            round
+            fab
             flat
             small
-            color="info"
+            color="#756c83"
+            icon
             @click.stop="makeUpdatable"
           >
-            編集
+            <v-icon>edit</v-icon>
           </v-btn>
           <v-btn
             v-if="updatable"
-            round
+            fab
             small
             flat
-            color="error"
+            icon
+            color="#f38181"
             @click.stop="deleteGroupWithId"
           >
-            削除
+            <v-icon>delete</v-icon>
           </v-btn>
           <v-btn
             v-if="!updatable"
-            round
+            fab
+            flat
             small
-            color="warning"
+            color="#756c83"
+            icon
             @click.stop="putGroupWithParams"
           >
-            更新
+            <v-icon>update</v-icon>
           </v-btn>
           <v-btn
             v-if="!updatable"
+            fab
             flat
             round
             small
-            color="error"
+            color="#f38181"
+            icon
             @click.stop="makeUpdatable"
           >
-            キャンセル
+            <v-icon>clear</v-icon>
           </v-btn>
         </v-layout>
       </v-card>
@@ -94,6 +99,9 @@ export default {
   },
   computed: {
     is_owner() {
+      if (!this.val.owner) {
+        return
+      }
       return this.val.owner.uid === this.currentUser.email
     }
   },
@@ -128,5 +136,8 @@ export default {
 <style>
   .spacer {
     padding: 5%;
+  }
+  .group_card_space {
+    margin-top: 5%;
   }
 </style>

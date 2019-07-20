@@ -1,21 +1,22 @@
 <template>
   <div>
     <v-layout row justify-center align-space-between wrap>
-      <v-flex md6 lg3>
+      <v-flex xs12 sm4>
         <job-display :val="job" class="each_card_space" />
       </v-flex>
-      <v-flex md6 lg3>
+      <v-flex xs12 sm4>
         <datetime-selector :val="job" class="each_card_space" />
       </v-flex>
-      <v-flex md6 lg3>
+      <v-flex xs12 sm4>
         <assign-selector
           :members="members"
           :assigns="assigns"
           class="each_card_space"
         />
-      </v-flex>
-      <v-flex md6 lg3>
-        <tag-card />
+        <tag-card class="each_card_space" />
+        <v-btn icon large @click="returnPage">
+          <v-icon>reply</v-icon>
+        </v-btn>
       </v-flex>
     </v-layout>
 
@@ -82,6 +83,9 @@ export default {
   methods: {
     async updateStepCards({ jobId }) {
       await this.indexSteps({ jobId })
+    },
+    returnPage() {
+      this.$router.push(`/groups/${this.groupId}`)
     },
     ...mapActions('groups/jobs/steps', ['indexSteps'])
   },

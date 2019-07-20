@@ -37,7 +37,7 @@
                     dark
                   >
                     <v-btn icon :to="`/jobs/${event.jobId}`">
-                      <v-icon>edit</v-icon>
+                      <v-icon>add_to_queue</v-icon>
                     </v-btn>
                     <v-toolbar-title v-html="event.title" />
                     <v-spacer />
@@ -59,18 +59,16 @@
       </v-sheet>
       <v-layout row justify-space-between>
         <v-flex sm4 xs12 class="text-sm-left text-xs-center">
-          <v-btn @click="prevMonth">
-            <v-icon dark left>
-              keyboard_arrow_left
+          <v-btn fab small color="#756c83" @click="prevMonth">
+            <v-icon color="#fbfbfb">
+              chevron_left
             </v-icon>
-            Prev
           </v-btn>
         </v-flex>
         <v-flex sm4 xs12 class="text-sm-right text-xs-center">
-          <v-btn @click="nextMonth">
-            Next
-            <v-icon right dark>
-              keyboard_arrow_right
+          <v-btn fab small color="#756c83" @click="nextMonth">
+            <v-icon color="#fbfbfb">
+              chevron_right
             </v-icon>
           </v-btn>
         </v-flex>

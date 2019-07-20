@@ -2,10 +2,10 @@
   <div>
     <v-layout row justify-center>
       <v-flex xs12>
-        <v-card class="tag_card_space">
+        <v-card class="tag_card_space" flat>
           <tagging-selector />
-          <tag-register />
-          <tag-delete-selector />
+          <!-- <tag-register />
+          <tag-delete-selector /> -->
         </v-card>
       </v-flex>
     </v-layout>
@@ -13,14 +13,14 @@
 </template>
 <script>
 // import { mapActions, mapGetters } from 'vuex'
-import TagRegister from '~/components/registers/TagRegister'
+// import TagRegister from '~/components/registers/TagRegister'
 import TaggingSelector from '~/components/selector/TaggingSelector'
-import TagDeleteSelector from '~/components/selector/TagDeleteSelector'
+// import TagDeleteSelector from '~/components/selector/TagDeleteSelector'
 export default {
   components: {
-    TagRegister,
-    TaggingSelector,
-    TagDeleteSelector
+    // TagRegister,
+    TaggingSelector
+    // TagDeleteSelector
   }
 }
 </script>

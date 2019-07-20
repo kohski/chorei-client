@@ -12,8 +12,8 @@
         <v-btn icon flat @click="toLeft">
           <v-icon>chevron_left</v-icon>
         </v-btn>
-        <v-btn flat small color="error" @click.stop="deleteStepWithId">
-          削除
+        <v-btn flat small color="#f38181" @click.stop="deleteStepWithId" icon>
+          <v-icon>delete</v-icon>
         </v-btn>
         <v-btn icon flat @click="toRight">
           <v-icon>chevron_right</v-icon>

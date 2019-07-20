@@ -1,7 +1,7 @@
 <template>
   <v-layout row justify-center>
     <v-flex>
-      <v-card class="spacer">
+      <v-card class="spacer" flat>
         <image-uploader
           v-if="!updatable"
           @imageRecieve="imageRecieve"
@@ -27,34 +27,39 @@
           label="公開設定"
           :disabled="updatable"
         />
-        <v-btn
-          v-if="updatable"
-          round
-          small
-          color="info"
-          @click="makeUpdatable"
-        >
-          編集
-        </v-btn>
-        <v-btn
-          v-if="!updatable"
-          round
-          small
-          color="warning"
-          @click="putJobWithParams"
-        >
-          更新
-        </v-btn>
-        <v-btn
-          v-if="!updatable"
-          flat
-          round
-          small
-          color="error"
-          @click="makeUpdatable"
-        >
-          キャンセル
-        </v-btn>
+        <v-layout row justify-space-around>
+          <v-btn
+            v-if="updatable"
+            round
+            small
+            color="#756c83"
+            fab
+            icon
+            @click="makeUpdatable"
+          >
+            <v-icon color="#fbfbfb">edit</v-icon>
+          </v-btn>
+          <v-btn
+            v-if="!updatable"
+            round
+            small
+            color="#51b4b8"
+            icon
+            @click="putJobWithParams"
+          >
+            <v-icon color="#fbfbfb">update</v-icon>
+          </v-btn>
+          <v-btn
+            v-if="!updatable"
+            round
+            small
+            icon
+            color="#f38181"
+            @click="makeUpdatable"
+          >
+            <v-icon color="#fbfbfb">clear</v-icon>
+          </v-btn>
+        </v-layout>
       </v-card>
     </v-flex>
   </v-layout>

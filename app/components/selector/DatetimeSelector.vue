@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="date_time_selector_space">
+    <v-card class="date_time_selector_space" flat>
       <v-layout column align-center wrap>
         <v-flex xs10>
           <v-layout row justify-center>
@@ -9,23 +9,29 @@
             </p>
           </v-layout>
           <v-btn icon flat small @click="startDateToggle = !startDateToggle">
-            <v-icon>date_range</v-icon>
+            <v-icon color="#756c83">date_range</v-icon>
           </v-btn>
           <v-btn icon flat small @click="startTimeToggle = !startTimeToggle">
-            <v-icon>access_time</v-icon>
+            <v-icon color="#756c83">access_time</v-icon>
           </v-btn>
-          <v-text-field readonly :value="startDateTime" outline label="開始" />
+          <v-text-field readonly :value="startDateTime" outline label="開始" color="#756c83" />
         </v-flex>
       </v-layout>
       <v-layout column align-center wrap>
         <v-flex xs10>
-          <v-btn icon flat small @click="endDateToggle = !endDateToggle">
+          <v-btn icon flat small @click="endDateToggle = !endDateToggle" color="#756c83" >
             <v-icon>date_range</v-icon>
           </v-btn>
-          <v-btn icon flat small @click="endTimeToggle = !endTimeToggle">
+          <v-btn icon flat small @click="endTimeToggle = !endTimeToggle" color="#756c83" >
             <v-icon>access_time</v-icon>
           </v-btn>
-          <v-text-field readonly :value="endDateTime" outline label="終了" :error-messages="errorMessage" />
+          <v-text-field
+            readonly
+            :value="endDateTime"
+            outline
+            label="終了"
+            :error-messages="errorMessage"
+            color="#756c83" />
         </v-flex>
       </v-layout>
       <v-layout column align-center wrap>
@@ -48,8 +54,15 @@
         </v-flex>
       </v-layout>
       <v-layout row justify-center>
-        <v-btn small dark round :disabled="dateChecker" @click="putJobWithParams">
-          登録・更新
+        <v-btn
+          small
+          dark
+          round
+          :disabled="dateChecker"
+          @click="putJobWithParams"
+          color="#756c83"
+          icon>
+          <v-icon>update</v-icon>
         </v-btn>
       </v-layout>
     </v-card>

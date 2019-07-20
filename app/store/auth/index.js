@@ -49,6 +49,15 @@ export const mutations = {
     state.uid = uid
     state.image = image
     state.description = description
+  },
+  clearInfo(state) {
+    state.id = ''
+    state.uid = ''
+    state.accessToken = ''
+    state.client = ''
+    state.name = ''
+    state.image = ''
+    state.description = ''
   }
 }
 
@@ -167,8 +176,9 @@ export const actions = {
         if (process.client) {
           this.$toast.success('Signed Out!')
           const cookies = new Cookies()
-          cookies.remove('chorei-server')
+          cookies.remove('chorei-server', { maxAge: 0 })
         }
+        this.commit('clearInfo')
         this.$router.push('/')
       })
       .catch((e) => {

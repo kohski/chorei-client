@@ -29,13 +29,14 @@
           :disabled="toggleDisabled"
         />
         <v-layout row justify-center>
-          <v-btn round dark to="/auth/edit">
+          <v-btn round dark to="/auth/edit" color="#756c83">
             編集
           </v-btn>
           <v-btn
             round
-            color="error"
+            color="#f38181"
             @click="logoutInShowPage"
+            dark
           >
             ログアウト
           </v-btn>

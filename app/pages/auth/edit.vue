@@ -28,7 +28,7 @@
           label="自己紹介"
         />
         <v-layout row justify-center>
-          <v-btn round dark @click="updateUserWithParams">
+          <v-btn round dark color="#756c83" @click="updateUserWithParams">
             更新
           </v-btn>
         </v-layout>

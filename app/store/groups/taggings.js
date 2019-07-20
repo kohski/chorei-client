@@ -27,6 +27,7 @@ export const actions = {
         commit('setTaggings', res.data.data)
       })
       .catch((e) => {
+        commit('setTaggings', [])
         if (process.client) {
           // this.$toast.error(e.response.data.message || e)
           this.$toast.error('タグづけがありません')

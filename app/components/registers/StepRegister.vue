@@ -2,8 +2,8 @@
   <v-layout row justify-center>
     <v-flex xs12>
       <v-layout row justify-center>
-        <v-btn round small dark @click="toggleModal">
-          ステップ登録
+        <v-btn round color="#756c83" @click="toggleModal" icon>
+          <v-icon color="#fbfbfb">add</v-icon>
         </v-btn>
       </v-layout>
       <v-dialog v-model="dialog" width="30%">
@@ -16,8 +16,14 @@
             maxlength="400"
           />
           <v-layout row justify-center>
-            <v-btn round dark small @click="postStepWithParams">
-              登録
+            <v-btn
+              round
+              dark
+              small
+              color="#756c83"
+              @click="postStepWithParams"
+              icon>
+              <v-icon>update</v-icon>
             </v-btn>
           </v-layout>
         </v-card>

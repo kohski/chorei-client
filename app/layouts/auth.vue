@@ -9,6 +9,7 @@
       :fixed="fixed"
       app
       class="footer"
+      color="#b9e1dc"
     >
       <v-layout row justify-center>
         <span>&copy; 2019 chorei.site All Right Reserved</span>

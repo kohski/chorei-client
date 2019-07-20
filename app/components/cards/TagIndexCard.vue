@@ -23,8 +23,10 @@ export default {
       const groupId = this.$route.params.id
       await this.deleteTag({ tagId: tag.id })
       await this.indexTagsByGroup({ groupId: groupId })
+      await this.indexJobs({ groupId: groupId })
     },
-    ...mapActions('groups/tags', ['deleteTag', 'indexTagsByGroup'])
+    ...mapActions('groups/tags', ['deleteTag', 'indexTagsByGroup']),
+    ...mapActions('groups/jobs', ['indexJobs'])
   }
 }
 </script>

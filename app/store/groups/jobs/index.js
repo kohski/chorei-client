@@ -75,6 +75,7 @@ export const actions = {
         // const jobId = res.data.data.id
         commit('setJob', res.data.data)
         this.$toast.success('ジョブが作成されました')
+        this.$router.push(`/jobs/${res.data.data.id}`)
       })
       .catch((e) => {
         if (process.client) {
@@ -137,6 +138,7 @@ export const actions = {
         commit('setJob', res.data.data)
       })
       .catch((e) => {
+        commit('setJob', {})
         if (process.client) {
           this.$toast.error(e.response.data.message || e)
         }
@@ -175,6 +177,7 @@ export const actions = {
         commit('setPublicJobs', res.data.data)
       })
       .catch((e) => {
+        commit('setPublicJobs', [])
         if (process.client) {
           this.$toast.error(e.response.data.message || e)
         }
