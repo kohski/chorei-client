@@ -120,7 +120,7 @@ export default {
         }
         await this.postStep({ jobId: jobId, formData: stepFormData })
       }
-      this.$router.push(`/jobs/${jobId}`)
+      await this.$router.push(`/jobs/${jobId}`)
     },
     ...mapActions('groups/jobs', ['showJob', 'postJob']),
     ...mapActions('groups', ['indexGroups']),
