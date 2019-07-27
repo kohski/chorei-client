@@ -13,7 +13,7 @@
             ジョブ スケジュール
           </p>
         </v-layout>
-        <schedule-selector :vals="assignedSchedules" :groups="groups" />
+        <schedule-selector :vals="assignedSchedules" :groups="groups" :jobs="assignedJobs" />
       </v-flex>
       <v-flex xs3>
         <p class="title">
@@ -28,7 +28,7 @@
           >
             <group-card
               :val="group"
-              :currentUser="showInfo"
+              :current-user="showInfo"
               @updateGroupCards="updateGroupCards"
             />
           </v-flex>
@@ -52,12 +52,14 @@ export default {
   computed: {
     ...mapGetters('groups', ['groups']),
     ...mapGetters('auth', ['showInfo']),
+    ...mapGetters('groups/jobs', ['assignedJobs']),
     ...mapGetters('groups/jobs/schedules', ['assignedSchedules'])
   },
   async asyncData({ store }) {
     await store.dispatch('auth/getUser')
     await store.dispatch('groups/indexGroups')
     await store.dispatch('groups/jobs/schedules/indexAssignedSchedules')
+    await store.dispatch('groups/jobs/assignedJobs')
   },
   methods: {
     async deleteGroupWithId(id) {

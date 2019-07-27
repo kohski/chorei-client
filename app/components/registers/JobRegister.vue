@@ -73,7 +73,6 @@ export default {
     async postJobWithParams() {
       const groupId = this.$route.params.id
       const formData = this.formData
-      debugger
       if (this.validator()) {
         await this.postJob({ groupId: groupId, formData: formData })
         // const jobId = this.job.id

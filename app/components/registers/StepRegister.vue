@@ -2,8 +2,10 @@
   <v-layout row justify-center>
     <v-flex xs12>
       <v-layout row justify-center>
-        <v-btn round color="#756c83" @click="toggleModal" icon>
-          <v-icon color="#fbfbfb">add</v-icon>
+        <v-btn round color="#756c83" icon @click="toggleModal">
+          <v-icon color="#fbfbfb">
+            add
+          </v-icon>
         </v-btn>
       </v-layout>
       <v-dialog v-model="dialog" width="30%">
@@ -21,8 +23,9 @@
               dark
               small
               color="#756c83"
+              icon
               @click="postStepWithParams"
-              icon>
+            >
               <v-icon>update</v-icon>
             </v-btn>
           </v-layout>

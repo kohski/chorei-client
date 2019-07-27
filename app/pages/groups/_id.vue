@@ -17,7 +17,7 @@
         </h2>
         <v-layout row justify-start wrap>
           <v-flex xs12>
-            <job-index :jobs="jobs" :tags="tags" :members="members" class="group_page_title"/>
+            <job-index :jobs="jobs" :tags="tags" :members="members" class="group_page_title" />
           </v-flex>
         </v-layout>
         <v-layout row justify-center>
@@ -38,7 +38,7 @@
             >
               <member-card
                 :val="member"
-                :currentUser="showInfo"
+                :current-user="showInfo"
                 :owner="owner"
                 class="member_card"
               />
@@ -46,19 +46,19 @@
           </v-layout>
           <member-register />
         </v-card>
-        <v-divider class="diveider_space"></v-divider>
+        <v-divider class="diveider_space" />
         <h2 class="title group_page_title">
           登録タグ
         </h2>
-        <tag-card class="group_page_space"/>
+        <tag-card class="group_page_space" />
       </v-flex>
     </v-layout>
-    <v-divider class="diveider_space"></v-divider>
+    <v-divider class="diveider_space" />
     <h2 class="title group_page_title">
       ジョブカレンダー
     </h2>
     <v-flex xs12>
-      <schedule-selector :vals="groupSchedules" />
+      <schedule-selector :vals="groupSchedules" :jobs="jobs" />
     </v-flex>
   </v-container>
 </template>

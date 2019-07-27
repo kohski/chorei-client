@@ -13,7 +13,8 @@
         prepend-icon="attach_file"
         color="#756c83"
         icon
-        @click="pickFile" >
+        @click="pickFile"
+      >
         <v-icon>add_photo_alternate</v-icon>
       </v-btn>
       <input

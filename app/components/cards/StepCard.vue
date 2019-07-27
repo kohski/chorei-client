@@ -2,7 +2,7 @@
   <v-layout row justify-center class="step_card_wrapper">
     <v-flex xs10>
       <p>{{ index + 1 }}</p>
-      <v-img :src="val.image" height="120" contain />
+      <v-img v-if="val.image" :src="val.image" height="120" contain />
       <v-textarea
         v-model="val.memo"
         label="メモ"
@@ -12,7 +12,7 @@
         <v-btn icon flat @click="toLeft">
           <v-icon>chevron_left</v-icon>
         </v-btn>
-        <v-btn flat small color="#f38181" @click.stop="deleteStepWithId" icon>
+        <v-btn flat small color="#f38181" icon @click.stop="deleteStepWithId">
           <v-icon>delete</v-icon>
         </v-btn>
         <v-btn icon flat @click="toRight">

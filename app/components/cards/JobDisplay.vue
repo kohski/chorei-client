@@ -6,7 +6,7 @@
           v-if="!updatable"
           @imageRecieve="imageRecieve"
         />
-        <v-img v-if="updatable" :src="formData.image" />
+        <v-img v-if="updatable && formData.image" :src="formData.image" />
         <v-text-field
           v-model="formData.title"
           label="名称"
@@ -37,7 +37,9 @@
             icon
             @click="makeUpdatable"
           >
-            <v-icon color="#fbfbfb">edit</v-icon>
+            <v-icon color="#fbfbfb">
+              edit
+            </v-icon>
           </v-btn>
           <v-btn
             v-if="!updatable"
@@ -47,7 +49,9 @@
             icon
             @click="putJobWithParams"
           >
-            <v-icon color="#fbfbfb">update</v-icon>
+            <v-icon color="#fbfbfb">
+              update
+            </v-icon>
           </v-btn>
           <v-btn
             v-if="!updatable"
@@ -57,7 +61,9 @@
             color="#f38181"
             @click="makeUpdatable"
           >
-            <v-icon color="#fbfbfb">clear</v-icon>
+            <v-icon color="#fbfbfb">
+              clear
+            </v-icon>
           </v-btn>
         </v-layout>
       </v-card>

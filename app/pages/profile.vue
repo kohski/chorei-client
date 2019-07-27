@@ -35,8 +35,8 @@
           <v-btn
             round
             color="#f38181"
-            @click="logoutInShowPage"
             dark
+            @click="logoutInShowPage"
           >
             ログアウト
           </v-btn>

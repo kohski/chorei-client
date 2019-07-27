@@ -79,7 +79,7 @@
 <script>
 // import { mapActions, mapGetters } from 'vuex'
 export default {
-  props: ['vals', 'groups'],
+  props: ['vals', 'groups', 'jobs'],
   data: () => ({
     today: '2019-06-01',
     target: '2019-06-01',
@@ -104,14 +104,15 @@ export default {
     })
     this.events = this.vals.map((elm) => {
       const date = this.$moment(new Date(elm.start_at)).format('L').split('/').join('-')
+      const targetJob = this.jobs.find((job) => { return job.id === elm.job_id })
       const groupImage = this.groups.find((group) => {
-        return group.id === elm.job_entity.group_id
-      }).image
+        return group.id === targetJob.group_id
+      }).image || ''
       const eachSchedule = {
         id: elm.id,
         jobId: elm.job_id,
-        title: elm.job_entity.title,
-        details: elm.job_entity.description,
+        title: targetJob.title,
+        details: targetJob.description,
         date: date,
         groupImage: groupImage,
         isDone: elm.is_done,

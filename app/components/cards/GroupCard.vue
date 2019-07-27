@@ -1,12 +1,12 @@
 <template>
   <v-layout row justify-center>
     <v-flex xs10>
-      <v-card  @click.self="toDetailPage" class="group_card_space">
+      <v-card class="group_card_space" @click.self="toDetailPage">
         <image-uploader
           v-if="!updatable"
           @imageRecieve="imageRecieve"
         />
-        <v-img v-if="updatable" :src="formData.image" contain @click="toDetailPage" />
+        <v-img v-if="updatable && formData.image" :src="formData.image" contain @click="toDetailPage" />
         <v-text-field
           v-model="formData.name"
           :disabled="updatable"

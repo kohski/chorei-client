@@ -9,20 +9,24 @@
             </p>
           </v-layout>
           <v-btn icon flat small @click="startDateToggle = !startDateToggle">
-            <v-icon color="#756c83">date_range</v-icon>
+            <v-icon color="#756c83">
+              date_range
+            </v-icon>
           </v-btn>
           <v-btn icon flat small @click="startTimeToggle = !startTimeToggle">
-            <v-icon color="#756c83">access_time</v-icon>
+            <v-icon color="#756c83">
+              access_time
+            </v-icon>
           </v-btn>
           <v-text-field readonly :value="startDateTime" outline label="開始" color="#756c83" />
         </v-flex>
       </v-layout>
       <v-layout column align-center wrap>
         <v-flex xs10>
-          <v-btn icon flat small @click="endDateToggle = !endDateToggle" color="#756c83" >
+          <v-btn icon flat small color="#756c83" @click="endDateToggle = !endDateToggle">
             <v-icon>date_range</v-icon>
           </v-btn>
-          <v-btn icon flat small @click="endTimeToggle = !endTimeToggle" color="#756c83" >
+          <v-btn icon flat small color="#756c83" @click="endTimeToggle = !endTimeToggle">
             <v-icon>access_time</v-icon>
           </v-btn>
           <v-text-field
@@ -31,7 +35,8 @@
             outline
             label="終了"
             :error-messages="errorMessage"
-            color="#756c83" />
+            color="#756c83"
+          />
         </v-flex>
       </v-layout>
       <v-layout column align-center wrap>
@@ -59,9 +64,10 @@
           dark
           round
           :disabled="dateChecker"
-          @click="putJobWithParams"
           color="#756c83"
-          icon>
+          icon
+          @click="putJobWithParams"
+        >
           <v-icon>update</v-icon>
         </v-btn>
       </v-layout>

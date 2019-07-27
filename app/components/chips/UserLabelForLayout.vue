@@ -1,6 +1,6 @@
 <template>
   <v-chip color="transparent" @click="transferProfile">
-    <v-avatar size="40px" v-if="val.image" >
+    <v-avatar v-if="val.image" size="40px">
       <img :src="val.image">
     </v-avatar>
     {{ val.name }}

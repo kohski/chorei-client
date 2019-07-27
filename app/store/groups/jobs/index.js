@@ -183,7 +183,7 @@ export const actions = {
         }
       })
   },
-  async assignedJobs({ commit, state }, { groupId }) {
+  async assignedJobs({ commit, state }) {
     await this.$axios.get(
       `/assigned_jobs`,
       {

@@ -14,7 +14,7 @@
                 multiple
                 color="#51b4b8"
                 @change="searchByMember"
-              ></v-select>
+              />
             </v-flex>
             <v-flex xs4 offset-xs1>
               <v-select
@@ -26,7 +26,7 @@
                 multiple
                 color="#51b4b8"
                 @change="searchByTag"
-              ></v-select>
+              />
             </v-flex>
             <v-btn small fab flat @click="resetSort">
               <v-icon>clear</v-icon>
@@ -39,7 +39,7 @@
         >
           <template v-slot:items="props">
             <td @click="transferJob(props.item)">
-              <v-img :src="props.item.image" />
+              <v-img v-if="props.item.image" :src="props.item.image" />
             </td>
             <td @click="transferJob(props.item)">
               {{ props.item.title }}
@@ -51,7 +51,7 @@
               <!-- <v-layout row justify-start wrap>
                 <user-label v-for="user in props.item.assigns" :key="user.name" :val="user" />
               </v-layout> -->
-              <span v-for="user in props.item.assigns" :key="user.name">{{user.name}}</span>
+              <span v-for="user in props.item.assigns" :key="user.name">{{ user.name }}</span>
             </td>
             <td @click="transferJob(props.item)">
               <v-chip v-for="tag in props.item.tags" :key="tag">
