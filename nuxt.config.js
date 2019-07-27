@@ -67,7 +67,7 @@ export default {
     // See https://github.com/nuxt-community/axios-module#options
     // baseURL: 'http://3.113.114.91/api/v1'
     // eslint-disable-next-line no-undef
-    baseURL: 'http://localhost:3001/api/v1'
+    baseURL: 'https://api.chorei.site/api/v1'
   },
 
   /*
