@@ -36,6 +36,7 @@
         <v-data-table
           :headers="headers"
           :items="jobItems"
+          :items-per-page="5"
         >
           <template v-slot:items="props">
             <td @click="transferJob(props.item)">
@@ -48,15 +49,17 @@
               {{ props.item.description }}
             </td>
             <td @click="transferJob(props.item)">
-              <!-- <v-layout row justify-start wrap>
-                <user-label v-for="user in props.item.assigns" :key="user.name" :val="user" />
-              </v-layout> -->
               <span v-for="user in props.item.assigns" :key="user.name">{{ user.name }}</span>
             </td>
             <td @click="transferJob(props.item)">
               <v-chip v-for="tag in props.item.tags" :key="tag">
                 {{ tag }}
               </v-chip>
+            </td>
+            <td>
+              <v-btn icon @click="destroyJob(props.item)">
+                <v-icon color="#f38181" >delete</v-icon>
+              </v-btn>
             </td>
           </template>
           <template v-slot:no-results>
@@ -71,6 +74,7 @@
 </template>
 <script>
 // import UserLabel from '~/components/chips/UserLabelForJobIndex'
+import { mapActions } from 'vuex'
 export default {
   name: 'JobIndexCard',
   components: {
@@ -85,7 +89,8 @@ export default {
         { text: '名称', value: '名称' },
         { text: '詳細', value: '詳細' },
         { text: '担当者', value: '担当者' },
-        { text: 'タグ', value: 'タグ' }
+        { text: 'タグ', value: 'タグ' },
+        { text: '削除', value: '削除' }
       ],
       jobItems: [],
       filter_assigns: [],
@@ -141,7 +146,13 @@ export default {
       filteredItems.forEach((elm) => {
         this.jobItems.push(elm)
       })
-    }
+    },
+    async destroyJob(job) {
+      const groupId = this.$route.params.id
+      await this.deleteJob(job.id)
+      await this.indexJobs({ groupId: groupId })
+    },
+    ...mapActions('groups/jobs', ['deleteJob', 'indexJobs'])
   }
 }
 </script>
