@@ -22,6 +22,7 @@
               :tags="tags"
               :members="members"
               :taggings="taggingsByGroup"
+              :assigns="assignsByGroup"
               :key="jobs.length"
               class="group_page_title"
             />
@@ -97,7 +98,8 @@ export default {
     ...mapGetters('auth', ['showInfo']),
     ...mapGetters('groups/tags', ['tags']),
     ...mapGetters('groups/taggings', ['taggingsByGroup']),
-    ...mapGetters('groups/jobs/schedules', ['groupSchedules'])
+    ...mapGetters('groups/jobs/schedules', ['groupSchedules']),
+    ...mapGetters('groups/jobs/assigns', ['assignsByGroup'])
   },
   async asyncData({ store }) {
     const idCategory = 'group'
@@ -116,6 +118,7 @@ export default {
     await store.dispatch('groups/taggings/indexTaggingsByGroup', { groupId: groupId })
     await store.dispatch('groups/members/indexMembers', { groupId: groupId })
     await store.dispatch('groups/jobs/schedules/indexGroupSchedules', { groupId: groupId })
+    await store.dispatch('groups/jobs/assigns/indexAssignsByGroup', { groupId: groupId })
   },
   methods: {
     async updateIndexPage() {

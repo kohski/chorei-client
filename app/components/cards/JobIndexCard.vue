@@ -49,7 +49,7 @@
               {{ props.item.description }}
             </td>
             <td @click="transferJob(props.item)">
-              <span v-for="(user, index) in props.item.assigns" :key="user.name">{{ user.name }}<span v-if="(index + 1) !== props.item.assigns.length">, </span></span>
+              <span v-for="user in attachAssign(props.item)" :key="user.name">{{ user.name }}, </span>
             </td>
             <td @click="transferJob(props.item)">
               <v-chip v-for="tag in attachTags(props.item)" :key="tag">
@@ -80,7 +80,7 @@ export default {
   components: {
     // UserLabel
   },
-  props: ['jobs', 'tags', 'members', 'taggings'],
+  props: ['jobs', 'tags', 'members', 'taggings', 'assigns'],
   data() {
     return {
       search: '',
@@ -153,6 +153,14 @@ export default {
       const tagIds = attachTaggings.map((elm) => { return elm.tag_id })
       const tags = this.tags.filter((tag) => { return tagIds.indexOf(tag.id) > -1 })
       return tags.map((tag) => { return tag.name })
+    },
+    attachAssign(job) {
+      const assigns = this.assigns.filter(elm => elm.job_id === job.id)
+      let memberIds = ''
+      if (assigns.length > 0) {
+        memberIds = assigns.map(elm => elm.member_id)
+      }
+      return this.members.filter((member) => { return memberIds.indexOf(member.member.id) > -1 })
     },
     async destroyJob(job) {
       const groupId = this.$route.params.id

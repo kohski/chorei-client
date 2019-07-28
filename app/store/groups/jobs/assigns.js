@@ -1,9 +1,11 @@
 export const state = () => ({
-  assigns: []
+  assigns: [],
+  assignsByGroup: []
 })
 
 export const getters = {
-  assigns(state) { return state.assigns }
+  assigns(state) { return state.assigns },
+  assignsByGroup(state) { return state.assignsByGroup }
 }
 
 export const mutations = {
@@ -15,6 +17,9 @@ export const mutations = {
   },
   setAssign(state, assign) {
     state.assign = assign
+  },
+  setAssignsByGroup(state, assigns) {
+    state.assignsByGroup = assigns
   }
 }
 export const actions = {
@@ -39,6 +44,28 @@ export const actions = {
         }
       })
   },
+  async indexAssignsByGroup({ commit, state }, { groupId }) {
+    await this.$axios.get(
+      `/assigns/assign_member_by_group?group_id=${groupId}`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+      .then((res) => {
+        commit('setAssignsByGroup', res.data.data)
+      })
+      .catch((e) => {
+        commit('setAssignsByGroup', [])
+        if (process.client) {
+          // this.$toast.info(e.response.data.message || e)
+          this.$toast.error('担当者がいません')
+        }
+      })
+  },
+
   async postAssign({ commit, store }, { userId, jobId }) {
     await this.$axios.post(
       `/assigns/assign_with_user_id`,
