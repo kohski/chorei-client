@@ -36,7 +36,7 @@
         <v-data-table
           :headers="headers"
           :items="jobItems"
-          :items-per-page="5"
+          :pagination.sync="pagination"
         >
           <template v-slot:items="props">
             <td @click="transferJob(props.item)">
@@ -49,10 +49,10 @@
               {{ props.item.description }}
             </td>
             <td @click="transferJob(props.item)">
-              <span v-for="user in props.item.assigns" :key="user.name">{{ user.name }}</span>
+              <span v-for="(user, index) in props.item.assigns" :key="user.name">{{ user.name }}<span v-if="(index + 1) !== props.item.assigns.length">, </span></span>
             </td>
             <td @click="transferJob(props.item)">
-              <v-chip v-for="tag in props.item.tags" :key="tag">
+              <v-chip v-for="tag in attachTags(props.item)" :key="tag">
                 {{ tag }}
               </v-chip>
             </td>
@@ -80,7 +80,7 @@ export default {
   components: {
     // UserLabel
   },
-  props: ['jobs', 'tags', 'members'],
+  props: ['jobs', 'tags', 'members', 'taggings'],
   data() {
     return {
       search: '',
@@ -92,6 +92,9 @@ export default {
         { text: 'タグ', value: 'タグ' },
         { text: '削除', value: '削除' }
       ],
+      pagination: {
+        rowsPerPage: 10
+      },
       jobItems: [],
       filter_assigns: [],
       filter_tags: []
@@ -99,9 +102,7 @@ export default {
   },
   created() {
     if (this.jobs.length > 0) {
-      this.jobs.forEach((elm) => {
-        this.jobItems.push(elm)
-      })
+      this.jobItems = this.jobs
     }
   },
   methods: {
@@ -147,10 +148,17 @@ export default {
         this.jobItems.push(elm)
       })
     },
+    attachTags(job) {
+      const attachTaggings = this.taggings.filter((tagging) => { return tagging.job_id === job.id })
+      const tagIds = attachTaggings.map((elm) => { return elm.tag_id })
+      const tags = this.tags.filter((tag) => { return tagIds.indexOf(tag.id) > -1 })
+      return tags.map((tag) => { return tag.name })
+    },
     async destroyJob(job) {
       const groupId = this.$route.params.id
       await this.deleteJob(job.id)
       await this.indexJobs({ groupId: groupId })
+      this.$forceUpdate()
     },
     ...mapActions('groups/jobs', ['deleteJob', 'indexJobs'])
   }

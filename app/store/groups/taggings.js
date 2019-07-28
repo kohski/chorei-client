@@ -1,14 +1,19 @@
 export const state = () => ({
-  taggings: []
+  taggings: [],
+  taggingsByGroup: []
 })
 
 export const getters = {
-  taggings(state) { return state.taggings }
+  taggings(state) { return state.taggings },
+  taggingsByGroup(state) { return state.taggingsByGroup }
 }
 
 export const mutations = {
   setTaggings(state, taggings) {
     state.taggings = taggings
+  },
+  setTaggingsByGroup(state, taggings) {
+    state.taggingsByGroup = taggings
   }
 }
 
@@ -24,7 +29,7 @@ export const actions = {
       }
     )
       .then((res) => {
-        commit('setTaggings', res.data.data)
+        commit('setTaggingsWithGroup', res.data.data)
       })
       .catch((e) => {
         commit('setTaggings', [])
@@ -34,6 +39,28 @@ export const actions = {
         }
       })
   },
+  async indexTaggingsByGroup({ commit }, { groupId }) {
+    await this.$axios.get(
+      `/taggings/taggings_with_group_id?group_id=${groupId}`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+      .then((res) => {
+        commit('setTaggingsByGroup', res.data.data)
+      })
+      .catch((e) => {
+        commit('setTaggingsByGroup', [])
+        if (process.client) {
+          // this.$toast.error(e.response.data.message || e)
+          this.$toast.error('タグづけがありません')
+        }
+      })
+  },
+
   async postTagging({ commit }, { jobId, tagId }) {
     await this.$axios.post(
       `/taggings`,

@@ -17,7 +17,14 @@
         </h2>
         <v-layout row justify-start wrap>
           <v-flex xs12>
-            <job-index :jobs="jobs" :tags="tags" :members="members" class="group_page_title" />
+            <job-index
+              :jobs="jobs"
+              :tags="tags"
+              :members="members"
+              :taggings="taggingsByGroup"
+              :key="jobs.length"
+              class="group_page_title"
+            />
           </v-flex>
         </v-layout>
         <v-layout row justify-center>
@@ -89,6 +96,7 @@ export default {
     ...mapGetters('groups/members', ['members']),
     ...mapGetters('auth', ['showInfo']),
     ...mapGetters('groups/tags', ['tags']),
+    ...mapGetters('groups/taggings', ['taggingsByGroup']),
     ...mapGetters('groups/jobs/schedules', ['groupSchedules'])
   },
   async asyncData({ store }) {
@@ -105,6 +113,7 @@ export default {
     await store.dispatch('groups/jobs/indexJobs', { groupId: groupId })
     await store.dispatch('auth/getUser')
     await store.dispatch('groups/tags/indexTagsByGroup', { groupId: groupId })
+    await store.dispatch('groups/taggings/indexTaggingsByGroup', { groupId: groupId })
     await store.dispatch('groups/members/indexMembers', { groupId: groupId })
     await store.dispatch('groups/jobs/schedules/indexGroupSchedules', { groupId: groupId })
   },
