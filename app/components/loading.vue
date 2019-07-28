@@ -32,10 +32,11 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.5);
   text-align: center;
   padding-top: 200px;
   font-size: 30px;
   font-family: sans-serif;
+  z-index: 8;
 }
 </style>

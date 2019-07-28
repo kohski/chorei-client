@@ -10,7 +10,7 @@ export default ({ req, route, redirect, store }) => {
   }
   const cookies = req ? new Cookies(req.headers.cookie) : new Cookies()
   const credential = cookies.get('chorei-server') ? cookies.get('chorei-server') : ''
-  if (!credential || credential.uid === '') {
+  if (!credential && credential.uid === '') {
     return redirect('/auth/login')
   }
   store.dispatch('auth/getUser')
