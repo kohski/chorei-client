@@ -48,7 +48,7 @@ export const actions = {
       }
     )
       .then((res) => {
-        commit('setJobs', res.data.data)
+        commit('setJobs', res.data.data.data)
       })
       .catch((e) => {
         commit('setJobs', [])

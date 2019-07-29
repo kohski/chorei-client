@@ -40,13 +40,13 @@
         >
           <template v-slot:items="props">
             <td @click="transferJob(props.item)">
-              <v-img v-if="props.item.image" :src="props.item.image" />
+              <v-img v-if="props.item.attributes.image" :src="props.item.image" />
             </td>
             <td @click="transferJob(props.item)">
-              {{ props.item.title }}
+              {{ props.item.attributes.title }}
             </td>
             <td class="text-xs-left" @click="transferJob(props.item)">
-              {{ props.item.description }}
+              {{ props.item.attributes.description }}
             </td>
             <td @click="transferJob(props.item)">
               <span v-for="user in attachAssign(props.item)" :key="user.name">{{ user.name }}, </span>
@@ -149,13 +149,13 @@ export default {
       })
     },
     attachTags(job) {
-      const attachTaggings = this.taggings.filter((tagging) => { return tagging.job_id === job.id })
+      const attachTaggings = this.taggings.filter((tagging) => { return tagging.job_id === parseInt(job.id) })
       const tagIds = attachTaggings.map((elm) => { return elm.tag_id })
       const tags = this.tags.filter((tag) => { return tagIds.indexOf(tag.id) > -1 })
       return tags.map((tag) => { return tag.name })
     },
     attachAssign(job) {
-      const assigns = this.assigns.filter(elm => elm.job_id === job.id)
+      const assigns = this.assigns.filter(elm => elm.job_id === parseInt(job.id))
       let memberIds = ''
       if (assigns.length > 0) {
         memberIds = assigns.map(elm => elm.member_id)
