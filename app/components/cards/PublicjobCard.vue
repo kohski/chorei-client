@@ -3,7 +3,7 @@
     <v-layout row justify-center>
       <v-flex xs10>
         <v-card @click="dialog = !dialog">
-          <v-img :src="val.image" height="120px" />
+          <v-img v-if="val.image" :src="val.image" height="120px" />
           <div class="spacer">
             <v-text-field
               v-model="val.title"
@@ -24,7 +24,7 @@
     <v-layout row justify-center>
       <v-dialog v-model="dialog" width="60%">
         <v-card class="modal_wrapper">
-          <v-img :src="val.image" />
+          <v-img v-if="val.image" :src="val.image" />
           <v-text-field
             v-model="val.title"
             label="名称"
