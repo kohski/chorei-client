@@ -102,19 +102,15 @@ export default {
     //   return eachGroup
     // })
     this.events = this.vals.map((elm) => {
-      const date = this.$moment(new Date(elm.start_at)).format('L').split('/').join('-')
-      const targetJob = this.jobs.find((job) => { return parseInt(job.id) === elm.job_id })
-      // const groupImage = this.groups.find((group) => {
-      //   return group.id === elm.job_entity.group_id
-      // }).image
+      const date = this.$moment(new Date(elm.attributes.start_at)).format('L').split('/').join('-')
+      const targetJob = this.jobs.find((job) => { return job.id === elm.relationships.job.data.id })
       const eachSchedule = {
         id: elm.id,
-        jobId: elm.job_id,
+        jobId: elm.relationships.job.data.id,
         title: targetJob.attributes.title,
         details: targetJob.attributes.description,
         date: date,
-        // groupImage: groupImage,
-        isDone: elm.is_done,
+        isDone: elm.attributes.is_done,
         open: false
       }
       return eachSchedule

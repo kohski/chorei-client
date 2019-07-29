@@ -120,7 +120,7 @@ export const actions = {
         }
       })
       .then((res) => {
-        commit('setAssignedSchedules', res.data.data)
+        commit('setAssignedSchedules', res.data.data.data)
       })
       .catch((e) => {
         commit('setAssignedSchedules', [])
@@ -139,7 +139,7 @@ export const actions = {
         }
       })
       .then((res) => {
-        commit('setGroupSchedules', res.data.data)
+        commit('setGroupSchedules', res.data.data.data)
       })
       .catch((e) => {
         commit('setGroupSchedules', [])
